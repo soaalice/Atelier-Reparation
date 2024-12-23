@@ -1,11 +1,11 @@
 package com.web.atelier.Repositories;
 
-import com.web.atelier.Models.Modele;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import com.web.atelier.Models.Type_composant;
 
 @Repository
-public interface ModeleRepository extends JpaRepository<Modele, Integer> {
+public interface Type_composantRepository extends JpaRepository<Type_composant,Integer> {
 
-
-}
+    
+} 
