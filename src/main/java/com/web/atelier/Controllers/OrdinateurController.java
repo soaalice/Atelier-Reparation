@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.atelier.Models.Modele;
 import com.web.atelier.Models.Ordinateur;
-import com.web.atelier.Models.TypeComposant;
 import com.web.atelier.Services.ModeleService;
 import com.web.atelier.Services.OrdinateurService;
 
