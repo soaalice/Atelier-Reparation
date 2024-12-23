@@ -21,9 +21,9 @@ public class Composant {
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name="type_composant_id")
+    @JoinColumn(name="type_composant_id", nullable = false)
     Type_composant type_composant;
 
-    @Column
+    @Column(unique = true)
     String name;
 }

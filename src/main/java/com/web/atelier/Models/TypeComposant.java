@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="type_composant")
-public class Type_composant {
+public class TypeComposant {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column
+    @Column(unique = true)
     String name;
 
 }

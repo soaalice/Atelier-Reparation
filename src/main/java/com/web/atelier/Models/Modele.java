@@ -16,7 +16,7 @@ public class Modele {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column
+    @Column(unique = true)
     String name;
 
 }

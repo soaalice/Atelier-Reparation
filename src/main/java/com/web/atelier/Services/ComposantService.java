@@ -18,7 +18,7 @@ public class ComposantService {
     }
 
     //Get All Composants
-    public List<Composant> getComposants(){
+    public List<Composant> getAllComposants(){
         return composantRepository.findAll();
     }
 

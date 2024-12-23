@@ -19,10 +19,10 @@ public class Ordinateur {
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name="modele_id")
+    @JoinColumn(name="modele_id", nullable = false)
     Modele modele;
 
-    @Column
+    @Column(unique = true)
     String name;
 
 }

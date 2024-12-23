@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.web.atelier.Repositories.ModeleRepository;
-import com.web.atelier.Repositories.Type_composantRepository;
+import com.web.atelier.Repositories.TypeComposantRepository;
 import com.web.atelier.Models.Modele;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ public class EntityController {
     private ModeleRepository modeleRepository;
 
     @Autowired
-    private Type_composantRepository typeComposantRepository;
+    private TypeComposantRepository typeComposantRepository;
 
     // Afficher le formulaire pour ajouter un Modele
     @GetMapping("/modele/form")
