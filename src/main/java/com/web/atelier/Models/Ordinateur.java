@@ -11,10 +11,12 @@ import lombok.*;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ordinateur {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    int id;
+    Integer id;
 
     @ManyToOne
     @JoinColumn(name="modele_id")

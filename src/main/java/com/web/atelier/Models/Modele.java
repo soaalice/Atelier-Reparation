@@ -9,10 +9,12 @@ import lombok.*;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Modele {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    int id;
+    Integer id;
 
     @Column
     String name;
