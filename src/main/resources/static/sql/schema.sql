@@ -62,7 +62,7 @@ CREATE TABLE reparation (
     ordinateur_id INT NOT NULL REFERENCES ordinateur(id),
     date_reparation DATE NOT NULL,
     montant_total DECIMAL(10,2) NOT NULL,
-    duree_totale INTERVAL NOT NULL
+    duree_totale DECIMAL NOT NULL
 );
 
 -- Table: type_reparation
@@ -74,7 +74,7 @@ CREATE TABLE type_reparation (
 CREATE TABLE tarif (
     id SERIAL PRIMARY KEY,
     prix DECIMAL(10,2) NOT NULL,
-    duree INTERVAL NOT NULL,
+    duree DECIMAL NOT NULL,
     composant_id INT NOT NULL REFERENCES composant(id),
     type_reparation_id INT NOT NULL REFERENCES type_reparation(id)
 );
