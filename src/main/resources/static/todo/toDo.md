@@ -18,4 +18,20 @@
 
     1. Initialisation environnement springboot
     2. Initialisation base & modeles
-    3. Création des pages jsp (liste, formulaire)
+    3. Création des pages jsp:
+        -  MODELE: 
+           - (nomPage: 'FormModele', route: '/modeles/form')  formulaire : name
+           - (nomPage: 'ListModele', route: '/modeles', method: GET) liste: id, name
+            
+        -  ORDINATEUR:
+           - (nomPage: 'FormOrdinateur', route: '/ordinateurs/form') formulaire : name, modele_id
+           - (nomPage: 'ListOrdinateur', route: '/ordinateurs', method: GET) liste: id
+          
+        - TYPE COMPOSANT: 
+          - (nomPage: 'FormTypeComposant', route: '/type-composants/form')  formulaire : name
+          - (nomPage: 'ListTypeComposant', route: '/type-composants', method: GET) liste: id, name
+            
+        - COMPOSANT
+          - (nomPage: 'FormComposant', route: '/composants/form')  formulaire : name, type_composant_id
+          - (nomPage: 'ListComposant', route: '/composants', method: GET) liste: id, name 
+    4. 

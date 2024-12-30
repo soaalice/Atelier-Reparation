@@ -60,7 +60,7 @@ CREATE TABLE type_composant_modele (
 CREATE TABLE reparation (
     id SERIAL PRIMARY KEY,
     ordinateur_id INT NOT NULL REFERENCES ordinateur(id),
-    date_reparation DATE NOT NULL,
+    date_reparation DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     montant_total DECIMAL(10,2) NOT NULL,
     duree_totale DECIMAL NOT NULL
 );
@@ -94,5 +94,5 @@ CREATE TABLE mvt_stock (
     entree INT DEFAULT 0,
     sortie INT DEFAULT 0,
     composant_id INT NOT NULL REFERENCES composant(id),
-    date_mvt DATE NOT NULL
+    date_mvt DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
