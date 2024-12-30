@@ -22,11 +22,11 @@ public class Reparation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ordinateur_id", nullable = false)
-    Ordinateur ordinateur;
+    private Ordinateur ordinateur;
 
     @Column(nullable = false)
     private LocalDate dateReparation;

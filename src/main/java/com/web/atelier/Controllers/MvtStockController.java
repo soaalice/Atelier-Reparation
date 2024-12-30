@@ -1,5 +1,6 @@
 package com.web.atelier.Controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,17 @@ public class MvtStockController {
         List<Composant> listComposants = composantService.getAllComposants();
         model.addAttribute("listComposant", listComposants);
         return "FormMvtStock";
+    }
+
+    @GetMapping("/mvtStocks/search")
+    public String searchMvtStock(@RequestParam("minDate") String minDate,
+                                  @RequestParam( "maxDate") String maxDate,
+                                  Model model) {
+        LocalDate minDateParsed = (minDate != null && !minDate.isEmpty()) ? LocalDate.parse(minDate) : null;
+        LocalDate maxDateParsed = (maxDate != null && !maxDate.isEmpty()) ? LocalDate.parse(maxDate) : null;
+
+        List<MvtStock> mvtStocks = mvtStockService.getMvtStockByDateRange(minDateParsed, maxDateParsed);
+        model.addAttribute("listMvtStock", mvtStocks);
+        return "ListMvtStock"; // Vue pour afficher les résultats
     }
 }

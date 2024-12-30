@@ -11,6 +11,13 @@
     <title>Liste des Mouvements de Stock</title>
 </head>
 <body>
+    <form action="/mvtStocks/search" method="get">
+        <label for="minDate">Date Min :</label>
+        <input type="date" id="minDate" name="minDate">
+        <label for="maxDate">Date Max :</label>
+        <input type="date" id="maxDate" name="maxDate">
+        <button type="submit">Rechercher</button>
+    </form>
     <h1>Liste des Mouvements de Stock</h1>
     <table border="1">
         <tr>

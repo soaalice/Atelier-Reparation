@@ -11,6 +11,18 @@
     <title>Liste des Reparations</title>
 </head>
 <body>
+    <form action="/reparations/search" method="get">
+        <label for="minDate">Date min :</label>
+        <input type="date" id="minDate" name="minDate">
+
+        <label for="maxDate">Date max :</label>
+        <input type="date" id="maxDate" name="maxDate">
+
+        <label for="modele">Modèle :</label>
+        <input type="text" id="modele" name="modele">
+
+        <button type="submit">Rechercher</button>
+    </form>
     <h1>Liste des Reparations</h1>
     <table border="1">
         <tr>

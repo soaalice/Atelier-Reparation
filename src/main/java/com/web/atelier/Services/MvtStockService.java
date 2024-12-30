@@ -1,5 +1,6 @@
 package com.web.atelier.Services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class MvtStockService {
     // Obtenir un mouvement de stock par son id
     public MvtStock getMvtStockById(int id) {
         return mvtStockRepository.findById(id).orElse(null);
+    }
+
+    // Rechercher les mouvements de stock par plage de dates
+    public List<MvtStock> getMvtStockByDateRange(LocalDate minDate, LocalDate maxDate) {
+        return mvtStockRepository.findByDateRange(minDate.toString(), maxDate.toString());
     }
 }
