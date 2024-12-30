@@ -4,10 +4,10 @@
   - ordinateur(done)
   - type_composant(done)
   - composant(done)
-  - composant_modele
-  - type_composant_modele
-  - tarif
-  - mvt_stock
+  - composant_modele(done)
+  - type_composant_modele(done)
+  - tarif(done)
+  - mvt_stock(done)
 
 # Formulaire
     - reparation (ordinateur, date_reparation)
