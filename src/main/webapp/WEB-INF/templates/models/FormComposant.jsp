@@ -6,11 +6,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ajouter un Composant</title>
+    <title>Formulaire Composant</title>
 </head>
 <body>
-    <h1>Ajouter un Composant</h1>
+    <jsp:include page="inc/header.jsp" />
     <form action="/composants" method="post">
+        <h1>Composant</h1>
         <label for="name">Nom:</label>
         <input type="text" id="name" name="name" required />
         <label for="typeComposant">Type de Composant:</label>

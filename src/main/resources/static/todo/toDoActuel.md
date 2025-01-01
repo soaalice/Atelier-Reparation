@@ -1,5 +1,4 @@
-# Liste et Formulaire tsotra:
-
+# Liste et Formulaire tsotra
   - modele (done)
   - ordinateur(done)
   - type_composant(done)
@@ -18,5 +17,5 @@
       - modele
     - mvt_stock
       - date_mvt (min et max)
-    - etat_stock (vue)
+    - etat_stock
       - date_etat (min et max)

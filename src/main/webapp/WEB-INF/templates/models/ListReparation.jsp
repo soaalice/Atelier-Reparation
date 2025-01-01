@@ -11,6 +11,8 @@
     <title>Liste des Reparations</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
+
     <h1>Liste des Reparations</h1>
     <table border="1">
         <tr>

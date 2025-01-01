@@ -9,11 +9,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Type Composant Modele</title>
+    <title>Formulaire Type Composant Modele</title>
 </head>
 <body>
-    <h1>Ajouter un Type Composant Modele</h1>
+    <jsp:include page="inc/header.jsp" />
+
     <form action="/typeComposantModeles" method="post">
+        <h1>Type Composant Modele</h1>
         <label for="modele">Modele:</label>
         <select id="modele" name="modeleId">
             <%

@@ -10,6 +10,9 @@
     <title>List TypeComposant</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
+    <h1>Liste des Types de Composant</h1>
+
     <table>
         <tr>
             <th>Id</th>

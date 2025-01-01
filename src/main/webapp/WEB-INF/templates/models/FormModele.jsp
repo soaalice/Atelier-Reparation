@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ajouter un Modele</title>
+    <title>Formulaire Modele</title>
 </head>
 <body>
-    <h1>Ajouter un Modele</h1>
+    <jsp:include page="inc/header.jsp" />
+
     <form action="/modeles" method="post">
+        <h1>Modele</h1>
         <label for="name">Nom:</label>
         <input type="text" id="name" name="name" required />
         <button type="submit">Enregistrer</button>

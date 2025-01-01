@@ -28,14 +28,14 @@ public class ComposantModeleController {
     @Autowired
     private ModeleService modeleService;
 
-    @GetMapping("/composantModeles")
+    @GetMapping("/composant-modeles")
     public String showAllComposantModeles(Model model) {
         List<ComposantModele> listComposantModeles = composantModeleService.getAllComposantModeles();
         model.addAttribute("listComposantModeles", listComposantModeles);
         return "ListComposantModele";
     }
 
-    @PostMapping("/composantModeles")
+    @PostMapping("/composant-modeles")
     public String addComposantModele(@RequestParam("composantId") Integer composantId,
             @RequestParam("modeleId") Integer modeleId) {
         Composant composant = composantService.getComposantById(composantId);
@@ -46,10 +46,10 @@ public class ComposantModeleController {
         composantModele.setModele(modele);
 
         composantModeleService.addComposantModele(composantModele);
-        return "redirect:/composantModeles";
+        return "redirect:/composant-modeles";
     }
 
-    @GetMapping("/composantModeles/form")
+    @GetMapping("/composant-modeles/form")
     public String showFormComposantModele(Model model) {
         List<Composant> listComposants = composantService.getAllComposants();
         List<Modele> listModeles = modeleService.getAllModeles();

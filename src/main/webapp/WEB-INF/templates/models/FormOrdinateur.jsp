@@ -3,11 +3,13 @@
 
 <html>
 <head>
-    <title>Ajouter un Ordinateur</title>
+    <title>Formulaire Ordinateur</title>
 </head>
 <body>
-    <h1>Ajouter un Ordinateur</h1>
+    <jsp:include page="inc/header.jsp" />
+
     <form action="/ordinateurs" method="post">
+        <h1>Ordinateur</h1>
         <label for="name">Nom:</label>
         <input type="text" id="name" name="name" required />
         <label for="modele">Modele:</label>

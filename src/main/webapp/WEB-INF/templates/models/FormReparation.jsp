@@ -8,11 +8,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter une Reparation</title>
+    <title>Formulaire Reparation</title>
 </head>
 <body>
-    <h1>Ajouter une Reparation</h1>
+    <jsp:include page="inc/header.jsp" />
+
     <form action="/reparations" method="post">
+        <h1>Reparation</h1>
         <label for="ordinateur">Ordinateur:</label>
         <select id="ordinateur" name="ordinateurId">
             <%

@@ -9,11 +9,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Tarif</title>
+    <title>Formulaire Tarif</title>
 </head>
 <body>
-    <h1>Ajouter un Tarif</h1>
+    <jsp:include page="inc/header.jsp" />
+
     <form action="/tarifs" method="post">
+        <h1>Tarif</h1>
         <label for="prix">Prix:</label>
         <input type="number" id="prix" name="prix" step="0.01" required />
 

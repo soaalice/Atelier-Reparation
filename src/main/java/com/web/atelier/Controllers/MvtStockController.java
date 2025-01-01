@@ -23,22 +23,22 @@ public class MvtStockController {
     @Autowired
     private ComposantService composantService;
 
-    @GetMapping("/mvtStocks")
+    @GetMapping("/mvt-stocks")
     public String showAllMvtStocks(Model model) {
         List<MvtStock> listMvtStocks = mvtStockService.getAllMvtStocks();
         model.addAttribute("listMvtStock", listMvtStocks);
         return "ListMvtStock";
     }
 
-    @PostMapping("/mvtStocks")
+    @PostMapping("/mvt-stocks")
     public String addMvtStock(MvtStock mvtStock, @RequestParam("composantId") Integer composantId) {
         Composant composant = composantService.getComposantById(composantId);
         mvtStock.setComposant(composant);
         mvtStockService.addMvtStock(mvtStock);
-        return "redirect:/mvtStocks/form";
+        return "redirect:/mvt-stocks/form";
     }
 
-    @GetMapping("/mvtStocks/form")
+    @GetMapping("/mvt-stocks/form")
     public String showFormMvtStock(Model model) {
         List<Composant> listComposants = composantService.getAllComposants();
         model.addAttribute("listComposant", listComposants);

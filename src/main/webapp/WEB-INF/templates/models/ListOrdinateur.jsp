@@ -11,6 +11,8 @@
     <title>List Ordinateurs</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
+
     <h1>Liste des Ordinateurs</h1>
     <table border="1">
         <tr>

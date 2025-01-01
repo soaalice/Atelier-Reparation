@@ -8,11 +8,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Mvt de Stock</title>
+    <title>Formulaire Mvt de Stock</title>
 </head>
 <body>
-    <h1>Ajouter un Mvt de Stock</h1>
+    <jsp:include page="inc/header.jsp" />
+
     <form action="/mvtStocks" method="post">
+        <h1>Mouvement de Stock</h1>
         <label for="entree">Entrée:</label>
         <input type="number" id="entree" name="entree" value="0" required />
 

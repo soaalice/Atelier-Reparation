@@ -11,6 +11,8 @@
     <title>Liste des Mouvements de Stock</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
+
     <h1>Liste des Mouvements de Stock</h1>
     <table border="1">
         <tr>
