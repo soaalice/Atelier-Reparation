@@ -53,6 +53,10 @@
         transition: border-color 0.3s ease;
     }
 
+    form input{
+        width: -webkit-fill-available;
+    }
+
     /* Focus sur les champs de formulaire */
     form select:focus,
     form input:focus {
