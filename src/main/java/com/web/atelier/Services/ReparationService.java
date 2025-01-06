@@ -30,7 +30,20 @@ public class ReparationService {
     }
 
     // Recherche des réparations par critères
-    public List<Reparation> searchReparations(LocalDate minDate, LocalDate maxDate, String modele) {
-        return reparationRepository.findByCriteria(minDate, maxDate, modele);
+    public List<Reparation> searchReparations(String minDateStr, String maxDateStr, String modele) {
+        LocalDate minDate = (minDateStr != null && !minDateStr.isEmpty()) ? LocalDate.parse(minDateStr) : null;
+        LocalDate maxDate = (maxDateStr != null && !maxDateStr.isEmpty()) ? LocalDate.parse(maxDateStr) : null;
+        if(minDate!=null && maxDate!=null){
+            return reparationRepository.findByCriteria(minDate, maxDate, modele);
+        }
+        else if(minDate==null && maxDate!=null){
+            return reparationRepository.findByMaxDate(maxDate, modele);
+        }
+        else if(minDate!=null && maxDate==null){
+            return reparationRepository.findByMinDate(minDate, modele);
+        }
+        else{
+            return this.getAllReparations();
+        }
     }
 }
