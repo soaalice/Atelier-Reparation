@@ -55,26 +55,24 @@ public class MvtStockController {
     }
 
     @GetMapping("/mvtStocks/search")
-    public String searchMvtStock(@RequestParam("minDate") String minDate,
-                                  @RequestParam( "maxDate") String maxDate,
+    public String searchMvtStock(@RequestParam("minDate") String minDateStr,
+                                  @RequestParam( "maxDate") String maxDateStr,
                                   Model model) {
-        LocalDate minDateParsed = (minDate != null && !minDate.isEmpty()) ? LocalDate.parse(minDate) : null;
-        LocalDate maxDateParsed = (maxDate != null && !maxDate.isEmpty()) ? LocalDate.parse(maxDate) : null;
 
-        List<MvtStock> mvtStocks = mvtStockService.getMvtStockByDateRange(minDateParsed, maxDateParsed);
+        List<MvtStock> mvtStocks = mvtStockService.getMvtStockByDateRange(minDateStr, maxDateStr);
         model.addAttribute("listMvtStock", mvtStocks);
         List<TypeComposant> listTypeComposants = typeComposantService.getAllTypeComposants();
         model.addAttribute("listTypeComposant", listTypeComposants);
         return "ListMvtStock"; // Vue pour afficher les résultats
     }
 
-    @GetMapping("/mvtStocks/etat")
-    public String etatStock(@RequestParam("typeComposantId") Integer typeComposantId,@RequestParam("minDate") String minDate,@RequestParam( "maxDate") String maxDate,Model model){
-        LocalDate minDateParsed = (minDate != null && !minDate.isEmpty()) ? LocalDate.parse(minDate) : null;
-        LocalDate maxDateParsed = (maxDate != null && !maxDate.isEmpty()) ? LocalDate.parse(maxDate) : null;
+    // @GetMapping("/mvtStocks/etat")
+    // public String etatStock(@RequestParam("typeComposantId") Integer typeComposantId,@RequestParam("minDate") String minDate,@RequestParam( "maxDate") String maxDate,Model model){
+    //     LocalDate minDateParsed = (minDate != null && !minDate.isEmpty()) ? LocalDate.parse(minDate) : null;
+    //     LocalDate maxDateParsed = (maxDate != null && !maxDate.isEmpty()) ? LocalDate.parse(maxDate) : null;
 
-        List<StockDto> stocks = mvtStockService.getStockbyDateRange(typeComposantId, minDateParsed, maxDateParsed);
-        model.addAttribute("stockList", stocks);
-         return "EtatStock";
-    }
+    //     List<StockDto> stocks = mvtStockService.getStockbyDateRange(typeComposantId, minDateParsed, maxDateParsed);
+    //     model.addAttribute("stockList", stocks);
+    //      return "EtatStock";
+    // }
 }

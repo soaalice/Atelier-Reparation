@@ -13,10 +13,16 @@ import com.web.atelier.Models.MvtStock;
 
 @Repository
 public interface MvtStockRepository extends JpaRepository<MvtStock, Integer> {
+    @Query("SELECT m FROM MvtStock m WHERE m.dateMvt >= :minDate")
+    List<MvtStock> findByMinDate(@Param("minDate") LocalDate minDate);
+
+    @Query("SELECT m FROM MvtStock m WHERE m.dateMvt <= :maxDate")
+    List<MvtStock> findByMaxDate(@Param("maxDate") LocalDate maxDate);
+
     @Query("SELECT m FROM MvtStock m " +
-            "WHERE (:minDate IS NULL OR m.dateMvt >= CAST(:minDate AS date)) " +
-            "AND (:maxDate IS NULL OR m.dateMvt <= CAST(:maxDate AS date))")
-    List<MvtStock> findByDateRange(@Param("minDate") String minDate, @Param("maxDate") String maxDate);
+            "WHERE (:minDate IS NULL OR m.dateMvt >= :minDate) " +
+            "AND (:maxDate IS NULL OR m.dateMvt <= :maxDate)")
+    List<MvtStock> findByDateRange(@Param("minDate") LocalDate minDate, @Param("maxDate") LocalDate maxDate);
 
     
     // @Query("SELECT new com.web.atelier.Dto.StockDto(c.id, c.name, tc.id, tc.name, " +

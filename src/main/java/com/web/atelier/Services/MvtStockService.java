@@ -32,11 +32,20 @@ public class MvtStockService {
     }
 
     // Rechercher les mouvements de stock par plage de dates
-    public List<MvtStock> getMvtStockByDateRange(LocalDate minDate, LocalDate maxDate) {
-        return mvtStockRepository.findByDateRange(minDate.toString(), maxDate.toString());
+    public List<MvtStock> getMvtStockByDateRange(String minDateStr, String maxDateStr) {
+        LocalDate minDate = (minDateStr != null && !minDateStr.isEmpty()) ? LocalDate.parse(minDateStr) : null;
+        LocalDate maxDate = (maxDateStr != null && !maxDateStr.isEmpty()) ? LocalDate.parse(maxDateStr) : null;
+
+        if (minDate == null && maxDate == null) {
+            return mvtStockRepository.findAll(); // Retourner tous les mouvements si aucune date n'est fournie
+        } else if (minDate != null && maxDate == null) {
+            return mvtStockRepository.findByMinDate(minDate); // Requête avec minDate uniquement
+        } else if (minDate == null && maxDate != null) {
+            return mvtStockRepository.findByMaxDate(maxDate); // Requête avec maxDate uniquement
+        } else {
+            return mvtStockRepository.findByDateRange(minDate, maxDate); // Requête avec les deux paramètres
+        }
     }
 
-//     public List<StockDto> getStockbyDateRange(Integer typeComposantId,LocalDate minDate, LocalDate maxDate) {
-//         return mvtStockRepository.findStock(typeComposantId,minDate,maxDate);
-//     }
+
 }
