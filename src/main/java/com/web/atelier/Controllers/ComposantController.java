@@ -32,7 +32,7 @@ public class ComposantController {
     @PostMapping("/composants")
     public String addModele(Composant composant,@RequestParam("typeComposantId") Integer typeComposantId) {
         TypeComposant typeComposant = typeComposantService.getTypeComposantById(typeComposantId);
-        composant.setType_composant(typeComposant);
+        composant.setTypeComposant(typeComposant);
         composantService.addComposant(composant);
         return "redirect:/composants/form";
     }
