@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.atelier.Dto.StockDto;
 import com.web.atelier.Models.MvtStock;
 import com.web.atelier.Repositories.MvtStockRepository;
 
@@ -34,4 +35,8 @@ public class MvtStockService {
     public List<MvtStock> getMvtStockByDateRange(LocalDate minDate, LocalDate maxDate) {
         return mvtStockRepository.findByDateRange(minDate.toString(), maxDate.toString());
     }
+
+//     public List<StockDto> getStockbyDateRange(Integer typeComposantId,LocalDate minDate, LocalDate maxDate) {
+//         return mvtStockRepository.findStock(typeComposantId,minDate,maxDate);
+//     }
 }
