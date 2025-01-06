@@ -22,7 +22,7 @@ public class Composant {
 
     @ManyToOne
     @JoinColumn(name="type_composant_id", nullable = false)
-    TypeComposant type_composant;
+    TypeComposant typeComposant;
 
 
     @Column(unique = true)
