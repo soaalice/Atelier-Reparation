@@ -15,7 +15,7 @@
 <body>
     <jsp:include page="inc/header.jsp" />
 
-    <h1>Liste des Type Composant Modèles</h1>
+    <h1>Liste des Types Composants Modèles</h1>
     <table border="1">
         <tr>
             <th>Id</th>

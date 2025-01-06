@@ -14,6 +14,8 @@ import com.web.atelier.Services.OrdinateurService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 public class ReparationController {
@@ -51,5 +53,20 @@ public class ReparationController {
     public String showFormReparation(Model model) {
         model.addAttribute("listOrdinateurs", ordinateurService.getAllOrdinateurs());
         return "FormReparation";
+    }
+    
+    @GetMapping("/reparations/search")
+    public String searchReparations(
+            @RequestParam(value = "minDate", required = false) String minDateStr,
+            @RequestParam(value = "maxDate", required = false) String maxDateStr,
+            @RequestParam(value = "modele", required = false) String modele,
+            Model model) {
+        LocalDate minDate = (minDateStr != null && !minDateStr.isEmpty()) ? LocalDate.parse(minDateStr):null ;
+        LocalDate maxDate = (maxDateStr != null && !maxDateStr.isEmpty()) ?  LocalDate.parse(minDateStr) :null ;
+
+        List<Reparation> reparations = reparationService.searchReparations(minDate, maxDate, modele);
+        model.addAttribute("listReparations", reparations);
+
+        return "ListReparation";
     }
 }

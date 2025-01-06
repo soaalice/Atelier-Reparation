@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.web.atelier.Models.Reparation;
 import com.web.atelier.Repositories.ReparationRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -26,5 +27,10 @@ public class ReparationService {
     // Obtenir une réparation par son ID
     public Reparation getReparationById(int id) {
         return reparationRepository.findById(id).orElse(null);
+    }
+
+    // Recherche des réparations par critères
+    public List<Reparation> searchReparations(LocalDate minDate, LocalDate maxDate, String modele) {
+        return reparationRepository.findByCriteria(minDate, maxDate, modele);
     }
 }

@@ -5,7 +5,6 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-
     <form action="/typeComposants" method="post">
         <h1>Type de Composant</h1>
         <label for="name">Nom:</label>

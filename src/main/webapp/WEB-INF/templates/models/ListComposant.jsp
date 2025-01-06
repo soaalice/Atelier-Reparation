@@ -28,7 +28,7 @@
                     <tr>
                         <td><%= composant.getId() %></td>
                         <td><%= composant.getName() %></td>
-                        <td><%= composant.getType_composant().getName() %></td>
+                        <td><%= composant.getTypeComposant().getName() %></td>
                     </tr>
                 <%
             }

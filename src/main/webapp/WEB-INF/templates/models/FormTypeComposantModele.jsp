@@ -13,7 +13,6 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-
     <form action="/typeComposantModeles" method="post">
         <h1>Type Composant Modele</h1>
         <label for="modele">Modele:</label>

@@ -13,7 +13,6 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-
     <form action="/tarifs" method="post">
         <h1>Tarif</h1>
         <label for="prix">Prix:</label>
