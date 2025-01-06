@@ -9,6 +9,7 @@
     <title>Ajouter un Composant</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter un Composant</h1>
     <form action="/composants" method="post">
         <label for="name">Nom:</label>

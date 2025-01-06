@@ -10,6 +10,7 @@
     <title>Liste des Stocks</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Liste des Stocks</h1>
     <table border="1">
         <tr>

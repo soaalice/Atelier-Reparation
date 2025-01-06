@@ -6,6 +6,7 @@
     <title>Ajouter un Ordinateur</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter un Ordinateur</h1>
     <form action="/ordinateurs" method="post">
         <label for="name">Nom:</label>

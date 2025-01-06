@@ -11,6 +11,7 @@
     <title>Liste des Reparations</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <form action="/reparations/search" method="get">
         <label for="minDate">Date min :</label>
         <input type="date" id="minDate" name="minDate">

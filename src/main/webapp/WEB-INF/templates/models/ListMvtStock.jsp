@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.web.atelier.Models.MvtStock" %>
 <%@ page import="com.web.atelier.Models.Composant" %>
+<%@ page import="com.web.atelier.Models.TypeComposant" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,6 +12,7 @@
     <title>Liste des Mouvements de Stock</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Search stocks</h1>
     <form action="/mvtStocks/search" method="get">
         <label for="minDate">Date Min :</label>

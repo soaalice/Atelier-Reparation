@@ -12,6 +12,7 @@
     <title>Ajouter un Tarif</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter un Tarif</h1>
     <form action="/tarifs" method="post">
         <label for="prix">Prix:</label>

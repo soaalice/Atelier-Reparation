@@ -12,6 +12,7 @@
     <title>Ajouter un Type Composant Modele</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter un Type Composant Modele</h1>
     <form action="/typeComposantModeles" method="post">
         <label for="modele">Modele:</label>

@@ -11,6 +11,7 @@
     <title>List Composant</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <table border="1">
         <tr>
             <th>Id</th>
@@ -24,7 +25,7 @@
                     <tr>
                         <td><%= composant.getId() %></td>
                         <td><%= composant.getName() %></td>
-                        <td><%= composant.getType_composant().getName() %></td>
+                        <td><%= composant.getTypeComposant().getName() %></td>
                     </tr>
                 <%
             }

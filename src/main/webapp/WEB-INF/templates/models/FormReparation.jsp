@@ -11,6 +11,7 @@
     <title>Ajouter une Reparation</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter une Reparation</h1>
     <form action="/reparations" method="post">
         <label for="ordinateur">Ordinateur:</label>

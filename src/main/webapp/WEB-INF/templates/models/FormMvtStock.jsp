@@ -11,6 +11,7 @@
     <title>Ajouter un Mvt de Stock</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter un Mvt de Stock</h1>
     <form action="/mvtStocks" method="post">
         <label for="entree">Entrée:</label>

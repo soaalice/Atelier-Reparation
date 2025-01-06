@@ -4,6 +4,7 @@
     <title>Ajouter un Type de Composant</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter un Type de Composant</h1>
     <form action="/typeComposants" method="post">
         <label for="name">Nom:</label>

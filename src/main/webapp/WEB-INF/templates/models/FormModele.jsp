@@ -4,6 +4,7 @@
     <title>Ajouter un Modele</title>
 </head>
 <body>
+    <jsp:include page="inc/header.jsp" />
     <h1>Ajouter un Modele</h1>
     <form action="/modeles" method="post">
         <label for="name">Nom:</label>
