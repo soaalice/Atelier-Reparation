@@ -31,6 +31,6 @@ public class ReparationService {
 
     // Recherche des réparations par critères
     public List<Reparation> searchReparations(LocalDate minDate, LocalDate maxDate, String modele) {
-        return reparationRepository.findByCriteria(minDate.toString(), maxDate.toString(), modele);
+        return reparationRepository.findByCriteria(minDate, maxDate, modele);
     }
 }

@@ -61,13 +61,8 @@ public class ReparationController {
             @RequestParam(value = "maxDate", required = false) String maxDateStr,
             @RequestParam(value = "modele", required = false) String modele,
             Model model) {
-        
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
-        LocalDate minDate = (minDateStr != null && !minDateStr.isEmpty()) ? 
-                LocalDate.parse(minDateStr, formatter) : null;
-        LocalDate maxDate = (maxDateStr != null && !maxDateStr.isEmpty()) ? 
-                LocalDate.parse(maxDateStr, formatter) : null;
+        LocalDate minDate = (minDateStr != null && !minDateStr.isEmpty()) ? LocalDate.parse(minDateStr):null ;
+        LocalDate maxDate = (maxDateStr != null && !maxDateStr.isEmpty()) ?  LocalDate.parse(minDateStr) :null ;
 
         List<Reparation> reparations = reparationService.searchReparations(minDate, maxDate, modele);
         model.addAttribute("listReparations", reparations);

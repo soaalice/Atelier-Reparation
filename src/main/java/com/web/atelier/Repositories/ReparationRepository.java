@@ -14,11 +14,11 @@ import java.util.List;
 public interface ReparationRepository extends JpaRepository<Reparation, Integer> {
 
     @Query("SELECT r FROM Reparation r WHERE " +
-            "(:minDate IS NULL OR r.dateReparation >= CAST(:minDate AS date)) AND " +
-            "(:maxDate IS NULL OR r.dateReparation <= CAST(:minDate AS date)) AND " +
+            "(:minDate IS NULL OR r.dateReparation >= :minDate )  AND " +
+            "(:maxDate IS NULL OR r.dateReparation <= :maxDate )  AND " +
             "(:modele IS NULL OR LOWER(r.ordinateur.modele.name) LIKE CONCAT('%', LOWER(:modele), '%'))")
     List<Reparation> findByCriteria(
-            @Param("minDate") String minDate,
-            @Param("maxDate") String maxDate,
+            @Param("minDate") LocalDate minDate,
+            @Param("maxDate") LocalDate maxDate,
             @Param("modele") String modele);
 }
