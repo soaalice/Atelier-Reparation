@@ -29,7 +29,7 @@ public class TypeComposantController {
     @PostMapping("/typeComposants")
     public String addTypeComposant(TypeComposant typeComposant) {
         typeComposantService.addTypeComposant(typeComposant);
-        return "redirect:/typecomposants"; // Redirection vers la page de la liste des types de composants après ajout
+        return "redirect:/typeComposants"; // Redirection vers la page de la liste des types de composants après ajout
     }
 
     // Affichage du formulaire pour ajouter un type de composant
