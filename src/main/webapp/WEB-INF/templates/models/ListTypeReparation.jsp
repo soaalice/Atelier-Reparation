@@ -11,7 +11,7 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-    <h1>Liste des Types de Composant</h1>
+    <h1>Liste des Types de Reparations</h1>
 
     <table>
         <tr>

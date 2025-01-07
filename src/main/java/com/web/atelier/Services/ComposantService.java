@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.atelier.Models.Composant;
+import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Repositories.ComposantRepository;
 
 @Service
@@ -25,5 +26,9 @@ public class ComposantService {
     //Get a composant by its id
     public Composant getComposantById(int id){
         return composantRepository.findById(id).orElse(null);
+    }
+
+    public List<Composant> getComposantByOrdinateur(Ordinateur ordinateur){
+        return composantRepository.findByOrdinateur(ordinateur.getId());
     }
 }

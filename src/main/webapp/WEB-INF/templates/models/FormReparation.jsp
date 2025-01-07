@@ -13,7 +13,7 @@
 <body>
     <jsp:include page="inc/header.jsp" />
 
-    <form action="/reparations" method="post">
+    <form action="/reparations-details" method="post">
         <h1>Reparation</h1>
         <label for="ordinateur">Ordinateur:</label>
         <select id="ordinateur" name="ordinateurId">
@@ -28,11 +28,11 @@
         <label for="dateReparation">Date de Réparation:</label>
         <input type="date" id="dateReparation" name="dateReparation" required />
 
-        <label for="montantTotal">Montant Total:</label>
+        <%-- <label for="montantTotal">Montant Total:</label>
         <input type="number" id="montantTotal" name="montantTotal" step="0.01" required />
 
         <label for="dureeTotale">Durée Totale (en heures):</label>
-        <input type="number" id="dureeTotale" name="dureeTotale" step="0.01" required />
+        <input type="number" id="dureeTotale" name="dureeTotale" step="0.01" required /> --%>
 
         <button type="submit">Enregistrer</button>
     </form>

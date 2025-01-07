@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.atelier.Models.Reparation;
+import com.web.atelier.Models.ReparationDetails;
 import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Services.ReparationService;
+import com.web.atelier.Services.TypeComposantService;
+import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.OrdinateurService;
+import com.web.atelier.Services.ReparationDetailsService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,27 +30,51 @@ public class ReparationController {
     @Autowired
     private OrdinateurService ordinateurService;
 
+    @Autowired
+    private ReparationDetailsService reparationDetailsService;
+
+    @Autowired
+    private ComposantService composantService;
+
+    @Autowired
+    private TypeComposantService typeComposantService;
+
     @GetMapping("/reparations")
-    public String showAllReparations(Model model) {
-        model.addAttribute("listReparations", reparationService.getAllReparations());
+    public String showAllReparations(@RequestParam(value="typeComposantId",required = false)Integer typeComposantId,Model model) {
+        List<Reparation> list;
+        if(typeComposantId!=null){
+            list = reparationService.getReparationsByTypeComposant(typeComposantId);
+        }
+        else{
+            list = reparationService.getAllReparations();
+        }
+        model.addAttribute("listTypeComposants",typeComposantService.getAllTypeComposants() );
+        model.addAttribute("listReparations", list);
         return "ListReparation";
     }
 
     @PostMapping("/reparations")
     public String addReparation(Reparation reparation,
             @RequestParam("ordinateurId") Integer ordinateurId,
-            @RequestParam("dateReparation") String dateReparation,
-            @RequestParam("montantTotal") BigDecimal montantTotal,
-            @RequestParam("dureeTotale") BigDecimal dureeTotale) {
+            @RequestParam("dateReparation") LocalDate dateReparation,@RequestParam("composants")List<Integer>composants,Model model) {
 
         Ordinateur ordinateur = ordinateurService.getOrdinateurById(ordinateurId);
+        reparation.setDateReparation(dateReparation);
         reparation.setOrdinateur(ordinateur);
-        reparation.setDateReparation(LocalDate.parse(dateReparation));
-        reparation.setMontantTotal(montantTotal);
-        reparation.setDureeTotale(dureeTotale);
+        // reparation.setMontantTotal(montantTotal);
+        // reparation.setDureeTotale(dureeTotale);
+
 
         reparationService.addReparation(reparation);
-        return "redirect:/reparations/form";
+        for (Integer long1 : composants) {
+            ReparationDetails temp = new ReparationDetails();
+            temp.setComposant(composantService.getComposantById(long1));
+            temp.setReparation(reparation);
+            reparationDetailsService.addReparationDetails(temp);
+        }
+        
+        
+        return "redirect:reparations/form";
     }
 
     @GetMapping("/reparations/form")

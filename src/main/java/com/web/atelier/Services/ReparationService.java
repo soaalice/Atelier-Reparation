@@ -46,4 +46,8 @@ public class ReparationService {
             return this.getAllReparations();
         }
     }
+
+    public List<Reparation> getReparationsByTypeComposant(Integer typeComposantId){
+        return reparationRepository.findByTypeComposant(typeComposantId);
+    }
 }

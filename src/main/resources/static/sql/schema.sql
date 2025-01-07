@@ -60,9 +60,9 @@ CREATE TABLE type_composant_modele (
 CREATE TABLE reparation (
     id SERIAL PRIMARY KEY,
     ordinateur_id INT NOT NULL REFERENCES ordinateur(id),
-    date_reparation DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    montant_total DECIMAL(10,2) NOT NULL,
-    duree_totale DECIMAL NOT NULL
+    date_reparation DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
+    -- montant_total DECIMAL(10,2) NOT NULL,
+    -- duree_totale DECIMAL NOT NULL
 );
 
 -- Table: type_reparation
@@ -82,10 +82,8 @@ CREATE TABLE tarif (
 -- Table: reparation_details
 CREATE TABLE reparation_details (
     id SERIAL PRIMARY KEY,
-    id_reparation INT NOT NULL REFERENCES reparation(id),
-    qte INT NOT NULL,
-    pu DECIMAL(10,2) NOT NULL,
-    tarif_id INT NOT NULL REFERENCES tarif(id)
+    reparation_id INT NOT NULL REFERENCES reparation(id),
+    composant_id INT NOT NULL REFERENCES composant(id)
 );
 
 -- Table: mvt_stock

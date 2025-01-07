@@ -18,18 +18,19 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reparation {
+public class ReparationDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "ordinateur_id", nullable = false)
-    private Ordinateur ordinateur;
+    @JoinColumn(name = "reparation_id", nullable = false)
+    private Reparation reparation;
 
-    @Column(nullable = false)
-    private LocalDate dateReparation;
+    @ManyToOne
+    @JoinColumn(name="composant_id", nullable = false)
+    private Composant composant;
 
     // @Column(nullable = false)
     // private BigDecimal montantTotal;
