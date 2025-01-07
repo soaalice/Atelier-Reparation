@@ -61,10 +61,7 @@ public class ReparationController {
             @RequestParam(value = "maxDate", required = false) String maxDateStr,
             @RequestParam(value = "modele", required = false) String modele,
             Model model) {
-        LocalDate minDate = (minDateStr != null && !minDateStr.isEmpty()) ? LocalDate.parse(minDateStr):null ;
-        LocalDate maxDate = (maxDateStr != null && !maxDateStr.isEmpty()) ?  LocalDate.parse(minDateStr) :null ;
-
-        List<Reparation> reparations = reparationService.searchReparations(minDate, maxDate, modele);
+        List<Reparation> reparations = reparationService.searchReparations(minDateStr, maxDateStr, modele);
         model.addAttribute("listReparations", reparations);
 
         return "ListReparation";
