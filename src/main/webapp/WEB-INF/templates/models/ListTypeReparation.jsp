@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="java.util.List"%>
-<%@page import="com.web.atelier.Models.TypeComposant"%>
+<%@page import="com.web.atelier.Models.TypeReparation"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste Types Composant</title>
+    <title>Liste Types Reparation</title>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
@@ -19,8 +19,8 @@
             <th>Name</th>
         </tr>
         <% 
-            List<TypeComposant> listTypeComposants = (List<TypeComposant>) request.getAttribute("listTypeComposants");
-            for (TypeComposant typeComposant : listTypeComposants) { 
+            List<TypeReparation> listTypeReparations = (List<TypeReparation>) request.getAttribute("listTypeReparations");
+            for (TypeReparation typeComposant : listTypeReparations) { 
         %>
             <tr>
                 <td><%= typeComposant.getId() %></td>

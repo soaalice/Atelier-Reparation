@@ -8,11 +8,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Reparations</title>
+    <title>Liste des Réparations</title>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-    <h1>Liste des Reparations</h1>
+    <h1>Liste des Réparations</h1>
     <table border="1">
         <tr>
             <th>Id</th>

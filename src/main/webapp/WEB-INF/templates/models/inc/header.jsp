@@ -290,11 +290,16 @@
                     <a href="/" class="navbar-link">Home</a>
                 </li>
 
+                <li class="navbar-item">
+                    <a href="/" class="navbar-link">Etat Stock</a>
+                </li>
+
                 <!-- Dropdown Insertion -->
                 <li class="navbar-item dropdown">
                     <a href="#" class="navbar-link">Insertion</a>
                     <div class="dropdown-content">
                         <a href="/type-composants/form" class="dropdown-item">Type Composant</a>
+                        <a href="/type-reparations/form" class="dropdown-item">Type Réparation</a>
                         <a href="/modeles/form" class="dropdown-item">Modèle</a>
                         <a href="/ordinateurs/form" class="dropdown-item">Ordinateur</a>
                         <a href="/composants/form" class="dropdown-item">Composant</a>
@@ -310,6 +315,7 @@
                     <a href="#" class="navbar-link">Liste</a>
                     <div class="dropdown-content">
                         <a href="/type-composants" class="dropdown-item">Type Composant</a>
+                        <a href="/type-reparations" class="dropdown-item">Type Réparation</a>
                         <a href="/modeles" class="dropdown-item">Modèle</a>
                         <a href="/ordinateurs" class="dropdown-item">Ordinateur</a>
                         <a href="/composants" class="dropdown-item">Composant</a>

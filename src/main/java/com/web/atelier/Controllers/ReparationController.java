@@ -46,7 +46,7 @@ public class ReparationController {
         reparation.setDureeTotale(dureeTotale);
 
         reparationService.addReparation(reparation);
-        return "redirect:/reparations";
+        return "redirect:/reparations/form";
     }
 
     @GetMapping("/reparations/form")

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="java.util.List"%>
 <%@page import="com.web.atelier.Models.Modele"%>
 
@@ -12,7 +13,7 @@
         <h1>Ordinateur</h1>
         <label for="name">Nom:</label>
         <input type="text" id="name" name="name" required />
-        <label for="modele">Modele:</label>
+        <label for="modele">Modèle:</label>
         <select id="modele" name="modeleId">
             <%
                 List<Modele> listModele = (List<Modele>) request.getAttribute("listModele");

@@ -9,13 +9,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire Type Composant Modele</title>
+    <title>Formulaire Type Composant Modèle</title>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-    <form action="/typeComposantModeles" method="post">
-        <h1>Type Composant Modele</h1>
-        <label for="modele">Modele:</label>
+    <form action="/type-composant-modeles" method="post">
+        <h1>Type Composant Modèle</h1>
+        <label for="modele">Modèle:</label>
         <select id="modele" name="modeleId">
             <%
                 List<Modele> listModeles = (List<Modele>) request.getAttribute("listModeles");

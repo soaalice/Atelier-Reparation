@@ -54,7 +54,7 @@ public class MvtStockController {
         return "FormMvtStock";
     }
 
-    @GetMapping("/mvtStocks/search")
+    @GetMapping("/mvt-stocks/search")
     public String searchMvtStock(@RequestParam("minDate") String minDateStr,
                                   @RequestParam( "maxDate") String maxDateStr,
                                   Model model) {

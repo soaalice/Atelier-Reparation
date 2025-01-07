@@ -28,14 +28,14 @@ public class TypeComposantModeleController {
     @Autowired
     private TypeComposantService typeComposantService;
 
-    @GetMapping("/typeComposantModeles")
+    @GetMapping("/type-composant-modeles")
     public String showAllTypeComposantModeles(Model model) {
         List<TypeComposantModele> listTypeComposantModeles = typeComposantModeleService.getAllTypeComposantModeles();
         model.addAttribute("listTypeComposantModeles", listTypeComposantModeles);
         return "ListTypeComposantModele";
     }
 
-    @PostMapping("/typeComposantModeles")
+    @PostMapping("/type-composant-modeles")
     public String addTypeComposantModele(@RequestParam("modeleId") Integer modeleId,
             @RequestParam("typeComposantId") Integer typeComposantId,
             @RequestParam("min") Integer min,
@@ -50,10 +50,10 @@ public class TypeComposantModeleController {
         typeComposantModele.setMax(max);
 
         typeComposantModeleService.addTypeComposantModele(typeComposantModele);
-        return "redirect:/typeComposantModeles";
+        return "redirect:/type-composant-modeles/form";
     }
 
-    @GetMapping("/typeComposantModeles/form")
+    @GetMapping("/type-composant-modeles/form")
     public String showFormTypeComposantModele(Model model) {
         List<Modele> listModeles = modeleService.getAllModeles();
         List<TypeComposant> listTypeComposants = typeComposantService.getAllTypeComposants();

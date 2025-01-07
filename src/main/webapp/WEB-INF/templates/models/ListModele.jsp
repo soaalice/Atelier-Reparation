@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Modeles</title>
+    <title>Liste Modèles</title>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />

@@ -13,7 +13,7 @@
 <body>
     <jsp:include page="inc/header.jsp" />
 
-    <form action="/mvtStocks" method="post">
+    <form action="/mvt-stocks" method="post">
         <h1>Mouvement de Stock</h1>
         <label for="entree">Entrée:</label>
         <input type="number" id="entree" name="entree" value="0" required />

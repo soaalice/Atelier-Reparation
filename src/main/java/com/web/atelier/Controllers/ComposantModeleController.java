@@ -46,7 +46,7 @@ public class ComposantModeleController {
         composantModele.setModele(modele);
 
         composantModeleService.addComposantModele(composantModele);
-        return "redirect:/composant-modeles";
+        return "redirect:/composant-modeles/form";
     }
 
     @GetMapping("/composant-modeles/form")

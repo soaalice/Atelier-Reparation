@@ -16,20 +16,20 @@ public class TypeReparationController {
     @Autowired
     private TypeReparationService typeReparationService;
 
-    @GetMapping("/typeReparations")
+    @GetMapping("/type-reparations")
     public String showAllTypeReparations(Model model) {
         List<TypeReparation> listTypeReparations = typeReparationService.getAllTypeReparations();
         model.addAttribute("listTypeReparations", listTypeReparations);
         return "ListTypeReparation";
     }
 
-    @PostMapping("/typeReparations")
+    @PostMapping("/type-reparations")
     public String addTypeReparation(TypeReparation typeReparation) {
         typeReparationService.addTypeReparation(typeReparation);
-        return "redirect:/typeReparations/form";
+        return "redirect:/type-reparations/form";
     }
 
-    @GetMapping("/typeReparations/form")
+    @GetMapping("/type-reparations/form")
     public String showFormTypeReparation(Model model) {
         return "FormTypeReparation";
     }

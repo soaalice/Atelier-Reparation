@@ -9,13 +9,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire Composant Modele</title>
+    <title>Formulaire Composant Modèle</title>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
 
-    <form action="/composantModeles" method="post">
-        <h1>Composant Modele</h1>
+    <form action="/composant-modeles" method="post">
+        <h1>Composant Modèle</h1>
         <label for="composant">Composant:</label>
         <select id="composant" name="composantId">
             <%
@@ -26,7 +26,7 @@
             <% } %>
         </select>
 
-        <label for="modele">Modele:</label>
+        <label for="modele">Modèle:</label>
         <select id="modele" name="modeleId">
             <%
                 List<Modele> listModeles = (List<Modele>) request.getAttribute("listModeles");

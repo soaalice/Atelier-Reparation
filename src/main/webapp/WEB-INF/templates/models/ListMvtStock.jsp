@@ -14,7 +14,7 @@
 <body>
     <jsp:include page="inc/header.jsp" />
     <h1>Search stocks</h1>
-    <form action="/mvtStocks/search" method="get">
+    <form action="/mvt-stocks/search" method="get">
         <label for="minDate">Date Min :</label>
         <input type="date" id="minDate" name="minDate">
         <label for="maxDate">Date Max :</label>
@@ -23,7 +23,7 @@
     </form>
 
     <h1>Voir Etat Stock</h1>
-    <form action="/mvtStocks/etat" method="get">
+    <form action="/mvt-stocks/etat" method="get">
         <label for="typeComposant">TypeComposant :</label>
         <select id="typeComposant" name="typeComposantId">
             <%

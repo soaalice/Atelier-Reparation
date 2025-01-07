@@ -22,19 +22,19 @@ public class TypeComposantController {
     public String showAllTypeComposants(Model model) {
         List<TypeComposant> listTypeComposants = typeComposantService.getAllTypeComposants();
         model.addAttribute("listTypeComposants", listTypeComposants);
-        return "ListTypeComposant"; // Affiche la page JSP avec la liste des types de composants
+        return "ListTypeComposant";
     }
 
     // Ajout d'un nouveau type de composant
     @PostMapping("/type-composants")
     public String addTypeComposant(TypeComposant typeComposant) {
         typeComposantService.addTypeComposant(typeComposant);
-        return "redirect:/type-composants"; // Redirection vers la page de la liste des types de composants après ajout
+        return "redirect:/type-composants/form";
     }
 
     // Affichage du formulaire pour ajouter un type de composant
     @GetMapping("/type-composants/form")
     public String showFormTypeComposant() {
-        return "FormTypeComposant"; // Affiche un formulaire pour ajouter un nouveau type de composant
+        return "FormTypeComposant";
     }
 }

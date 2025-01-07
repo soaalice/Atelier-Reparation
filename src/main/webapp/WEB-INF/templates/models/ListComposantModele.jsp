@@ -18,7 +18,7 @@
         <tr>
             <th>Id</th>
             <th>Composant</th>
-            <th>Modele</th>
+            <th>Modèle</th>
         </tr>
         <%
             List<ComposantModele> listComposantModeles = (List<ComposantModele>) request.getAttribute("listComposantModeles");

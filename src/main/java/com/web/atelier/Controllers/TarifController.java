@@ -50,7 +50,7 @@ public class TarifController {
         tarif.setTypeReparation(typeReparation);
 
         tarifService.addTarif(tarif);
-        return "redirect:/tarifs";
+        return "redirect:/tarifs/form";
     }
 
     @GetMapping("/tarifs/form")
