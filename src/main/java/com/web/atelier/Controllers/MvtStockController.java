@@ -91,7 +91,7 @@ public class MvtStockController {
             @RequestParam(value = "endDate", required = false) String endDate,
             @RequestParam(value = "typeComposantId", required = false) String typeComposantId,
             Model model) {
-        Date start = null;
+        Date start = Date.valueOf("1900-01-01");
         if (startDate != null && !startDate.isEmpty()) {
             try {
                 start = Date.valueOf(startDate);
@@ -102,7 +102,7 @@ public class MvtStockController {
             }
         }
 
-        Date end = null;
+        Date end = Date.valueOf("2100-01-01");
         if (endDate != null && !endDate.isEmpty()) {
             try {
                 end = Date.valueOf(endDate); // Convertir en java.sql.Date

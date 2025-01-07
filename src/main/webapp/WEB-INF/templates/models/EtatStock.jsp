@@ -43,11 +43,11 @@
     </table>
 
     <form action="/etat-stock" method="get">
-        <%-- <label for="startDate">Date de début :</label>
+        <label for="startDate">Date de début :</label>
         <input type="date" id="startDate" name="startDate" value="<%= request.getAttribute("startDate") != null ? request.getAttribute("startDate") : "" %>">
         
         <label for="endDate">Date de fin :</label>
-        <input type="date" id="endDate" name="endDate" value="<%= request.getAttribute("endDate") != null ? request.getAttribute("endDate") : "" %>"> --%>
+        <input type="date" id="endDate" name="endDate" value="<%= request.getAttribute("endDate") != null ? request.getAttribute("endDate") : "" %>">
         
         <label for="typeComposantId">Type de composant :</label>
         <select id="typeComposantId" name="typeComposantId">

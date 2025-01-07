@@ -49,12 +49,12 @@ public interface MvtStockRepository extends JpaRepository<MvtStock, Integer> {
                     "FROM composant c " +
                     "JOIN type_composant tc ON tc.id = c.type_composant_id " +
                     "LEFT JOIN mvt_stock ms ON c.id = ms.composant_id " +
-                    "WHERE ( :startDate IS NULL OR ms.date_mvt >= :startDate ) " +
-                    "AND ( :endDate IS NULL OR ms.date_mvt <= :endDate ) " +
+                    "AND ( :startDate IS NULL OR ms.date_mvt >= CAST( :startDate AS DATE) ) " +
+                    "AND ( :endDate IS NULL OR ms.date_mvt <= CAST( :endDate AS DATE )) " +
                     "AND ( :typeComposantId IS NULL OR tc.id = :typeComposantId ) " + 
                     "GROUP BY c.id, tc.id", nativeQuery = true)
-    List<StockDto> findStockData(@Param("startDate") Date startDate,
-                    @Param("endDate") Date endDate,
+    List<StockDto> findStockData(@Param("startDate") String startDate,
+                    @Param("endDate") String endDate,
                     @Param("typeComposantId") Integer typeComposantId);
 
 }
