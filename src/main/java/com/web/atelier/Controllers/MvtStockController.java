@@ -1,6 +1,7 @@
 package com.web.atelier.Controllers;
 
 import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.web.atelier.Models.MvtStock;
 import com.web.atelier.Models.TypeComposant;
@@ -75,4 +77,60 @@ public class MvtStockController {
     //     model.addAttribute("stockList", stocks);
     //      return "EtatStock";
     // }
+
+    // @GetMapping("/etat-stock")
+    // public String getStockSummary(Model model) {
+    //     List<StockDto> stockSummary = mvtStockService.getStockDtos();
+    //     model.addAttribute("stockList", stockSummary);
+    //     return "EtatStock"; // Nom de la page JSP
+    // }
+
+    @GetMapping("/etat-stock")
+    public String getStockSummary(
+            @RequestParam(value = "startDate", required = false) String startDate,
+            @RequestParam(value = "endDate", required = false) String endDate,
+            @RequestParam(value = "typeComposantId", required = false) String typeComposantId,
+            Model model) {
+        Date start = null;
+        if (startDate != null && !startDate.isEmpty()) {
+            try {
+                start = Date.valueOf(startDate);
+            } catch (IllegalArgumentException e) {
+                // Vous pouvez loguer l'erreur ici, ou simplement ignorer si la date n'est pas
+                // au bon format
+                System.err.println("Invalid startDate format: " + startDate);
+            }
+        }
+
+        Date end = null;
+        if (endDate != null && !endDate.isEmpty()) {
+            try {
+                end = Date.valueOf(endDate); // Convertir en java.sql.Date
+            } catch (IllegalArgumentException e) {
+                // Vous pouvez loguer l'erreur ici, ou simplement ignorer si la date n'est pas
+                // au bon format
+                System.err.println("Invalid endDate format: " + endDate);
+            }
+        }
+
+        Integer id = null;
+        if (typeComposantId != null && !typeComposantId.isEmpty()) {
+            try {
+                id = Integer.valueOf(typeComposantId);
+            } catch (NumberFormatException e) {
+                // Si l'ID n'est pas un nombre valide, laisser id = null
+                // Vous pouvez aussi loguer cette erreur si nécessaire
+            }
+        }
+
+        List<TypeComposant> listTypeComposants = typeComposantService.getAllTypeComposants();
+        model.addAttribute("listTypeComposant", listTypeComposants);
+        List<StockDto> stockSummary = mvtStockService.getStockDtos(start, end, id);
+        model.addAttribute("stockList", stockSummary);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        model.addAttribute("typeComposantId", typeComposantId);
+        return "EtatStock"; // Nom de la page JSP
+    }
+
 }

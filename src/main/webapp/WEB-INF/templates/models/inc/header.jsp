@@ -281,7 +281,7 @@
     <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
-                <a href="/" class="navbar-brand">MyApp</a>
+                <a href="/" class="navbar-brand">Atelier</a>
             </div>
 
             <!-- Menu de navigation -->
@@ -291,7 +291,7 @@
                 </li>
 
                 <li class="navbar-item">
-                    <a href="/" class="navbar-link">Etat Stock</a>
+                    <a href="/etat-stock" class="navbar-link">Etat Stock</a>
                 </li>
 
                 <!-- Dropdown Insertion -->

@@ -1,5 +1,6 @@
 package com.web.atelier.Repositories;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -34,5 +35,26 @@ public interface MvtStockRepository extends JpaRepository<MvtStock, Integer> {
     //        "AND (:startDate IS NULL OR :endDate IS NULL OR ms.dateMvt BETWEEN :startDate AND :endDate) " +
     //        "GROUP BY c.id, tc.id")
     // List<StockDto> findStock(@Param("typeComposantId") Integer typeComposantId, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    @Query(value = "SELECT c.id as composantId, c.name as composantName, tc.id as typeComposantId, " +
+            "tc.name as typeComposantName, COALESCE(COALESCE(SUM(ms.entree - ms.sortie), 0), 0) as stock " +
+            "FROM composant c " +
+            "JOIN type_composant tc ON tc.id = c.type_composant_id " +
+            "LEFT JOIN mvt_stock ms ON c.id = ms.composant_id " +
+            "GROUP BY c.id, tc.id", nativeQuery = true)
+    List<StockDto> findStockData();
+
+    @Query(value = "SELECT c.id as composantId, c.name as composantName, tc.id as typeComposantId, " +
+                    "tc.name as typeComposantName, COALESCE(COALESCE(SUM(ms.entree - ms.sortie), 0), 0) as stock " +
+                    "FROM composant c " +
+                    "JOIN type_composant tc ON tc.id = c.type_composant_id " +
+                    "LEFT JOIN mvt_stock ms ON c.id = ms.composant_id " +
+                    "WHERE ( :startDate IS NULL OR ms.date_mvt >= :startDate ) " +
+                    "AND ( :endDate IS NULL OR ms.date_mvt <= :endDate ) " +
+                    "AND ( :typeComposantId IS NULL OR tc.id = :typeComposantId ) " + 
+                    "GROUP BY c.id, tc.id", nativeQuery = true)
+    List<StockDto> findStockData(@Param("startDate") Date startDate,
+                    @Param("endDate") Date endDate,
+                    @Param("typeComposantId") Integer typeComposantId);
 
 }

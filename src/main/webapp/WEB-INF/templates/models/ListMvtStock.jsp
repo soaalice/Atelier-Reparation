@@ -13,16 +13,7 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-    <h1>Search stocks</h1>
-    <form action="/mvt-stocks/search" method="get">
-        <label for="minDate">Date Min :</label>
-        <input type="date" id="minDate" name="minDate">
-        <label for="maxDate">Date Max :</label>
-        <input type="date" id="maxDate" name="maxDate">
-        <button type="submit">Rechercher</button>
-    </form>
-
-    <h1>Voir Etat Stock</h1>
+    <%-- <h1>Voir Etat Stock</h1>
     <form action="/mvt-stocks/etat" method="get">
         <label for="typeComposant">TypeComposant :</label>
         <select id="typeComposant" name="typeComposantId">
@@ -38,7 +29,7 @@
         <label for="maxDate">Date Max :</label>
         <input type="date" id="maxDate" name="maxDate">
         <button type="submit">Rechercher</button>
-    </form>
+    </form> --%>
 
     <h1>Liste des Mouvements de Stock</h1>
     <table border="1">
@@ -62,5 +53,13 @@
             </tr>
         <% } %>
     </table>
+
+    <form action="/mvt-stocks/search" method="get">
+        <label for="minDate">Date Min :</label>
+        <input type="date" id="minDate" name="minDate">
+        <label for="maxDate">Date Max :</label>
+        <input type="date" id="maxDate" name="maxDate">
+        <button type="submit">Rechercher</button>
+    </form>
 </body>
 </html>

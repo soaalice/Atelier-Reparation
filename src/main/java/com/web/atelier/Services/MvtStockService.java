@@ -1,6 +1,7 @@
 package com.web.atelier.Services;
 
 import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,12 @@ public class MvtStockService {
         }
     }
 
+    public List<StockDto> getStockDtos() {
+        return mvtStockRepository.findStockData();
+    }
+
+    public List<StockDto> getStockDtos(Date startDate, Date endDate, Integer typeComposantId) {
+        return mvtStockRepository.findStockData(startDate, endDate, typeComposantId);
+    }
 
 }
