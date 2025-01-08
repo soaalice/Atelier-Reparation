@@ -79,7 +79,8 @@ public class ReparationController {
 
     @GetMapping("/reparations/form")
     public String showFormReparation(Model model) {
-        model.addAttribute("listOrdinateurs", ordinateurService.getAllOrdinateurs());
+        // model.addAttribute("listOrdinateurs", ordinateurService.getAllOrdinateurs());
+        model.addAttribute("listOrdinateurs", ordinateurService.getAllRepairableOrdinateurs());
         return "FormReparation";
     }
     

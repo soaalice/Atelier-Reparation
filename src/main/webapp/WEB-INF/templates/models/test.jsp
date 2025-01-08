@@ -1,47 +1,42 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.web.atelier.Dto.StockDto" %>
+<%@ page import="com.web.atelier.Models.ComposantModele" %>
+<%@ page import="com.web.atelier.Models.Composant" %>
+<%@ page import="com.web.atelier.Models.Modele" %>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etat Stocks</title>
+    <title>Formulaire Composant Modèle</title>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-    <h1>Etat des Stocks</h1>
-    <table border="1">
-        <tr>
-            <%-- <th>Composant ID</th> --%>
-            <th>Composant Name</th>
-            <%-- <th>Type Composant ID</th> --%>
-            <th>Type Composant Name</th>
-            <th>Stock</th>
-        </tr>
-        <%
-            List<StockDto> stockList = (List<StockDto>) request.getAttribute("stockList");
-            if (stockList != null) {
-                for (StockDto stock : stockList) {
-        %>
-            <tr>
-                <%-- <td><%= stock.getComposantId() %></td> --%>
-                <td><%= stock.getComposantName() %></td>
-                <%-- <td><%= stock.getTypeComposantId() %></td> --%>
-                <td><%= stock.getTypeComposantName() %></td>
-                <td><%= stock.getStock() %></td>
-            </tr>
-        <%
-                }
-            } else {
-        %>
-            <tr>
-                <td colspan="5">Aucun stock disponible.</td>
-            </tr>
-        <%
-            }
-        %>
-    </table>
+
+    <form action="/composant-modeles" method="post">
+        <h1>Composant Modèle</h1>
+        <label for="composant">Composant:</label>
+        <select id="composant" name="composantId">
+            <%
+                List<Composant> listComposants = (List<Composant>) request.getAttribute("listComposants");
+                for (Composant composant : listComposants) {
+            %>
+                <option value="<%= composant.getId() %>"><%= composant.getName() %></option>
+            <% } %>
+        </select>
+
+        <label for="modele">Modèle:</label>
+        <select id="modele" name="modeleId">
+            <%
+                List<Modele> listModeles = (List<Modele>) request.getAttribute("listModeles");
+                for (Modele modele : listModeles) {
+            %>
+                <option value="<%= modele.getId() %>"><%= modele.getName() %></option>
+            <% } %>
+        </select>
+
+        <button type="submit">Enregistrer</button>
+    </form>
 </body>
 </html>

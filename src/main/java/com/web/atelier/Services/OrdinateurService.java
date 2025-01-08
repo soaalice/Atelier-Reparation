@@ -23,6 +23,10 @@ public class OrdinateurService {
         return ordinateurRepository.findAll();
     }
 
+    public List<Ordinateur> getAllRepairableOrdinateurs(){
+        return ordinateurRepository.findNotRepaired();
+    }
+
     //Get an Ordinateur By its ID
     public Ordinateur getOrdinateurById(int id){
         return ordinateurRepository.findById(id).orElse(null);
