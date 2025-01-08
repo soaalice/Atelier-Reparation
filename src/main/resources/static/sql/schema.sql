@@ -23,19 +23,15 @@ CREATE TABLE composant (
     type_composant_id INT NOT NULL REFERENCES type_composant(id)
 );
 
--- Ajouter une colonne 'name' à la table 'modele'
 ALTER TABLE modele
 ADD COLUMN name VARCHAR(255);
 
--- Ajouter une colonne 'name' à la table 'ordinateur'
 ALTER TABLE ordinateur
 ADD COLUMN name VARCHAR(255);
 
--- Ajouter une colonne 'name' à la table 'type_composant'
 ALTER TABLE type_composant
 ADD COLUMN name VARCHAR(255);
 
--- Ajouter une colonne 'name' à la table 'composant'
 ALTER TABLE composant
 ADD COLUMN name VARCHAR(255);
 
@@ -44,7 +40,8 @@ ADD COLUMN name VARCHAR(255);
 CREATE TABLE composant_modele (
     id SERIAL PRIMARY KEY,
     composant_id INT NOT NULL REFERENCES composant(id),
-    modele_id INT NOT NULL REFERENCES modele(id)
+    modele_id INT NOT NULL REFERENCES modele(id),
+    UNIQUE (composant_id, modele_id)
 );
 
 -- Table: type_composant_modele
