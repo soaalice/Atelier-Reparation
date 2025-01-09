@@ -12,6 +12,12 @@ CREATE TABLE ordinateur (
     modele_id INT NOT NULL REFERENCES modele(id)
 );
 
+-- Table : unite
+CREATE TABLE unite(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(10) NOT NULL
+);
+
 -- Table: type_composant
 CREATE TABLE type_composant (
     id SERIAL PRIMARY KEY
@@ -32,8 +38,14 @@ ADD COLUMN name VARCHAR(255);
 ALTER TABLE type_composant
 ADD COLUMN name VARCHAR(255);
 
+ALTER TABLE type_composant
+ADD COLUMN unite_id INT  REFERENCES unite(id);
+
 ALTER TABLE composant
 ADD COLUMN name VARCHAR(255);
+
+ALTER TABLE composant
+ADD COLUMN valeur DECIMAL;
 
 
 -- Table: composant_modele
@@ -80,7 +92,7 @@ CREATE TABLE tarif (
 CREATE TABLE reparation_details (
     id SERIAL PRIMARY KEY,
     reparation_id INT NOT NULL REFERENCES reparation(id),
-    composant_id INT NOT NULL REFERENCES composant(id)
+    tarif_id INT NOT NULL REFERENCES tarif(id)
 );
 
 -- Table: mvt_stock
@@ -91,3 +103,5 @@ CREATE TABLE mvt_stock (
     composant_id INT NOT NULL REFERENCES composant(id),
     date_mvt DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+

@@ -11,6 +11,7 @@ import com.web.atelier.Models.Reparation;
 import com.web.atelier.Models.ReparationDetails;
 import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Services.ReparationService;
+import com.web.atelier.Services.TarifService;
 import com.web.atelier.Services.TypeComposantService;
 import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.OrdinateurService;
@@ -34,7 +35,7 @@ public class ReparationController {
     private ReparationDetailsService reparationDetailsService;
 
     @Autowired
-    private ComposantService composantService;
+    private TarifService tarifService;
 
     @Autowired
     private TypeComposantService typeComposantService;
@@ -68,7 +69,7 @@ public class ReparationController {
         reparationService.addReparation(reparation);
         for (Integer long1 : composants) {
             ReparationDetails temp = new ReparationDetails();
-            temp.setComposant(composantService.getComposantById(long1));
+            temp.setTarif(tarifService.getTarifById(long1));
             temp.setReparation(reparation);
             reparationDetailsService.addReparationDetails(temp);
         }

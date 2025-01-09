@@ -17,6 +17,7 @@ import com.web.atelier.Services.ReparationService;
 import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.OrdinateurService;
 import com.web.atelier.Services.ReparationDetailsService;
+import com.web.atelier.Services.TypeReparationService;
 
 @Controller
 public class ReparationDetailsController {
@@ -25,6 +26,10 @@ public class ReparationDetailsController {
     private ReparationDetailsService reparationDetailsService;
     @Autowired
     private ReparationService reparationService;
+
+    @Autowired
+    private TypeReparationService typeReparationService;
+
     @Autowired
     private ComposantService composantService;
     @Autowired
@@ -39,6 +44,7 @@ public class ReparationDetailsController {
             model.addAttribute("ordinateurId", ordinateurId);
         model.addAttribute("dateReparation", dateReparation);
         model.addAttribute("listComposants", composantService.getComposantByOrdinateur(ordinateur));
+        model.addAttribute("listTypeReparations",typeReparationService.getAllTypeReparations());
         return "FormReparationDetails";
     }
 

@@ -19,3 +19,12 @@
       - date_mvt (min et max)
     - etat_stock
       - date_etat (min et max)
+
+
+# Features 2:
+    -tables :
+      -unite(id,name)
+      -type_ordinateur(id,description)
+      -type_composant=>(unite_id)
+      -composant => (valeur)
+      -retour(reparation,date)

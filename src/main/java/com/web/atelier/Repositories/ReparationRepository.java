@@ -31,6 +31,6 @@ public interface ReparationRepository extends JpaRepository<Reparation, Integer>
             @Param("maxDate") LocalDate maxDate,
             @Param("modele") String modele);
 
-        @Query("SELECT r FROM Reparation r JOIN ReparationDetails rd ON r.id=rd.reparation.id JOIN Composant c ON rd.composant.id=c.id JOIN TypeComposant tc ON c.typeComposant.id=tc.id WHERE tc.id=:typeComposantId")
+        @Query("SELECT r FROM Reparation r JOIN ReparationDetails rd ON r.id=rd.reparation.id JOIN Tarif t ON t.id=rd.tarif.id JOIN Composant c ON c.id=t.composant.id JOIN TypeComposant tc ON tc.id=c.typeComposant.id WHERE tc.id=:typeComposantId")
         List<Reparation> findByTypeComposant(@Param("typeComposantId") Integer typeComposantId);
 }
