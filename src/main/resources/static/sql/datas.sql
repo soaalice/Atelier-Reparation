@@ -13,3 +13,4 @@ INSERT INTO composant (type_composant_id, name) VALUES
 (3, '512GB SSD'), 
 (4, 'NVIDIA GTX 1050'), 
 (4, 'AMD Radeon RX 580');
+
