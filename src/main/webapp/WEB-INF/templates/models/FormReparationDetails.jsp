@@ -1,12 +1,12 @@
 i<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.web.atelier.Models.Reparation" %>
+<%@ page import="com.web.atelier.Models.TypeReparation" %>
 <%@ page import="com.web.atelier.Models.Ordinateur" %>
 <%@ page import="com.web.atelier.Models.TypeReparation" %>
 <%@ page import="com.web.atelier.Models.Composant" %>
 
 <%
-    Object ordinateurId =  request.getAttribute("ordinateurId");
+    Object ordinateurId = request.getAttribute("ordinateurId");
     if (ordinateurId == null) {
         response.sendRedirect("/reparations/form");
         return;  // Arrête l'exécution du reste de la page JSP
@@ -18,7 +18,7 @@ i<%@ page contentType="text/html; charset=UTF-8" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire Reparation details</title>
+    <title>Formulaire Réparation details</title>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
@@ -83,42 +83,40 @@ i<%@ page contentType="text/html; charset=UTF-8" %>
         <input type="hidden" name="dateReparation" value="<%= request.getAttribute("dateReparation") %>"></input>
 
         <label for="composant">composant:</label>
+        <div style="display: flex; align-items: center; flex-wrap: wrap;">
         
             <%
                 List<Composant> listcomposants = (List<Composant>) request.getAttribute("listComposants");
+                List<TypeReparation> listTypeReparations = (List<TypeReparation>) request.getAttribute("listTypeReparations");
                 for (Composant composant : listcomposants) {
             %>
-                <input id="composant_<%=composant.getId()%>" type="checkbox" name="composants" value="<%= composant.getId() %>"><%= composant.getName() %></input>
+                <input type="checkbox" name="composants" value="<%= composant.getId() %>" id="composant_<%= composant.getId() %>">
+                <label for="composant_<%= composant.getId() %>"><%= composant.getName() %></label>
 
-                <select name="reparation_<%= composant.getId() %>" id="select_<%= composant.getId() %>" style='display:none'>
-                    <%
-                        List<TypeReparation> listType = (List<TypeReparation>) request.getAttribute("listTypeReparations");
-                        for (TypeReparation type : listType) {
-                    %>
-                        <option value="<%= type.getId() %>"><%= type.getName() %></option>
+                <select required name="reparation_<%= composant.getId() %>" id="select_<%= composant.getId() %>" style="display:none;">
+                    <% for (TypeReparation reparation : listTypeReparations) { %>
+                        <option value="<%= reparation.getId() %>"><%= reparation.getName() %></option>
                     <% } %>
                 </select>
             <% } %>
+        </div>
 
 
         <button type="submit">Enregistrer</button>
     </form>
 
     <script>
-    // Ajouter un gestionnaire d'événement pour chaque checkbox
-    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function () {
-            var select = document.getElementById('select_'+this.value);
-            if (this.checked) {
-                // Afficher le select si la case est cochée
-                select.style.display = 'inline';
-            } else {
-                // Cacher le select si la case est décochée
-                select.style.display = 'none';
-            }
-        }
-    }  
-    
+        // Script pour afficher le select des réparations lorsque la case est cochée
+        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var select = document.getElementById('select_' + this.value);
+                if (this.checked) {
+                    select.style.display = 'inline';
+                } else {
+                    select.style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
