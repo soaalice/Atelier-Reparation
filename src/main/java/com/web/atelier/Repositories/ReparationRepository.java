@@ -13,6 +13,9 @@ import java.util.List;
 
 @Repository
 public interface ReparationRepository extends JpaRepository<Reparation, Integer> {
+        @Query("SELECT r FROM Reparation r WHERE r.id NOT IN (SELECT re.reparation.id FROM Retour re)")
+        List<Reparation> findReturnableReparations();
+
 
         @Query("SELECT r FROM Reparation r WHERE r.dateReparation >= :minDate AND " +
             "(:modele IS NULL OR LOWER(r.ordinateur.modele.name) LIKE CONCAT('%', LOWER(:modele), '%'))")

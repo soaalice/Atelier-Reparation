@@ -2,7 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.web.atelier.Models.Reparation" %>
 <%@ page import="com.web.atelier.Models.Ordinateur" %>
-<%@ page import="com.web.atelier.Models.TypeComposant" %>
+<%@ page import="com.web.atelier.Models.Retour" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,26 +17,26 @@
     <table border="1">
         <tr>
             <th>Id</th>
-            <th>Ordinateur</th>
+            <th>Réparation</th>
             <th>Date de Réparation</th>
-            <%-- <th>Montant Total</th>
-            <th>Durée Totale</th> --%>
+            <th>Date de Retour</th>
         </tr>
         <%
-            List<Reparation> listReparations = (List<Reparation>) request.getAttribute("listReparations");
-            for (Reparation reparation : listReparations) {
+            List<Retour> listRetours = (List<Retour>) request.getAttribute("listRetours");
+            for (Retour retour : listRetours) {
+                Reparation reparation = retour.getReparation(); // Obtient la réparation liée au retour
+                Ordinateur ordinateur = reparation.getOrdinateur(); // Obtient l'ordinateur de la réparation
         %>
             <tr>
-                <td><%= reparation.getId() %></td>
-                <td><%= reparation.getOrdinateur().getName() %></td>
+                <td><%= retour.getId() %></td>
+                <td><%= reparation.getId() + " - " + ordinateur.getName() %></td>
                 <td><%= reparation.getDateReparation() %></td>
-                <%-- <td><%= reparation.getMontantTotal() %></td>
-                <td><%= reparation.getDureeTotale() %></td> --%>
+                <td><%= retour.getDateRetour() %></td>
             </tr>
         <% } %>
     </table>
 
-    <form action="/reparations" method="get">
+    <%-- <form action="/retours" method="get">
         
         <label for="typeComposantId">Type de composant :</label>
         <select id="typeComposantId" name="typeComposantId">
@@ -53,6 +53,6 @@
         </select>
         
         <button type="submit">Filtrer</button>
-    </form>
+    </form> --%>
 </body>
 </html>

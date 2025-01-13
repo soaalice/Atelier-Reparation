@@ -29,10 +29,10 @@
     <% 
         }
     %>
-    <form action="/reparations-details" method="post">
+    <form action="/retours" method="post">
         <h1>Retour</h1>
         <label for="reparation">Reparation:</label>
-        <select id="reparation" name="ordinateurId">
+        <select id="reparation" name="reparationId">
             <%
                 List<Reparation> listReparations = (List<Reparation>) request.getAttribute("listReparations");
                 for (Reparation reparation : listReparations) {

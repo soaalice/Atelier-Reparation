@@ -8,7 +8,7 @@ i<%@ page contentType="text/html; charset=UTF-8" %>
     Object ordinateurId = request.getAttribute("ordinateurId");
     if (ordinateurId == null) {
         response.sendRedirect("/reparations/form");
-        return;  // Arrête l'exécution du reste de la page JSP
+        return; 
     }
 %>
 
@@ -109,7 +109,7 @@ i<%@ page contentType="text/html; charset=UTF-8" %>
                 for (Composant composant : listcomposants) {
             %>
                 <input type="checkbox" name="composants" value="<%= composant.getId() %>" id="composant_<%= composant.getId() %>">
-                <label for="composant_<%= composant.getId() %>"><%= composant.getName() %></label>
+                <label for="composant_<%= composant.getId() %>"><%= composant.getName() +" - "+ composant.getValeur() + " " + composant.getTypeComposant().getUnite().getName() %></label>
 
                 <select name="reparation_<%= composant.getId() %>" id="select_<%= composant.getId() %>" style="display:none;">
                     <% for (TypeReparation reparation : listTypeReparations) { %>

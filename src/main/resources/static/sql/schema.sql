@@ -4,56 +4,44 @@ CREATE DATABASE atelier_reparation;
 --Table: unite
 CREATE TABLE unite(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(50) NOT NULL UNIQUE
 );
 
 --Table: type_ordinateur
 CREATE TABLE type_ordinateur(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Table: modele
 CREATE TABLE modele (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Table: ordinateur
 CREATE TABLE ordinateur (
     id SERIAL PRIMARY KEY,
-    modele_id INT NOT NULL REFERENCES modele(id)
+    name VARCHAR(255),
+    modele_id INT NOT NULL REFERENCES modele(id),
+    type_ordinateur_id INT NOT NULL REFERENCES type_ordinateur(id)
 );
 
 -- Table: type_composant
 CREATE TABLE type_composant (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    unite_id INT NOT NULL REFERENCES unite(id)
 );
 
 -- Table: composant
 CREATE TABLE composant (
     id SERIAL PRIMARY KEY,
-    type_composant_id INT NOT NULL REFERENCES type_composant(id)
+    name VARCHAR(255) NOT NULL,
+    valeur NUMERIC NOT NULL DEFAULT 0,
+    type_composant_id INT NOT NULL REFERENCES type_composant(id),
+    UNIQUE (name, valeur)
 );
-
-ALTER TABLE modele
-ADD COLUMN name VARCHAR(255);
-
-ALTER TABLE ordinateur
-ADD COLUMN name VARCHAR(255);
-
-ALTER TABLE ordinateur
-ADD COLUMN type_ordinateur_id INT NOT NULL REFERENCES type_ordinateur(id);
-
-ALTER TABLE type_composant
-ADD COLUMN name VARCHAR(255);
-ALTER TABLE type_composant
-ADD COLUMN unite_id INT NOT NULL REFERENCES unite(id);
-
-ALTER TABLE composant
-ADD COLUMN name VARCHAR(255);
-ALTER TABLE composant
-ADD COLUMN valeur NUMERIC(18, 2) DEFAULT 0;
-
 
 -- Table: composant_modele
 CREATE TABLE composant_modele (

@@ -30,7 +30,8 @@
                 <td><%= tarif.getId() %></td>
                 <td><%= tarif.getPrix() %></td>
                 <td><%= tarif.getDuree() %></td>
-                <td><%= tarif.getComposant().getName() %></td>
+                <% Composant composant = tarif.getComposant(); %>
+                <td><%= composant.getName() +"-"+ composant.getValeur() + composant.getTypeComposant().getUnite().getName() %></td>
                 <td><%= tarif.getTypeReparation().getName() %></td>
             </tr>
         <% } %>

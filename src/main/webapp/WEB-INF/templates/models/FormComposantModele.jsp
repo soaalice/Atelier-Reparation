@@ -39,7 +39,7 @@
                 List<Composant> listComposants = (List<Composant>) request.getAttribute("listComposants");
                 for (Composant composant : listComposants) {
             %>
-                <option value="<%= composant.getId() %>"><%= composant.getName() %></option>
+                <option value="<%= composant.getId() %>"><%= composant.getName() +" - "+ composant.getValeur() + " " + composant.getTypeComposant().getUnite().getName() %></option>
             <% } %>
         </select>
 
