@@ -1,6 +1,8 @@
 package com.web.atelier.Services;
 
+import com.web.atelier.Models.Composant;
 import com.web.atelier.Models.Tarif;
+import com.web.atelier.Models.TypeReparation;
 import com.web.atelier.Repositories.TarifRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +26,9 @@ public class TarifService {
     public Tarif getTarifById(int id) {
         return tarifRepository.findById(id).orElse(null);
     }
+
+    public Tarif getTarifByComposantAndTypeReparation(Composant composant, TypeReparation reparation){
+        return tarifRepository.findByComposantAndTypeReparation(composant, reparation);
+    }
+
 }

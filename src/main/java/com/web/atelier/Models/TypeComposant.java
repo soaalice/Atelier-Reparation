@@ -1,20 +1,15 @@
 package com.web.atelier.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import com.web.atelier.Models.Unite;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="type_composant")
 public class TypeComposant {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -22,5 +17,9 @@ public class TypeComposant {
 
     @Column(unique = true)
     String name;
+
+    @ManyToOne
+    @JoinColumn(name = "unite_id", nullable = false)
+    private Unite unite;
 
 }

@@ -31,4 +31,5 @@ public class ComposantService {
     public List<Composant> getComposantByOrdinateur(Ordinateur ordinateur){
         return composantRepository.findByOrdinateur(ordinateur.getId());
     }
+
 }

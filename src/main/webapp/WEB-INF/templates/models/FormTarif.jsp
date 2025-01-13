@@ -13,13 +13,31 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
+    <% 
+        String successMessage = (String) request.getAttribute("successMessage");
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (successMessage != null) {
+    %>
+        <div style="color: green; font-weight: bold;">
+            <%= successMessage %>
+        </div>
+    <% 
+        } 
+        if (errorMessage != null) {
+    %>
+        <div style="color: red; font-weight: bold;">
+            <%= errorMessage %>
+        </div>
+    <% 
+        }
+    %>
     <form action="/tarifs" method="post">
         <h1>Tarif</h1>
         <label for="prix">Prix:</label>
-        <input type="number" id="prix" name="prix" step="0.01" required />
+        <input type="number" id="prix" name="prix" min="0" step="0.01" required />
 
         <label for="duree">Durée:</label>
-        <input type="number" id="duree" name="duree" step="0.01" required />
+        <input type="number" id="duree" name="duree" min="0" step="0.01" required />
 
         <label for="composant">Composant:</label>
         <select id="composant" name="composantId">

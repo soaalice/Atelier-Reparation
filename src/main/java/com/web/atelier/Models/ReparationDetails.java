@@ -28,9 +28,13 @@ public class ReparationDetails {
     @JoinColumn(name = "reparation_id", nullable = false)
     private Reparation reparation;
 
+    // @ManyToOne
+    // @JoinColumn(name="composant_id", nullable = false)
+    // private Composant composant;
+
     @ManyToOne
-    @JoinColumn(name="composant_id", nullable = false)
-    private Composant composant;
+    @JoinColumn(name="tarif_id", nullable = false)
+    private Tarif tarif;
 
     // @Column(nullable = false)
     // private BigDecimal montantTotal;

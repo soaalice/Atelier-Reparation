@@ -6,6 +6,7 @@ import com.web.atelier.Models.TypeReparation;
 import com.web.atelier.Services.TarifService;
 import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.TypeReparationService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,28 +34,34 @@ public class TarifController {
         List<Tarif> listTarifs = tarifService.getAllTarifs();
         model.addAttribute("listTarifs", listTarifs);
         return "ListTarif";
-    }
+        }
 
-    @PostMapping("/tarifs")
-    public String addTarif(@RequestParam("prix") Double prix,
+        @PostMapping("/tarifs")
+        public String addTarif(@RequestParam("prix") Double prix,
             @RequestParam("duree") Double duree,
             @RequestParam("composantId") Integer composantId,
-            @RequestParam("typeReparationId") Integer typeReparationId) {
-        Composant composant = composantService.getComposantById(composantId);
-        TypeReparation typeReparation = typeReparationService.getTypeReparationById(typeReparationId);
+            @RequestParam("typeReparationId") Integer typeReparationId,
+            RedirectAttributes redirectAttributes) {
+            try {
+                Composant composant = composantService.getComposantById(composantId);
+                TypeReparation typeReparation = typeReparationService.getTypeReparationById(typeReparationId);
 
-        Tarif tarif = new Tarif();
-        tarif.setPrix(prix);
-        tarif.setDuree(duree);
-        tarif.setComposant(composant);
-        tarif.setTypeReparation(typeReparation);
+                Tarif tarif = new Tarif();
+                tarif.setPrix(prix);
+                tarif.setDuree(duree);
+                tarif.setComposant(composant);
+                tarif.setTypeReparation(typeReparation);
 
-        tarifService.addTarif(tarif);
-        return "redirect:/tarifs/form";
-    }
+                tarifService.addTarif(tarif);
+                redirectAttributes.addFlashAttribute("successMessage", "Tarif ajouté avec succès !");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Erreur: " + e.getMessage());
+            }
+            return "redirect:/tarifs/form";
+        }
 
-    @GetMapping("/tarifs/form")
-    public String showFormTarif(Model model) {
+        @GetMapping("/tarifs/form")
+        public String showFormTarif(Model model) {
         List<Composant> listComposants = composantService.getAllComposants();
         List<TypeReparation> listTypeReparations = typeReparationService.getAllTypeReparations();
         model.addAttribute("listComposants", listComposants);

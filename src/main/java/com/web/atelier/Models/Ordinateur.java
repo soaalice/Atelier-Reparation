@@ -22,6 +22,10 @@ public class Ordinateur {
     @JoinColumn(name="modele_id", nullable = false)
     Modele modele;
 
+    @ManyToOne
+    @JoinColumn(name = "type_ordinateur_id", nullable = false)
+    TypeOrdinateur typeOrdinateur;
+
     @Column(unique = true)
     String name;
 

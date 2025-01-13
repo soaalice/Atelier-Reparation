@@ -13,6 +13,24 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
+    <% 
+        String successMessage = (String) request.getAttribute("successMessage");
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (successMessage != null) {
+    %>
+        <div style="color: green; font-weight: bold;">
+            <%= successMessage %>
+        </div>
+    <% 
+        } 
+        if (errorMessage != null) {
+    %>
+        <div style="color: red; font-weight: bold;">
+            <%= errorMessage %>
+        </div>
+    <% 
+        }
+    %>
     <form action="/type-composant-modeles" method="post">
         <h1>Type Composant Modèle</h1>
         <label for="modele">Modèle:</label>

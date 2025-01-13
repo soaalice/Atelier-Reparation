@@ -17,6 +17,7 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Unite</th>
         </tr>
         <% 
             List<TypeComposant> listTypeComposants = (List<TypeComposant>) request.getAttribute("listTypeComposants");
@@ -25,6 +26,7 @@
             <tr>
                 <td><%= typeComposant.getId() %></td>
                 <td><%= typeComposant.getName() %></td>
+                <td><%= typeComposant.getUnite().getName() %></td>
             </tr>
         <% } %>
     </table>

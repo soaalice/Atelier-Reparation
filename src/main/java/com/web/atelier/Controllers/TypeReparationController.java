@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.atelier.Models.TypeReparation;
 import com.web.atelier.Services.TypeReparationService;
@@ -21,16 +22,21 @@ public class TypeReparationController {
         List<TypeReparation> listTypeReparations = typeReparationService.getAllTypeReparations();
         model.addAttribute("listTypeReparations", listTypeReparations);
         return "ListTypeReparation";
-    }
+        }
 
-    @PostMapping("/type-reparations")
-    public String addTypeReparation(TypeReparation typeReparation) {
-        typeReparationService.addTypeReparation(typeReparation);
-        return "redirect:/type-reparations/form";
-    }
+        @PostMapping("/type-reparations")
+        public String addTypeReparation(TypeReparation typeReparation, RedirectAttributes redirectAttributes) {
+            try {
+                typeReparationService.addTypeReparation(typeReparation);
+                redirectAttributes.addFlashAttribute("successMessage", "Type de réparation ajouté avec succès.");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Erreur: " + e.getMessage());
+            }
+            return "redirect:/type-reparations/form";
+        }
 
-    @GetMapping("/type-reparations/form")
-    public String showFormTypeReparation(Model model) {
+        @GetMapping("/type-reparations/form")
+        public String showFormTypeReparation(Model model) {
         return "FormTypeReparation";
     }
 }

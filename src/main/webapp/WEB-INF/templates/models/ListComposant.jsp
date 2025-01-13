@@ -19,6 +19,7 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Valeur</th>
             <th>TypeComposant</th>
         </tr>
         <%
@@ -28,6 +29,7 @@
                     <tr>
                         <td><%= composant.getId() %></td>
                         <td><%= composant.getName() %></td>
+                        <td><%= composant.getValeur() +" "+ composant.getTypeComposant().getUnite().getName() %></td>
                         <td><%= composant.getTypeComposant().getName() %></td>
                     </tr>
                 <%

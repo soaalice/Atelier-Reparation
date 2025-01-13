@@ -74,6 +74,25 @@ i<%@ page contentType="text/html; charset=UTF-8" %>
 
     </style>
 
+    <% 
+        String successMessage = (String) request.getAttribute("successMessage");
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (successMessage != null) {
+    %>
+        <div style="color: green; font-weight: bold;">
+            <%= successMessage %>
+        </div>
+    <% 
+        } 
+        if (errorMessage != null) {
+    %>
+        <div style="color: red; font-weight: bold;">
+            <%= errorMessage %>
+        </div>
+    <% 
+        }
+    %>
+
     <form action="/reparations" method="post">
         <h1>Réparation Details</h1>
 
@@ -92,7 +111,7 @@ i<%@ page contentType="text/html; charset=UTF-8" %>
                 <input type="checkbox" name="composants" value="<%= composant.getId() %>" id="composant_<%= composant.getId() %>">
                 <label for="composant_<%= composant.getId() %>"><%= composant.getName() %></label>
 
-                <select required name="reparation_<%= composant.getId() %>" id="select_<%= composant.getId() %>" style="display:none;">
+                <select name="reparation_<%= composant.getId() %>" id="select_<%= composant.getId() %>" style="display:none;">
                     <% for (TypeReparation reparation : listTypeReparations) { %>
                         <option value="<%= reparation.getId() %>"><%= reparation.getName() %></option>
                     <% } %>

@@ -24,4 +24,5 @@ public class ComposantModeleService {
     public ComposantModele getComposantModeleById(int id) {
         return composantModeleRepository.findById(id).orElse(null);
     }
+
 }
