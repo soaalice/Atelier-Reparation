@@ -29,7 +29,7 @@
             <tr>
                 <td><%= recommendation.getId() %></td>
                 <% Composant composant = recommendation.getComposant(); %>
-                <td><%= composant.getName() +"-"+ composant.getValeur() + composant.getTypeComposant().getUnite().getName() %></td>
+                <td><%= composant.getName() +" - "+ composant.getValeur() + " " + composant.getTypeComposant().getUnite().getName() %></td>
                 <td><%= composant.getTypeComposant().getName() %></td>
                 <td><%= recommendation.getMois() %></td>
                 <td><%= recommendation.getAnnee() %></td>
@@ -53,11 +53,14 @@
                 %>
         </select>
 
-        <label for="dateMin">DateMin:</label>
+        <%-- <label for="dateMin">DateMin:</label>
         <input type="date" id="dateMin" name="dateMin"   />
 
         <label for="dateMax">DateMax:</label>
-        <input type="date" id="dateMax" name="dateMax"   />
+        <input type="date" id="dateMax" name="dateMax"   /> --%>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date"   />
         
         <button type="submit">Filtrer</button>
     </form>

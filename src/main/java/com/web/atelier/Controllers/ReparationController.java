@@ -67,7 +67,6 @@ public class ReparationController {
         }
 
         @PostMapping("/reparations")
-        @Transactional
         public String addReparation(Reparation reparation,
             @RequestParam("ordinateurId") Integer ordinateurId,
             @RequestParam("dateReparation") LocalDate dateReparation,

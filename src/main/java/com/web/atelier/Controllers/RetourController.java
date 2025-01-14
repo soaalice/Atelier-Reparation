@@ -56,6 +56,7 @@ public class RetourController {
     @PostMapping("/retours")
     public String addModele( @RequestParam(value="reparationId",required = true) Integer reparationId,@RequestParam(value="dateRetour" ,required=true) LocalDate date) {
         Retour retour = new Retour();
+        System.out.println("Daty : " +date);
         retour.setDate(date);
         retour.setReparation(reparationService.getReparationById(reparationId));
         retourService.addRetour(retour);

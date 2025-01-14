@@ -37,28 +37,42 @@ public class RecommendationController {
     private TypeComposantService typeComposantService;
 
     @GetMapping("/recommendations")
-    public String showAllRecommendations(@RequestParam(value="typeComposantId",required = false) Integer typeComposantId,@RequestParam(value="dateMin", required = false) String dateMinStr,@RequestParam(value="dateMax",required = false) String dateMaxStr,Model model) {
+    public String showAllRecommendations(@RequestParam(value="typeComposantId",required = false) Integer typeComposantId,
+                // @RequestParam(value="dateMin", required = false) String dateMinStr,
+                // @RequestParam(value="dateMax",required = false) String dateMaxStr,
+                @RequestParam(value="date", required = false) String date,
+                Model model) {
         List<Recommendation> list = recommendationService.getAllRecommendations();
-        Date startDate = Date.valueOf("1900-01-01");
+        // Date startDate = Date.valueOf("1900-01-01");
 
-        if(dateMinStr!=null && !dateMinStr.isEmpty()){
-            try {
-                startDate = Date.valueOf(dateMinStr);
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-        }
+        // if(dateMinStr!=null && !dateMinStr.isEmpty()){
+        //     try {
+        //         startDate = Date.valueOf(dateMinStr);
+        //     } catch (Exception e) {
+        //         System.err.println(e);
+        //     }
+        // }
 
-        Date endDate = Date.valueOf("2100-12-31");
-        if (dateMaxStr != null && !dateMaxStr.isEmpty()) {
+        // Date endDate = Date.valueOf("2100-12-31");
+        // if (dateMaxStr != null && !dateMaxStr.isEmpty()) {
+        //     try {
+        //         endDate = Date.valueOf(dateMaxStr);
+        //     } catch (Exception e) {
+        //         System.err.println(e);
+        //     }
+        // }
+
+         Date endDate = Date.valueOf(LocalDate.now());
+        if (date != null && !date.isEmpty()) {
             try {
-                endDate = Date.valueOf(dateMaxStr);
+                endDate = Date.valueOf(date);
             } catch (Exception e) {
                 System.err.println(e);
             }
         }
         
-        list = recommendationService.getFilterRecommendations(typeComposantId,startDate, endDate);
+        // list = recommendationService.getFilterRecommendations(typeComposantId,startDate, endDate);
+        list = recommendationService.getFilterRecommendations(typeComposantId,endDate);
 
         List<TypeComposant> listTypeComposants = typeComposantService.getAllTypeComposants();
         model.addAttribute("listRecommendations", list);

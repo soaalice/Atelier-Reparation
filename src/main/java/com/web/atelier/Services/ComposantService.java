@@ -38,11 +38,13 @@ public class ComposantService {
     }
 
     public Composant getSuperiorOrMinorComposant(Composant composant,int option){
-        if(option==1){
+        if(option==3){
+            return composantRepository.findMinorComposant(composant.getValeur(),composant.getTypeComposant().getId());
+        } else if (option == 4){
             return composantRepository.findSuperiorComposant(composant.getValeur(),composant.getTypeComposant().getId());
         }
         else{
-            return composantRepository.findMinorComposant(composant.getValeur(),composant.getTypeComposant().getId());
+            return composant;
         }
     }
 }

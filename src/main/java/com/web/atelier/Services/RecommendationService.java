@@ -38,5 +38,10 @@ public class RecommendationService {
         LocalDate end = endDate.toLocalDate();
         return recommendationRepository.filterByTypeComposantMonthYear(typeComposantId, start.getYear(), start.getMonthValue(), end.getYear(),end.getMonthValue());
     }
-    
+
+    public List<Recommendation> getFilterRecommendations(Integer typeComposantId, Date date) {
+        LocalDate start = date.toLocalDate();
+        return recommendationRepository.filterByTypeComposantMonthYear(typeComposantId, start.getYear(),
+                start.getMonthValue(), start.getYear(), start.getMonthValue());
+    }    
 }
