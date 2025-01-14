@@ -20,8 +20,8 @@
     <table border="1">
         <tr>
             <th>Id</th>
-            <th>Id reparation</th>
             <th>Ordinateur</th>
+            <th>Type Ordinateur</th>
             <th>Date de Retour</th>
             <%-- <th>Montant Total</th>
             <th>Durée Totale</th> --%>
@@ -32,8 +32,9 @@
         %>
             <tr>
                 <td><%= retour.getId() %></td>
-                <td><%= retour.getReparation().getId() %></td>
-                <td><%= retour.getReparation().getOrdinateur().getName() %></td>
+                <% Reparation reparation = retour.getReparation(); %>
+                <td><%= reparation.getId() +" - "+ reparation.getOrdinateur().getName() + " - " + reparation.getDateReparation() %></td>
+                <td><%= reparation.getOrdinateur().getTypeOrdinateur().getName() %></td>
                 <td><%= retour.getDate() %></td>
                 <%-- <td><%= reparation.getMontantTotal() %></td>
                 <td><%= reparation.getDureeTotale() %></td> --%>

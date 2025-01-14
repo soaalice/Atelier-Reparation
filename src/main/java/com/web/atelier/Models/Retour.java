@@ -26,6 +26,6 @@ public class Retour {
     @JoinColumn(name = "reparation_id", nullable = false)
     Reparation reparation;
 
-    @Column(unique = true)
+    @Column(name="date_retour", nullable = false)
     LocalDate date;
 }
