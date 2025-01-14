@@ -38,9 +38,10 @@ public class RetourController {
     @GetMapping("/retours")
     public String showAllRetours(@RequestParam(required = false) Integer typeComposantId,
             @RequestParam(required = false) Integer typeReparationId,
-            @RequestParam(required = false) Integer typeOrdinateurId,Model model) {
+            @RequestParam(required = false) Integer typeOrdinateurId,
+            Model model) {
         List<Retour> listRetour ;
-        if(typeReparationId != null || typeComposantId != null){
+        if(typeReparationId != null || typeComposantId != null || typeOrdinateurId != null){
             listRetour = retourService.filterRetours(typeComposantId, typeReparationId,typeOrdinateurId);
         }
         else{
