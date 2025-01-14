@@ -308,6 +308,7 @@
                         <a href="/composant-modeles/form" class="dropdown-item">Composant Modèle</a>
                         <a href="/mvt-stocks/form" class="dropdown-item">Mvt Stock</a>
                         <a href="/retours/form" class="dropdown-item">Retour</a>
+                        <a href="/recommendations/form" class="dropdown-item">Recommendation</a>
                     </div>
                 </li>
 
@@ -325,6 +326,7 @@
                         <a href="/composant-modeles" class="dropdown-item">Composant Modèle</a>
                         <a href="/mvt-stocks" class="dropdown-item">Mvt Stock</a>
                         <a href="/retours" class="dropdown-item">Retour</a>
+                        <a href="/recommendations" class="dropdown-item">Recommendation</a>
                     </div>
                 </li>
             </ul>

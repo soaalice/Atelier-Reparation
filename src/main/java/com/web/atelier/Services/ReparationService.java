@@ -2,6 +2,8 @@ package com.web.atelier.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.web.atelier.Models.Reparation;
 import com.web.atelier.Repositories.ReparationRepository;
 
@@ -15,6 +17,7 @@ public class ReparationService {
     private ReparationRepository reparationRepository;
 
     // Ajouter une réparation
+    @Transactional
     public Reparation addReparation(Reparation reparation) {
         return reparationRepository.save(reparation);
     }

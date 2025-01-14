@@ -36,9 +36,6 @@
         <label for="name">Nom:</label>
         <input type="text" id="name" name="name" required />
 
-        <label for="valeur">Valeur:</label>
-        <input type="number" id="valeur" name="valeur" min="0" step="0.01" required />
-
         <label for="typeComposant">Type de Composant:</label>
         <select id="typeComposant" name="typeComposantId">
             <%
@@ -49,7 +46,7 @@
             <% } %>
         </select>
         <label for="valeur">Valeur:</label>
-        <input type="number" id="valeur" name="valeur" min="0" required />
+        <input type="number" id="valeur" name="valeur" min="0" step="0.01" required />
         <button type="submit">Enregistrer</button>
     </form>
 </body>

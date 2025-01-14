@@ -94,7 +94,8 @@ CREATE TABLE reparation_details (
     id SERIAL PRIMARY KEY,
     reparation_id INT NOT NULL REFERENCES reparation(id),
     -- composant_id INT NOT NULL REFERENCES composant(id)
-    tarif_id INT NOT NULL REFERENCES tarif(id)
+    tarif_id INT NOT NULL REFERENCES tarif(id),
+    new_composant_id INT NOT NULL REFERENCES composant(id)
 );
 
 -- Table: mvt_stock

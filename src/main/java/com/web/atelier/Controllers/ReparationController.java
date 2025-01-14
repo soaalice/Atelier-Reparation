@@ -2,6 +2,7 @@ package com.web.atelier.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,6 +67,7 @@ public class ReparationController {
         }
 
         @PostMapping("/reparations")
+        @Transactional
         public String addReparation(Reparation reparation,
             @RequestParam("ordinateurId") Integer ordinateurId,
             @RequestParam("dateReparation") LocalDate dateReparation,
@@ -79,20 +81,27 @@ public class ReparationController {
                 reparation.setDateReparation(dateReparation);
                 reparation.setOrdinateur(ordinateur);
 
+                if(composants.size()==0){
+                    throw new Exception("Vous devez selectionne au minimum un composant a reparer.");
+                }
                 reparationService.addReparation(reparation);
                 for (Integer long1 : composants) {
                     Composant tempComposant = composantService.getComposantById(long1);
                     Composant newComposant = composantService.getSuperiorOrMinorComposant(tempComposant,
-                            Integer.parseInt(typeReparations.get("reparation_" + long1)));
+                    Integer.parseInt(typeReparations.get("reparation_" + long1)));
+                    
+                    if (newComposant == null) {
+                        throw new Exception("Aucun composant n'est disponible pour ce type de réparation.");
+                    }        
                     ReparationDetails temp = new ReparationDetails();
                     temp.setTarif(tarifService.getTarifByComposantAndTypeReparation(tempComposant,
-                            typeReparationService.getTypeReparationById(
-                                    Integer.parseInt(typeReparations.get("reparation_" + long1)))));
-                    temp.setReparation(reparation);
-                    temp.setNewComposant(newComposant);
-
-                    reparationDetailsService.addReparationDetails(temp);
-                }
+                    typeReparationService.getTypeReparationById(
+                        Integer.parseInt(typeReparations.get("reparation_" + long1)))));
+                        temp.setReparation(reparation);
+                        temp.setNewComposant(newComposant);
+                        
+                        reparationDetailsService.addReparationDetails(temp);
+                    }
 
                 redirectAttributes.addFlashAttribute("successMessage", "Réparation ajoutée avec succès !");
             } catch (Exception e) {
