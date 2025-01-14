@@ -2,6 +2,7 @@ package com.web.atelier.Services;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,9 @@ public class RecommendationService {
     }
 
     public List<Recommendation> getFilterRecommendations(Integer typeComposantId,Date startDate,Date endDate){
-        return recommendationRepository.filterByTypeComposantMonthYear(typeComposantId, startDate.getYear(), startDate.getMonth(),endDate.getYear(),endDate.getMonth());
+        LocalDate start = startDate.toLocalDate();
+        LocalDate end = endDate.toLocalDate();
+        return recommendationRepository.filterByTypeComposantMonthYear(typeComposantId, start.getYear(), start.getMonthValue(), end.getYear(),end.getMonthValue());
     }
     
 }
