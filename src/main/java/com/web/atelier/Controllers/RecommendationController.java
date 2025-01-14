@@ -1,5 +1,6 @@
 package com.web.atelier.Controllers;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,11 +16,13 @@ import com.web.atelier.Models.Composant;
 import com.web.atelier.Models.Modele;
 import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Models.Recommendation;
+import com.web.atelier.Models.TypeComposant;
 import com.web.atelier.Models.TypeOrdinateur;
 import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.ModeleService;
 import com.web.atelier.Services.OrdinateurService;
 import com.web.atelier.Services.RecommendationService;
+import com.web.atelier.Services.TypeComposantService;
 import com.web.atelier.Services.TypeOrdinateurService;
 
 @Controller
@@ -30,10 +33,36 @@ public class RecommendationController {
     @Autowired
     private ComposantService composantService;
 
+    @Autowired
+    private TypeComposantService typeComposantService;
+
     @GetMapping("/recommendations")
-    public String showAllRecommendations(Model model) {
+    public String showAllRecommendations(@RequestParam(value="typeComposantId",required = false) Integer typeComposantId,@RequestParam(value="dateMin", required = false) String dateMinStr,@RequestParam(value="dateMax",required = false) String dateMaxStr,Model model) {
         List<Recommendation> list = recommendationService.getAllRecommendations();
+        Date startDate = Date.valueOf("1900-01-01");
+
+        if(dateMinStr!=null && !dateMinStr.isEmpty()){
+            try {
+                startDate = Date.valueOf(dateMinStr);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+
+        Date endDate = Date.valueOf("2100-12-31");
+        if (dateMaxStr != null && !dateMaxStr.isEmpty()) {
+            try {
+                endDate = Date.valueOf(dateMaxStr);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+        
+        list = recommendationService.getFilterRecommendations(typeComposantId,startDate, endDate);
+
+        List<TypeComposant> listTypeComposants = typeComposantService.getAllTypeComposants();
         model.addAttribute("listRecommendations", list);
+        model.addAttribute("listTypeComposants", listTypeComposants);
         return "ListRecommendation";
     }
 

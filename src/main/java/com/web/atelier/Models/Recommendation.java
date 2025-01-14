@@ -26,9 +26,9 @@ public class Recommendation {
     @JoinColumn(name = "composant_id", nullable = false)
     Composant composant;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     Integer mois;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     Integer annee;
 }

@@ -31,8 +31,8 @@ public class RetourService {
     }
 
     // Filtre par typeComposant et typeReparation
-    public List<Retour> filterRetours(Integer typeComposantId, Integer typeReparationId) {
-        return retourRepository.filterByTypeComposantAndTypeReparation(typeComposantId, typeReparationId);
+    public List<Retour> filterRetours(Integer typeComposantId, Integer typeReparationId,Integer typeOrdinateur) {
+        return retourRepository.filterByTypeComposantAndTypeReparation(typeComposantId, typeReparationId,typeOrdinateur);
     }
     
 

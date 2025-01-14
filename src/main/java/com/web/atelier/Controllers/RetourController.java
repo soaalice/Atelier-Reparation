@@ -16,6 +16,7 @@ import com.web.atelier.Models.TypeComposant;
 import com.web.atelier.Services.ReparationService;
 import com.web.atelier.Services.RetourService;
 import com.web.atelier.Services.TypeComposantService;
+import com.web.atelier.Services.TypeOrdinateurService;
 import com.web.atelier.Services.TypeReparationService;
 
 @Controller
@@ -31,13 +32,16 @@ public class RetourController {
 
     @Autowired
     private TypeComposantService typeComposantService;
+    @Autowired
+    private TypeOrdinateurService typeOrdinateurService;
 
     @GetMapping("/retours")
-    public String showAllComposants(@RequestParam(required = false) Integer typeComposantId,
-            @RequestParam(required = false) Integer typeReparationId,Model model) {
+    public String showAllRetours(@RequestParam(required = false) Integer typeComposantId,
+            @RequestParam(required = false) Integer typeReparationId,
+            @RequestParam(required = false) Integer typeOrdinateurId,Model model) {
         List<Retour> listRetour ;
         if(typeReparationId != null || typeComposantId != null){
-            listRetour = retourService.filterRetours(typeComposantId, typeReparationId);
+            listRetour = retourService.filterRetours(typeComposantId, typeReparationId,typeOrdinateurId);
         }
         else{
             listRetour = retourService.getAllRetours();
@@ -45,6 +49,7 @@ public class RetourController {
         model.addAttribute("listRetours", listRetour);
         model.addAttribute("listTypeComposants", typeComposantService.getAllTypeComposants());
         model.addAttribute("listTypeReparations", typeReparationService.getAllTypeReparations());
+        model.addAttribute("listTypeOrdinateurs", typeOrdinateurService.getAllTypeOrdinateurs());
         return "ListRetour";
     }
 

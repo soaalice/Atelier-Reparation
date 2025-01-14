@@ -5,6 +5,7 @@
 <%@ page import="com.web.atelier.Models.TypeReparation" %>
 <%@ page import="com.web.atelier.Models.TypeComposant" %>
 <%@ page import="com.web.atelier.Models.Retour" %>
+<%@ page import="com.web.atelier.Models.TypeOrdinateur" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -65,6 +66,20 @@
                     for (TypeReparation typeReparation : listTypeReparation) {
                 %>
                     <option value="<%= typeReparation.getId() %>"><%= typeReparation.getName() %></option>
+                <%
+                    }}
+                %>
+        </select>
+
+        <label for="typeOrdinateurId">Type d'ordinateurs :</label>
+        <select id="typeOrdinateurId" name="typeOrdinateurId">
+            <option value="">Tous</option>
+            <%
+                List<TypeOrdinateur> listTypeOrdinateur = (List<TypeOrdinateur>) request.getAttribute("listTypeOrdinateurs");
+                if (listTypeOrdinateur != null) {
+                    for (TypeOrdinateur typeOrdinateur : listTypeOrdinateur) {
+                %>
+                    <option value="<%= typeOrdinateur.getId() %>"><%= typeOrdinateur.getName() %></option>
                 <%
                     }}
                 %>

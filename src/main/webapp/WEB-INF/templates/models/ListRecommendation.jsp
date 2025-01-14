@@ -36,5 +36,31 @@
             </tr>
         <% } %>
     </table>
+
+    <form action="/recommendations" method="get">
+        
+        <label for="typeComposantId">Type de composant :</label>
+        <select id="typeComposantId" name="typeComposantId">
+            <option value="">Tous</option>
+            <%
+                List<TypeComposant> listTypeComposant = (List<TypeComposant>) request.getAttribute("listTypeComposants");
+                if (listTypeComposant != null) {
+                    for (TypeComposant typeComposant : listTypeComposant) {
+                %>
+                        <option value="<%= typeComposant.getId() %>"><%= typeComposant.getName() %></option>
+                <%
+                    }}
+                %>
+        </select>
+
+        <label for="dateMin">DateMin:</label>
+        <input type="date" id="dateMin" name="dateMin"   />
+
+        <label for="dateMax">DateMax:</label>
+        <input type="date" id="dateMax" name="dateMax"   />
+        
+        <button type="submit">Filtrer</button>
+    </form>
+
 </body>
 </html>

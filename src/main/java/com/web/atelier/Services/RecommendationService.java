@@ -1,6 +1,7 @@
 package com.web.atelier.Services;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,10 @@ public class RecommendationService {
     // Get a composant by its id
     public Recommendation getRecommendationById(int id) {
         return recommendationRepository.findById(id).orElse(null);
+    }
+
+    public List<Recommendation> getFilterRecommendations(Integer typeComposantId,Date startDate,Date endDate){
+        return recommendationRepository.filterByTypeComposantMonthYear(typeComposantId, startDate.getYear(), startDate.getMonth(),endDate.getYear(),endDate.getMonth());
     }
     
 }
