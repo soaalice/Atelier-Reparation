@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.web.atelier.Models.Reparation" %>
-<%@ page import="com.web.atelier.Models.Ordinateur" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,16 +11,33 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-
+    <% 
+        String successMessage = (String) request.getAttribute("successMessage");
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (successMessage != null) {
+    %>
+        <div style="color: green; font-weight: bold;">
+            <%= successMessage %>
+        </div>
+    <% 
+        } 
+        if (errorMessage != null) {
+    %>
+        <div style="color: red; font-weight: bold;">
+            <%= errorMessage %>
+        </div>
+    <% 
+        }
+    %>
     <form action="/retours" method="post">
         <h1>Retour</h1>
-        <label for="Reparation">Reparation:</label>
-        <select id="Reparation" name="reparationId">
+        <label for="reparation">Reparation:</label>
+        <select id="reparation" name="reparationId">
             <%
                 List<Reparation> listReparations = (List<Reparation>) request.getAttribute("listReparations");
                 for (Reparation reparation : listReparations) {
             %>
-                <option value="<%= reparation.getId() %>"><%= reparation.getOrdinateur().getName() %>(<%= reparation.getDateReparation() %>)</option>
+                <option value="<%= reparation.getId() %>"><%= reparation.getDateReparation() + "-" + reparation.getOrdinateur().getName() %></option>
             <% } %>
         </select>
 

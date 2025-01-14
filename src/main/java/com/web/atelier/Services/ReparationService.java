@@ -24,6 +24,10 @@ public class ReparationService {
         return reparationRepository.findAll();
     }
 
+    public List<Reparation> getReturnableReparations(){
+        return reparationRepository.findReturnableReparations();
+    }
+
     // Obtenir une réparation par son ID
     public Reparation getReparationById(int id) {
         return reparationRepository.findById(id).orElse(null);

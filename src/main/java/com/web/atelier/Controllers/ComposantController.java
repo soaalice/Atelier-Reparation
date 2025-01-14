@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.atelier.Models.Composant;
@@ -35,12 +36,20 @@ public class ComposantController {
     }
 
     @PostMapping("/composants")
-    public String addModele(Composant composant,@RequestParam("typeComposantId") Integer typeComposantId,
+    public String addModele(Composant composant,@RequestParam("typeComposantId") Integer typeComposantId, 
+            RedirectAttributes redirectAttributes,
             @RequestParam("valeur") BigDecimal valeur) {
-        TypeComposant typeComposant = typeComposantService.getTypeComposantById(typeComposantId);
-        composant.setTypeComposant(typeComposant);
-        composant.setValeur(valeur);
+        try {
+            TypeComposant typeComposant = typeComposantService.getTypeComposantById(typeComposantId);
+            composant.setTypeComposant(typeComposant);
+            composant.setValeur(valeur);
         composantService.addComposant(composant);
+
+            redirectAttributes.addFlashAttribute("successMessage", "Composant ajouté avec succès.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Erreur: "+e.getMessage());
+        }
         return "redirect:/composants/form";
     }
 

@@ -3,6 +3,7 @@ package com.web.atelier.Repositories;
 import com.web.atelier.Models.Composant;
 import com.web.atelier.Models.Tarif;
 import com.web.atelier.Models.TypeReparation;
+import org.springframework.data.jpa.repository.Query;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

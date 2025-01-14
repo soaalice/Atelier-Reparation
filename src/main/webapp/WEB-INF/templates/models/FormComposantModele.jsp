@@ -13,7 +13,24 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-
+    <% 
+        String successMessage = (String) request.getAttribute("successMessage");
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (successMessage != null) {
+    %>
+        <div style="color: green; font-weight: bold;">
+            <%= successMessage %>
+        </div>
+    <% 
+        } 
+        if (errorMessage != null) {
+    %>
+        <div style="color: red; font-weight: bold;">
+            <%= errorMessage %>
+        </div>
+    <% 
+        }
+    %>
     <form action="/composant-modeles" method="post">
         <h1>Composant Modèle</h1>
         <label for="composant">Composant:</label>
@@ -22,7 +39,7 @@
                 List<Composant> listComposants = (List<Composant>) request.getAttribute("listComposants");
                 for (Composant composant : listComposants) {
             %>
-                <option value="<%= composant.getId() %>"><%= composant.getName() %></option>
+                <option value="<%= composant.getId() %>"><%= composant.getName() +" - "+ composant.getValeur() + " " + composant.getTypeComposant().getUnite().getName() %></option>
             <% } %>
         </select>
 

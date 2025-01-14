@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.atelier.Models.MvtStock;
 import com.web.atelier.Models.TypeComposant;
@@ -39,18 +40,23 @@ public class MvtStockController {
         model.addAttribute("listTypeComposant", listTypeComposants);
         model.addAttribute("listMvtStock", listMvtStocks);
         return "ListMvtStock";
-    }
+        }
 
-    @PostMapping("/mvt-stocks")
-    public String addMvtStock(MvtStock mvtStock, @RequestParam("composantId") Integer composantId) {
-        Composant composant = composantService.getComposantById(composantId);
-        mvtStock.setComposant(composant);
-        mvtStockService.addMvtStock(mvtStock);
-        return "redirect:/mvt-stocks/form";
-    }
+        @PostMapping("/mvt-stocks")
+        public String addMvtStock(MvtStock mvtStock, @RequestParam("composantId") Integer composantId, RedirectAttributes redirectAttributes) {
+            try {
+                Composant composant = composantService.getComposantById(composantId);
+                mvtStock.setComposant(composant);
+                mvtStockService.addMvtStock(mvtStock);
+                redirectAttributes.addFlashAttribute("successMessage", "Mouvement de stock ajouté avec succès.");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Erreur: " + e.getMessage());
+            }
+            return "redirect:/mvt-stocks/form";
+        }
 
-    @GetMapping("/mvt-stocks/form")
-    public String showFormMvtStock(Model model) {
+        @GetMapping("/mvt-stocks/form")
+        public String showFormMvtStock(Model model) {
         List<Composant> listComposants = composantService.getAllComposants();
         model.addAttribute("listComposant", listComposants);
         return "FormMvtStock";

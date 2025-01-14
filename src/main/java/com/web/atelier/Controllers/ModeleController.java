@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.atelier.Models.Modele;
 import com.web.atelier.Services.ModeleService;
@@ -21,16 +22,21 @@ public class ModeleController {
         List<Modele> listModeles = modeleService.getAllModeles();
         model.addAttribute("listModeles", listModeles);
         return "ListModele";
-    }
+        }
 
-    @PostMapping("/modeles")
-    public String addModele(Modele modele) {
-        modeleService.addModele(modele);
-        return "redirect:/modeles/form";
-    }
+        @PostMapping("/modeles")
+        public String addModele(Modele modele, RedirectAttributes redirectAttributes) {
+            try {
+                modeleService.addModele(modele);
+                redirectAttributes.addFlashAttribute("successMessage", "Modèle ajouté avec succès !");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Erreur: " + e.getMessage());
+            }
+            return "redirect:/modeles/form";
+        }
 
-    @GetMapping("/modeles/form")
-    public String showFormModele() {
+        @GetMapping("/modeles/form")
+        public String showFormModele() {
         return "FormModele";
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.atelier.Models.Reparation;
 import com.web.atelier.Models.ReparationDetails;
@@ -42,12 +43,13 @@ public class ReparationController {
 
     @Autowired
     private TypeComposantService typeComposantService;
-
-    @Autowired
-    private TypeReparationService typeReparationService;
-
     @Autowired
     private ComposantService composantService;
+
+
+    @Autowired 
+    private TypeReparationService typeReparationService;
+
 
     @GetMapping("/reparations")
     public String showAllReparations(@RequestParam(value="typeComposantId",required = false)Integer typeComposantId,Model model) {
@@ -61,41 +63,46 @@ public class ReparationController {
         model.addAttribute("listTypeComposants",typeComposantService.getAllTypeComposants() );
         model.addAttribute("listReparations", list);
         return "ListReparation";
-    }
-
-    @PostMapping("/reparations")
-    public String addReparation(Reparation reparation,
-            @RequestParam("ordinateurId") Integer ordinateurId,
-            @RequestParam("dateReparation") LocalDate dateReparation,@RequestParam("composants")List<Integer>composants,
-            @RequestParam Map<String,String> typeReparations,
-            Model model) {
-
-        Ordinateur ordinateur = ordinateurService.getOrdinateurById(ordinateurId);
-        reparation.setDateReparation(dateReparation);
-        reparation.setOrdinateur(ordinateur);
-        // reparation.setMontantTotal(montantTotal);
-        // reparation.setDureeTotale(dureeTotale);
-
-
-        reparationService.addReparation(reparation);
-        for (Integer long1 : composants) {
-            Composant tempComposant = composantService.getComposantById(long1);
-            Composant newComposant = composantService.getSuperiorOrMinorComposant(tempComposant, Integer.parseInt(typeReparations.get("reparation_" + long1)));
-            ReparationDetails temp = new ReparationDetails();
-            temp.setTarif(tarifService.getTarifByComposantAndTypeReparation(tempComposant,typeReparationService.getTypeReparationById(
-            Integer.parseInt(typeReparations.get("reparation_" + long1)))));
-            temp.setReparation(reparation);
-            temp.setNewComposant(newComposant);
-            
-            reparationDetailsService.addReparationDetails(temp);
         }
-        
-        
+
+        @PostMapping("/reparations")
+        public String addReparation(Reparation reparation,
+            @RequestParam("ordinateurId") Integer ordinateurId,
+            @RequestParam("dateReparation") LocalDate dateReparation,
+            @RequestParam("composants") List<Integer> composants,
+            @RequestParam Map<String, String> typeReparations,
+            Model model,
+            RedirectAttributes redirectAttributes) {
+
+            try {
+                Ordinateur ordinateur = ordinateurService.getOrdinateurById(ordinateurId);
+                reparation.setDateReparation(dateReparation);
+                reparation.setOrdinateur(ordinateur);
+
+                reparationService.addReparation(reparation);
+                for (Integer long1 : composants) {
+                    Composant tempComposant = composantService.getComposantById(long1);
+                    Composant newComposant = composantService.getSuperiorOrMinorComposant(tempComposant,
+                            Integer.parseInt(typeReparations.get("reparation_" + long1)));
+                    ReparationDetails temp = new ReparationDetails();
+                    temp.setTarif(tarifService.getTarifByComposantAndTypeReparation(tempComposant,
+                            typeReparationService.getTypeReparationById(
+                                    Integer.parseInt(typeReparations.get("reparation_" + long1)))));
+                    temp.setReparation(reparation);
+                    temp.setNewComposant(newComposant);
+
+                    reparationDetailsService.addReparationDetails(temp);
+                }
+
+                redirectAttributes.addFlashAttribute("successMessage", "Réparation ajoutée avec succès !");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Erreur: " + e.getMessage());
+            }        
         return "redirect:reparations/form";
     }
 
-    @GetMapping("/reparations/form")
-    public String showFormReparation(Model model) {
+        @GetMapping("/reparations/form")
+        public String showFormReparation(Model model) {
         // model.addAttribute("listOrdinateurs", ordinateurService.getAllOrdinateurs());
         model.addAttribute("listOrdinateurs", ordinateurService.getAllRepairableOrdinateurs());
         return "FormReparation";

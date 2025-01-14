@@ -18,6 +18,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Modele</th>
+            <th>Type d'Ordinateur</th>
         </tr>
         <%
             List<Ordinateur> listOrdinateurs = (List<Ordinateur>) request.getAttribute("listOrdinateurs");
@@ -27,6 +28,7 @@
                     <td><%= ordinateur.getId() %></td>
                     <td><%= ordinateur.getName() %></td>
                     <td><%= ordinateur.getModele().getName() %></td>
+                    <td><%= ordinateur.getTypeOrdinateur().getName() %></td>
                 </tr>
             <%
                 }

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -33,24 +34,29 @@ public class ComposantModeleController {
         List<ComposantModele> listComposantModeles = composantModeleService.getAllComposantModeles();
         model.addAttribute("listComposantModeles", listComposantModeles);
         return "ListComposantModele";
-    }
+        }
 
-    @PostMapping("/composant-modeles")
-    public String addComposantModele(@RequestParam("composantId") Integer composantId,
-            @RequestParam("modeleId") Integer modeleId) {
-        Composant composant = composantService.getComposantById(composantId);
-        Modele modele = modeleService.getModeleById(modeleId);
+        @PostMapping("/composant-modeles")
+        public String addComposantModele(@RequestParam("composantId") Integer composantId,
+            @RequestParam("modeleId") Integer modeleId, RedirectAttributes redirectAttributes) {
+            try {
+                Composant composant = composantService.getComposantById(composantId);
+                Modele modele = modeleService.getModeleById(modeleId);
 
-        ComposantModele composantModele = new ComposantModele();
-        composantModele.setComposant(composant);
-        composantModele.setModele(modele);
+                ComposantModele composantModele = new ComposantModele();
+                composantModele.setComposant(composant);
+                composantModele.setModele(modele);
 
-        composantModeleService.addComposantModele(composantModele);
-        return "redirect:/composant-modeles/form";
-    }
+                composantModeleService.addComposantModele(composantModele);
+                redirectAttributes.addFlashAttribute("successMessage", "Liaison entre Composant et Modele ajoutée avec succès.");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Erreur: " + e.getMessage());
+            }
+            return "redirect:/composant-modeles/form";
+        }
 
-    @GetMapping("/composant-modeles/form")
-    public String showFormComposantModele(Model model) {
+        @GetMapping("/composant-modeles/form")
+        public String showFormComposantModele(Model model) {
         List<Composant> listComposants = composantService.getAllComposants();
         List<Modele> listModeles = modeleService.getAllModeles();
         model.addAttribute("listComposants", listComposants);

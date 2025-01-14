@@ -1,15 +1,30 @@
 CREATE DATABASE atelier_reparation;
 \c atelier_reparation;
 
+--Table: unite
+CREATE TABLE unite(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+--Table: type_ordinateur
+CREATE TABLE type_ordinateur(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
 -- Table: modele
 CREATE TABLE modele (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Table: ordinateur
 CREATE TABLE ordinateur (
     id SERIAL PRIMARY KEY,
-    modele_id INT NOT NULL REFERENCES modele(id)
+    name VARCHAR(255),
+    modele_id INT NOT NULL REFERENCES modele(id),
+    type_ordinateur_id INT NOT NULL REFERENCES type_ordinateur(id)
 );
 
 -- Table : unite
@@ -20,34 +35,19 @@ CREATE TABLE unite(
 
 -- Table: type_composant
 CREATE TABLE type_composant (
-    id SERIAL PRIMARY KEY
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    unite_id INT NOT NULL REFERENCES unite(id)
 );
 
 -- Table: composant
 CREATE TABLE composant (
     id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    valeur NUMERIC NOT NULL DEFAULT 0,
     type_composant_id INT NOT NULL REFERENCES type_composant(id),
-    valeur DECIMAL NOT NULL
+    UNIQUE (name, valeur)
 );
-
-ALTER TABLE modele
-ADD COLUMN name VARCHAR(255);
-
-ALTER TABLE ordinateur
-ADD COLUMN name VARCHAR(255);
-
-ALTER TABLE type_composant
-ADD COLUMN name VARCHAR(255);
-
-ALTER TABLE type_composant
-ADD COLUMN unite_id INT  REFERENCES unite(id);
-
-ALTER TABLE composant
-ADD COLUMN name VARCHAR(255);
-
-ALTER TABLE composant
-ADD COLUMN valeur DECIMAL;
-
 
 -- Table: composant_modele
 CREATE TABLE composant_modele (
@@ -93,8 +93,8 @@ CREATE TABLE tarif (
 CREATE TABLE reparation_details (
     id SERIAL PRIMARY KEY,
     reparation_id INT NOT NULL REFERENCES reparation(id),
-    tarif_id INT NOT NULL REFERENCES tarif(id),
-    new_composant_id INT NOT NULL REFERENCES composant(id)
+    -- composant_id INT NOT NULL REFERENCES composant(id)
+    tarif_id INT NOT NULL REFERENCES tarif(id)
 );
 
 -- Table: mvt_stock
@@ -106,10 +106,9 @@ CREATE TABLE mvt_stock (
     date_mvt DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE retour(
+-- Table:  retour
+CREATE TABLE retour (
     id SERIAL PRIMARY KEY,
     reparation_id INT NOT NULL REFERENCES reparation(id),
     date_retour DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-

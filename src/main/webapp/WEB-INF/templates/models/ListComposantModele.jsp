@@ -26,7 +26,8 @@
         %>
             <tr>
                 <td><%= composantModele.getId() %></td>
-                <td><%= composantModele.getComposant().getName() %></td>
+                <% Composant composant = composantModele.getComposant(); %>
+                <td><%= composant.getName() +" - "+ composant.getValeur() + " " + composant.getTypeComposant().getUnite().getName() %></td>
                 <td><%= composantModele.getModele().getName() %></td>
             </tr>
         <% } %>

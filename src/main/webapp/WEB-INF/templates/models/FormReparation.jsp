@@ -12,7 +12,24 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
-
+    <% 
+        String successMessage = (String) request.getAttribute("successMessage");
+        String errorMessage = (String) request.getAttribute("errorMessage");
+        if (successMessage != null) {
+    %>
+        <div style="color: green; font-weight: bold;">
+            <%= successMessage %>
+        </div>
+    <% 
+        } 
+        if (errorMessage != null) {
+    %>
+        <div style="color: red; font-weight: bold;">
+            <%= errorMessage %>
+        </div>
+    <% 
+        }
+    %>
     <form action="/reparations-details" method="post">
         <h1>Reparation</h1>
         <label for="ordinateur">Ordinateur:</label>
