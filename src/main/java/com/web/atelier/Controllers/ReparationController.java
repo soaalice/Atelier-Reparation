@@ -13,6 +13,7 @@ import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Services.ReparationService;
 import com.web.atelier.Services.TarifService;
 import com.web.atelier.Services.TypeComposantService;
+import com.web.atelier.Services.TypeReparationService;
 import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.OrdinateurService;
 import com.web.atelier.Services.ReparationDetailsService;
@@ -21,6 +22,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ReparationController {
@@ -40,6 +42,12 @@ public class ReparationController {
     @Autowired
     private TypeComposantService typeComposantService;
 
+    @Autowired
+    private TypeReparationService typeReparationService;
+
+    @Autowired
+    private ComposantService composantService;
+
     @GetMapping("/reparations")
     public String showAllReparations(@RequestParam(value="typeComposantId",required = false)Integer typeComposantId,Model model) {
         List<Reparation> list;
@@ -57,7 +65,9 @@ public class ReparationController {
     @PostMapping("/reparations")
     public String addReparation(Reparation reparation,
             @RequestParam("ordinateurId") Integer ordinateurId,
-            @RequestParam("dateReparation") LocalDate dateReparation,@RequestParam("composants")List<Integer>composants,Model model) {
+            @RequestParam("dateReparation") LocalDate dateReparation,@RequestParam("composants")List<Integer>composants,
+            @RequestParam Map<String,String> typeReparations,
+            Model model) {
 
         Ordinateur ordinateur = ordinateurService.getOrdinateurById(ordinateurId);
         reparation.setDateReparation(dateReparation);
@@ -69,8 +79,10 @@ public class ReparationController {
         reparationService.addReparation(reparation);
         for (Integer long1 : composants) {
             ReparationDetails temp = new ReparationDetails();
-            temp.setTarif(tarifService.getTarifById(long1));
+            temp.setTarif(tarifService.getTarifByComposantAndTypeReparation(composantService.getComposantById(long1),typeReparationService.getTypeReparationById(
+            Integer.parseInt(typeReparations.get("reparation_" + long1)))));
             temp.setReparation(reparation);
+            
             reparationDetailsService.addReparationDetails(temp);
         }
         

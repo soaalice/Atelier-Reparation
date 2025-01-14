@@ -23,6 +23,8 @@
                 <option value="<%= typeComposant.getId() %>"><%= typeComposant.getName() %></option>
             <% } %>
         </select>
+        <label for="valeur">Valeur:</label>
+        <input type="number" id="valeur" name="valeur" min="0" required />
         <button type="submit">Enregistrer</button>
     </form>
 </body>

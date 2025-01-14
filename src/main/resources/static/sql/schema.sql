@@ -26,7 +26,8 @@ CREATE TABLE type_composant (
 -- Table: composant
 CREATE TABLE composant (
     id SERIAL PRIMARY KEY,
-    type_composant_id INT NOT NULL REFERENCES type_composant(id)
+    type_composant_id INT NOT NULL REFERENCES type_composant(id),
+    valeur DECIMAL NOT NULL
 );
 
 ALTER TABLE modele
@@ -102,6 +103,12 @@ CREATE TABLE mvt_stock (
     sortie INT DEFAULT 0,
     composant_id INT NOT NULL REFERENCES composant(id),
     date_mvt DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE retour(
+    id SERIAL PRIMARY KEY,
+    reparation_id INT NOT NULL REFERENCES reparation(id),
+    date_retour DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 

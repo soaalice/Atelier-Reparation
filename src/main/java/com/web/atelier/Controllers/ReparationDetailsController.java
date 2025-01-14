@@ -27,10 +27,6 @@ public class ReparationDetailsController {
     private ReparationDetailsService reparationDetailsService;
     @Autowired
     private ReparationService reparationService;
-
-    @Autowired
-    private TypeReparationService typeReparationService;
-
     @Autowired
     private ComposantService composantService;
     @Autowired

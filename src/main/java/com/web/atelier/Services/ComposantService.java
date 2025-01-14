@@ -1,5 +1,6 @@
 package com.web.atelier.Services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,18 @@ public class ComposantService {
 
     public List<Composant> getComposantByOrdinateur(Ordinateur ordinateur){
         return composantRepository.findByOrdinateur(ordinateur.getId());
+    }
+
+    public List<Composant> getComposantsByType(Integer typeComposant){
+        return composantRepository.findByType(typeComposant);
+    }
+
+    public Composant getSuperiorOrMinorComposant(BigDecimal value,int option){
+        if(option==1){
+            return composantRepository.findSuperiorComposant(value);
+        }
+        else{
+            return composantRepository.findMinorComposant(value);
+        }
     }
 }

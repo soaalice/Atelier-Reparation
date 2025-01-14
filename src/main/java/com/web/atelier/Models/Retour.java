@@ -1,6 +1,6 @@
 package com.web.atelier.Models;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,19 +17,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Composant {
+public class Retour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name="type_composant_id", nullable = false)
-    TypeComposant typeComposant;
-
-
-    @Column(unique = true)
-    String name;
+    @JoinColumn(name = "reparation_id", nullable = false)
+    Reparation reparation;
 
     @Column(unique = true)
-    BigDecimal valeur;
+    LocalDate date;
 }

@@ -50,4 +50,8 @@ public class ReparationService {
     public List<Reparation> getReparationsByTypeComposant(Integer typeComposantId){
         return reparationRepository.findByTypeComposant(typeComposantId);
     }
+
+    public List<Reparation> getReparationNotReturned(){
+        return reparationRepository.findNotReturned();
+    }
 }
