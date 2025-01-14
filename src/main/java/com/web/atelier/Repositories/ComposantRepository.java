@@ -19,11 +19,11 @@ public interface ComposantRepository extends JpaRepository<Composant,Integer> {
     @Query("SELECT c FROM Composant c WHERE c.typeComposant.id = :typeComposantId")
     List<Composant> findByType(@Param("typeComposantId") Integer typeComposantId);
 
-    @Query("SELECT c FROM Composant c WHERE c.valeur > :valeur ORDER BY c.valeur ASC LIMIT 1")
-    Composant findSuperiorComposant(@Param("valeur") BigDecimal value);
+    @Query("SELECT c FROM Composant c WHERE c.valeur > :valeur AND c.typeComposant.id=:type ORDER BY c.valeur ASC LIMIT 1")
+    Composant findSuperiorComposant(@Param("valeur") BigDecimal value, @Param("type") Integer type);
 
-    @Query("SELECT c FROM Composant c WHERE c.valeur < :valeur ORDER BY c.valeur DESC LIMIT 1")
-    Composant findMinorComposant(@Param("valeur") BigDecimal value);
+    @Query("SELECT c FROM Composant c WHERE c.valeur < :valeur AND c.typeComposant.id=:type ORDER BY c.valeur DESC LIMIT 1")
+    Composant findMinorComposant(@Param("valeur") BigDecimal value, @Param("type") Integer type);
 
     
 } 

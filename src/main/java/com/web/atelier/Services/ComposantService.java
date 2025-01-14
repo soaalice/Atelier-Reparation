@@ -37,12 +37,12 @@ public class ComposantService {
         return composantRepository.findByType(typeComposant);
     }
 
-    public Composant getSuperiorOrMinorComposant(BigDecimal value,int option){
+    public Composant getSuperiorOrMinorComposant(Composant composant,int option){
         if(option==1){
-            return composantRepository.findSuperiorComposant(value);
+            return composantRepository.findSuperiorComposant(composant.getValeur(),composant.getTypeComposant().getId());
         }
         else{
-            return composantRepository.findMinorComposant(value);
+            return composantRepository.findMinorComposant(composant.getValeur(),composant.getTypeComposant().getId());
         }
     }
 }

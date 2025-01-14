@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.atelier.Models.Reparation;
 import com.web.atelier.Models.ReparationDetails;
+import com.web.atelier.Models.Composant;
 import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Services.ReparationService;
 import com.web.atelier.Services.TarifService;
@@ -78,10 +79,13 @@ public class ReparationController {
 
         reparationService.addReparation(reparation);
         for (Integer long1 : composants) {
+            Composant tempComposant = composantService.getComposantById(long1);
+            Composant newComposant = composantService.getSuperiorOrMinorComposant(tempComposant, Integer.parseInt(typeReparations.get("reparation_" + long1)));
             ReparationDetails temp = new ReparationDetails();
-            temp.setTarif(tarifService.getTarifByComposantAndTypeReparation(composantService.getComposantById(long1),typeReparationService.getTypeReparationById(
+            temp.setTarif(tarifService.getTarifByComposantAndTypeReparation(tempComposant,typeReparationService.getTypeReparationById(
             Integer.parseInt(typeReparations.get("reparation_" + long1)))));
             temp.setReparation(reparation);
+            temp.setNewComposant(newComposant);
             
             reparationDetailsService.addReparationDetails(temp);
         }
