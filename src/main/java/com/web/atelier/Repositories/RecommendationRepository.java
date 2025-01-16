@@ -16,8 +16,8 @@ public interface RecommendationRepository extends JpaRepository<Recommendation, 
 
     @Query("SELECT r FROM Recommendation r " +
             "WHERE ( :typeComposantId IS NULL OR r.composant.typeComposant.id = :typeComposantId) " +
-            "AND (r.annee > :anneeMin OR (r.annee = :anneeMin AND r.mois >= :moisMin)) " +
-            "AND (r.annee < :anneeMax OR (r.annee = :anneeMax AND r.mois <= :moisMax))")
+            "AND (r.annee > :anneeMin OR (r.annee = :anneeMin AND ( :moisMin IS NULL OR r.mois >= :moisMin) )) " +
+            "AND (r.annee < :anneeMax OR (r.annee = :anneeMax AND ( :moisMax IS NULL OR r.mois <= :moisMax)))")
     List<Recommendation> filterByTypeComposantMonthYear(
             @Param("typeComposantId") Integer typeComposantId,
             @Param("anneeMin") Integer anneeMin,

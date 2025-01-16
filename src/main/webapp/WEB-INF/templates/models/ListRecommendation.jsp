@@ -59,8 +59,20 @@
         <label for="dateMax">DateMax:</label>
         <input type="date" id="dateMax" name="dateMax"   /> --%>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date"   />
+        <label for="annee">Annee:</label>
+        <input type="number" id="date" name="annee" min="0"/>
+
+        <label for="mois">Mois:</label>
+        <select name="mois">
+        <option value="">Tous</option>
+        <%
+            for(int i = 1 ; i <=12 ; i++){
+                %>
+                <option value="<%=i%>"><%=i%></option>
+                <%
+            }
+        %>
+        </select>
         
         <button type="submit">Filtrer</button>
     </form>

@@ -40,7 +40,8 @@ public class RecommendationController {
     public String showAllRecommendations(@RequestParam(value="typeComposantId",required = false) Integer typeComposantId,
                 // @RequestParam(value="dateMin", required = false) String dateMinStr,
                 // @RequestParam(value="dateMax",required = false) String dateMaxStr,
-                @RequestParam(value="date", required = false) String date,
+                @RequestParam(value="annee", required = false) Integer annee,
+                @RequestParam(value = "mois", required = false) Integer mois,
                 Model model) {
         List<Recommendation> list = recommendationService.getAllRecommendations();
         // Date startDate = Date.valueOf("1900-01-01");
@@ -63,17 +64,13 @@ public class RecommendationController {
         // }
 
          Date endDate = Date.valueOf(LocalDate.now());
-        if (date != null && !date.isEmpty()) {
-            try {
-                endDate = Date.valueOf(date);
-            } catch (Exception e) {
-                System.err.println(e);
-            }
+        if(annee ==null){
+            annee = 2025;
         }
         
         // list = recommendationService.getFilterRecommendations(typeComposantId,startDate, endDate);
-        list = recommendationService.getFilterRecommendations(typeComposantId,endDate);
-
+        //list = recommendationService.getFilterRecommendations(typeComposantId,endDate);
+                    list = recommendationService.getFilterRecommendations(typeComposantId,mois,annee);
         List<TypeComposant> listTypeComposants = typeComposantService.getAllTypeComposants();
         model.addAttribute("listRecommendations", list);
         model.addAttribute("listTypeComposants", listTypeComposants);
