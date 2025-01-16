@@ -47,6 +47,7 @@ Ce projet est actuellement un projet universitaire et n'est pas encore sous lice
 ## Auteurs
 
 - [RAMPANANA Amboara Holisoa](https://github.com/soaalice)
+- [RAZANATSIMBA Dimbimpitia Antonio](https://github.com/Antonio6905)
 
 
 
