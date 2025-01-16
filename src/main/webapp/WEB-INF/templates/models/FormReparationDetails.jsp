@@ -100,6 +100,7 @@ i<%@ page contentType="text/html; charset=UTF-8" %>
         <input type="hidden" name="ordinateurId" value="<%= request.getAttribute("ordinateurId") %>"></input>
 
         <input type="hidden" name="dateReparation" value="<%= request.getAttribute("dateReparation") %>"></input>
+        <input type="hidden" name="clientId" value="<%= request.getAttribute("clientId") %>"></input>
 
         <label for="composant">composant:</label>
         <div style="display: flex; align-items: center; flex-wrap: wrap;">

@@ -63,10 +63,6 @@ public class RecommendationController {
         //     }
         // }
 
-         Date endDate = Date.valueOf(LocalDate.now());
-        if(annee ==null){
-            annee = 2025;
-        }
         
         // list = recommendationService.getFilterRecommendations(typeComposantId,startDate, endDate);
         //list = recommendationService.getFilterRecommendations(typeComposantId,endDate);

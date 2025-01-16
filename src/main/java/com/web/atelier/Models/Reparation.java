@@ -29,6 +29,10 @@ public class Reparation {
     @JoinColumn(name = "ordinateur_id", nullable = false)
     private Ordinateur ordinateur;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
+
     @Column(nullable = false)
     private LocalDate dateReparation;
 

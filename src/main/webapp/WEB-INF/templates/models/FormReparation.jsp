@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.web.atelier.Models.Reparation" %>
 <%@ page import="com.web.atelier.Models.Ordinateur" %>
+<%@ page import="com.web.atelier.Models.Client" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,6 +40,15 @@
                 for (Ordinateur ordinateur : listOrdinateurs) {
             %>
                 <option value="<%= ordinateur.getId() %>"><%= ordinateur.getName() %></option>
+            <% } %>
+        </select>
+
+        <select id="client" name="clientId">
+            <%
+                List<Client> listClients = (List<Client>) request.getAttribute("listClients");
+                for (Client client : listClients) {
+            %>
+                <option value="<%= client.getId() %>"><%= client.getFullName() %></option>
             <% } %>
         </select>
 

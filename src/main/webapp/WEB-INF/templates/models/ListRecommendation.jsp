@@ -60,15 +60,16 @@
         <input type="date" id="dateMax" name="dateMax"   /> --%>
 
         <label for="annee">Annee:</label>
-        <input type="number" id="date" name="annee" min="0"/>
+        <input type="number" id="date" name="annee" min="0" placeholder="Annee"/>
 
         <label for="mois">Mois:</label>
         <select name="mois">
         <option value="">Tous</option>
         <%
-            for(int i = 1 ; i <=12 ; i++){
+            String[] mois = {"Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Dcembre"};
+            for(int i = 0 ; i <mois.length ; i++){
                 %>
-                <option value="<%=i%>"><%=i%></option>
+                <option value="<%=i+1%>"><%=mois[i]%></option>
                 <%
             }
         %>

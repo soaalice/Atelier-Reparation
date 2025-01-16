@@ -19,6 +19,11 @@ CREATE TABLE modele (
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
+CREATE TABLE client(
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL UNIQUE
+);
+
 -- Table: ordinateur
 CREATE TABLE ordinateur (
     id SERIAL PRIMARY KEY,
@@ -26,6 +31,8 @@ CREATE TABLE ordinateur (
     modele_id INT NOT NULL REFERENCES modele(id),
     type_ordinateur_id INT NOT NULL REFERENCES type_ordinateur(id)
 );
+
+
 
 -- Table : unite
 CREATE TABLE unite(
@@ -70,9 +77,10 @@ CREATE TABLE type_composant_modele (
 CREATE TABLE reparation (
     id SERIAL PRIMARY KEY,
     ordinateur_id INT NOT NULL REFERENCES ordinateur(id),
-    date_reparation DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
+    date_reparation DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     -- montant_total DECIMAL(10,2) NOT NULL,
     -- duree_totale DECIMAL NOT NULL
+    client_id INT NOT NULL REFERENCES client(id)
 );
 
 -- Table: type_reparation

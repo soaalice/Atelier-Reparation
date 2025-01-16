@@ -309,6 +309,7 @@
                         <a href="/mvt-stocks/form" class="dropdown-item">Mvt Stock</a>
                         <a href="/retours/form" class="dropdown-item">Retour</a>
                         <a href="/recommendations/form" class="dropdown-item">Recommendation</a>
+                        <a href="/clients/form" class="dropdown-item">Client</a>
                     </div>
                 </li>
 
@@ -327,6 +328,7 @@
                         <a href="/mvt-stocks" class="dropdown-item">Mvt Stock</a>
                         <a href="/retours" class="dropdown-item">Retour</a>
                         <a href="/recommendations" class="dropdown-item">Recommendation</a>
+                        <a href="/clients" class="dropdown-item">Client</a>
                     </div>
                 </li>
             </ul>

@@ -17,6 +17,7 @@ import com.web.atelier.Services.ReparationService;
 import com.web.atelier.Services.TarifService;
 import com.web.atelier.Services.TypeComposantService;
 import com.web.atelier.Services.TypeReparationService;
+import com.web.atelier.Services.ClientService;
 import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.OrdinateurService;
 import com.web.atelier.Services.ReparationDetailsService;
@@ -44,8 +45,12 @@ public class ReparationController {
 
     @Autowired
     private TypeComposantService typeComposantService;
+
     @Autowired
     private ComposantService composantService;
+
+    @Autowired
+    private ClientService clientService;
 
 
     @Autowired 
@@ -61,6 +66,7 @@ public class ReparationController {
         else{
             list = reparationService.getAllReparations();
         }
+        
         model.addAttribute("listTypeComposants",typeComposantService.getAllTypeComposants() );
         model.addAttribute("listReparations", list);
         return "ListReparation";
@@ -70,6 +76,7 @@ public class ReparationController {
         public String addReparation(Reparation reparation,
             @RequestParam("ordinateurId") Integer ordinateurId,
             @RequestParam("dateReparation") LocalDate dateReparation,
+            @RequestParam("clientId") Integer clientId,
             @RequestParam("composants") List<Integer> composants,
             @RequestParam Map<String, String> typeReparations,
             Model model,
@@ -79,6 +86,7 @@ public class ReparationController {
                 Ordinateur ordinateur = ordinateurService.getOrdinateurById(ordinateurId);
                 reparation.setDateReparation(dateReparation);
                 reparation.setOrdinateur(ordinateur);
+                reparation.setClient(clientService.getClientById(clientId));
 
                 if(composants.size()==0){
                     throw new Exception("Vous devez selectionne au minimum un composant a reparer.");
@@ -111,6 +119,7 @@ public class ReparationController {
 
         @GetMapping("/reparations/form")
         public String showFormReparation(Model model) {
+            model.addAttribute("listClients", clientService.getAllClients());
         // model.addAttribute("listOrdinateurs", ordinateurService.getAllOrdinateurs());
         model.addAttribute("listOrdinateurs", ordinateurService.getAllRepairableOrdinateurs());
         return "FormReparation";
