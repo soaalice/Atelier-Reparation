@@ -59,20 +59,21 @@
         <label for="dateMax">DateMax:</label>
         <input type="date" id="dateMax" name="dateMax"   /> --%>
 
-        <label for="annee">Annee:</label>
-        <input type="number" id="date" name="annee" min="0" placeholder="Annee"/>
+        <label for="annee">Année:</label>
+        <input type="number" value="2025" placeHolder="Entrez une année" id="annee" name="annee" min="0"/>
 
         <label for="mois">Mois:</label>
         <select name="mois">
         <option value="">Tous</option>
         <%
-            String[] mois = {"Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Dcembre"};
-            for(int i = 0 ; i <mois.length ; i++){
-                %>
-                <option value="<%=i+1%>"><%=mois[i]%></option>
-                <%
+            String[] mois = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+            for (int i = 0; i < mois.length; i++) {  // On commence à 0 pour correspondre à l'index du tableau
+        %>
+                <option value="<%= i + 1 %>"><%= mois[i] %></option>
+        <%
             }
         %>
+
         </select>
         
         <button type="submit">Filtrer</button>
