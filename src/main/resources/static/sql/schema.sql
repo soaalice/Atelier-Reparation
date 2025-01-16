@@ -21,7 +21,9 @@ CREATE TABLE modele (
 
 CREATE TABLE client(
     id SERIAL PRIMARY KEY,
-    full_name VARCHAR(255) NOT NULL UNIQUE
+    full_name VARCHAR(255) NOT NULL UNIQUE,
+    birth_date DATE NOT NULL ,
+    email VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- Table: ordinateur

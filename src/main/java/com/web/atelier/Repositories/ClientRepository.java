@@ -14,5 +14,7 @@ import com.web.atelier.Models.Composant;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
 
+    @Query("SELECT c FROM Client c JOIN Reparation r ON c.id = r.client.id WHERE (:dateReparation IS NULL OR r.dateReparation=CAST(:dateReparation AS DATE))")
+    List<Client> filterClientByDateReparation(String dateReparation);
    
 }

@@ -1,6 +1,7 @@
 package com.web.atelier.Models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +23,13 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     String fullName;
+
+    @Column(nullable = false)
+    LocalDate birthDate;
+
+    @Column(unique = true, nullable = false)
+    String email;
 
 }

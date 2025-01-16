@@ -1,6 +1,7 @@
 package com.web.atelier.Controllers;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,18 +29,23 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping("/clients")
-    public String showAllComposants(Model model) {
+    public String showAllComposants(@RequestParam(value="dateReparation",required=false)String dateReparation,Model model) {
         List<Client> listClients = clientService.getAllClients();
+        if(dateReparation!=null && !dateReparation.isEmpty()){
+            listClients = clientService.getClientsByDateReparation(dateReparation);
+        }
         model.addAttribute("listClients", listClients);
         return "ListClient";
     }
 
     @PostMapping("/clients")
-    public String addModele(Composant composant, @RequestParam("name") String name,
+    public String addModele(Composant composant, @RequestParam("name") String name, @RequestParam("birthDate") String birthDate, @RequestParam("email") String email,
             RedirectAttributes redirectAttributes) {
         try {
             Client client = new Client();
             client.setFullName(name);
+            client.setBirthDate(LocalDate.parse(birthDate));
+            client.setEmail(email);
             clientService.addClient(client);
 
             redirectAttributes.addFlashAttribute("successMessage", "Client ajouté avec succès.");

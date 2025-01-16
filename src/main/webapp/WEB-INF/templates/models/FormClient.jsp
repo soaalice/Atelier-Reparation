@@ -33,7 +33,13 @@
         <h1>Client</h1>
 
         <label for="name">Nom:</label>
-        <input type="text" id="name" name="name" required />
+        <input type="text" id="name" name="name" placeholder="Nom" required />
+
+        <label for="birthDate">Birth Date:</label>
+        <input type="date" id="birthDate" name="birthDate" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="email" required />
 
         <button type="submit">Enregistrer</button>
     </form>

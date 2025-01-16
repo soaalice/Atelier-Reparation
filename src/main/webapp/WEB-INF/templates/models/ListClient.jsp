@@ -18,7 +18,8 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            
+            <th>Email</th>
+            <th>Birth Date</th>
         </tr>
         <%
             List<Client> listClients = (List<Client>) request.getAttribute("listClients");
@@ -27,10 +28,20 @@
                     <tr>
                         <td><%= client.getId() %></td>
                         <td><%= client.getFullName() %></td>
+                        <td><%= client.getEmail() %></td>
+                        <td><%= client.getBirthDate() %></td>
                     </tr>
                 <%
             }
         %>
     </table>
+
+    <form action="/clients" method="get">
+        
+        <label for="dateReparation">Date de reparation:</label>
+        <input type="date" name="dateReparation">
+        
+        <button type="submit">Filtrer</button>
+    </form>
 </body>
 </html>

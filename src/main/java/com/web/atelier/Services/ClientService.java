@@ -32,5 +32,8 @@ public class ClientService {
         return clientRepository.findById(id).orElse(null);
     }
 
+    public List<Client> getClientsByDateReparation(String date){
+        return clientRepository.filterClientByDateReparation(date);
+    }
    
 }

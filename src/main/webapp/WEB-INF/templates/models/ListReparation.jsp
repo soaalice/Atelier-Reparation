@@ -18,6 +18,7 @@
         <tr>
             <th>Id</th>
             <th>Ordinateur</th>
+            <th>Client</th>
             <th>Date de Réparation</th>
             <%-- <th>Montant Total</th>
             <th>Durée Totale</th> --%>
@@ -29,6 +30,7 @@
             <tr>
                 <td><%= reparation.getId() %></td>
                 <td><%= reparation.getOrdinateur().getName() %></td>
+                <td><%= reparation.getClient().getFullName() %></td>
                 <td><%= reparation.getDateReparation() %></td>
                 <%-- <td><%= reparation.getMontantTotal() %></td>
                 <td><%= reparation.getDureeTotale() %></td> --%>
