@@ -20,6 +20,7 @@ import com.web.atelier.Models.Technicien;
 import com.web.atelier.Models.TypeComposant;
 import com.web.atelier.Services.ClientService;
 import com.web.atelier.Services.ComposantService;
+import com.web.atelier.Services.ReparationService;
 import com.web.atelier.Services.TechnicienService;
 import com.web.atelier.Services.TypeComposantService;
 
@@ -30,11 +31,17 @@ public class TechnicienController {
     @Autowired
     private TechnicienService technicienService;
 
+    @Autowired
+    private ReparationService reparationService;
+
     @GetMapping("/commissions")
     public String showAllComposants(@RequestParam(value="dateMin",required = false)String dateMin,@RequestParam(value = "dateMax",required = false) String dateMax ,Model model) {
         List<Technicien> allTechniciens = technicienService.getAllTechniciens();
         if(dateMax != null || dateMin!=null){
             allTechniciens = technicienService.getAllTechniciensByDate(dateMin, dateMax);
+            for (Technicien technicien : allTechniciens) {
+                technicien.setAllReparations(reparationService.getReparationsTechnicien(dateMin, dateMax,technicien.getId()));
+            }
         }
         model.addAttribute("listTechniciens", allTechniciens);
         return "ListCommission";
