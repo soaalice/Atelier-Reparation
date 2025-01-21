@@ -21,13 +21,19 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
+
     <h1>Liste des Commissions</h1>
+
     <table border="1">
-        <tr>
-            <th>Technicien</th>
-            <th>Réparation</th>
-            <th>Commissions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Technicien</th>
+                <th>Réparation</th>
+                <th>Commissions</th>
+            </tr>
+        </thead>
+
+        <tbody>
         <%
             List<Technicien> listTechniciens = (List<Technicien>) request.getAttribute("listTechniciens");
             for (Technicien technicien : listTechniciens) {
@@ -35,56 +41,60 @@
             <tr>
                 <td><%= technicien.getName() %></td>
                 <td>
-                    <table>
                     <%
                         double sommeReparation = 0;
                         double sommeCommission = 0;
                         List<Reparation> allReparations = technicien.getAllReparations();
                         Double[] commissions = new Double[allReparations.size()];
                         if(allReparations.size()==0){
-                            out.print("Aucune Reparation");
-                        }
-                        else{
+                            out.print("Aucune réparation");
+                        } else{
+                    %>
+                    <table>
+                        <%
                             for(Reparation reparation : allReparations) {
                                 sommeReparation += reparation.getMontantTotal();
                                 sommeCommission += reparation.getMontantTotal()*0.05; 
                                 commissions[allReparations.indexOf(reparation)] = reparation.getMontantTotal()*0.05;
                                 %>
                                 <tr>
-                                    <td>REP<%= reparation.getId()  %></td>
+                                    <td>REP<%= reparation.getId() + "("+reparation.getDateReparation()+")"  %></td>
                                     <td class="montant-cell"><%=reparation.getMontantTotal()%></td>
                                 </tr>
                                 <%
                             }
-                        }
-                    %>
+                        %>
                     </table>
+                    <% } %>
                 </td>
                 <td>
-                    <table>
                     <%
                         if(allReparations.size() == 0){
                             out.print("Aucune commission");
                         }
                         else{
-                            for(Double commission : commissions){
-                                %>
-                                    <tr>
-                                        <td class="montant-cell"><%= commission %></td>
-                                    </tr>
-                                <%
-                            } 
-                        }
+                    %>
+                    <table>
+                    <%
+                        for(Double commission : commissions){
+                            %>
+                                <tr>
+                                    <td class="montant-cell"><%= commission %></td>
+                                </tr>
+                            <%
+                        } 
                     %>
                     </table>
+                    <% } %>
                 </td>
             </tr>
             <tr class="total-row">
-                <td>total</td>
+                <td>Total</td>
                 <td><%= sommeReparation %></td>
                 <td><%= sommeCommission %></td>
             </tr>
         <% } %>
+        </tbody>
     </table>
 
     <form action="/commissions" method="get">
@@ -93,7 +103,22 @@
 
         <label for="dateMax">Max Date:</label>
         <input type="date" name="dateMax">
+
+        <select id="technicienId" name="technicienId">
+            <option value="">Tous</option>
+            <%
+                List<Technicien> listAllTechniciens = (List<Technicien>) request.getAttribute("listAlltechniciens");
+                if (listAllTechniciens != null) {
+                    for (Technicien technicien : listAllTechniciens) {
+                %>
+                        <option value="<%= technicien.getId() %>"><%= technicien.getName() %></option>
+                <%
+                    }}
+                %>
+        </select>
+
         <button type="submit">Filtrer</button>
+
     </form>
 </body>
 </html>

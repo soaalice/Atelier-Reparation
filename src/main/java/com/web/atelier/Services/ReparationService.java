@@ -68,8 +68,9 @@ public class ReparationService {
             dateMin = LocalDate.parse(minDate);
         }
         LocalDate dateMax = LocalDate.of(2100, 12, 31);
-        if (maxDate != null && !maxDate.isEmpty())
-            LocalDate.parse(maxDate);
+        if (maxDate != null && !maxDate.isEmpty()){
+            dateMax = LocalDate.parse(maxDate);
+        }
         return reparationRepository.findByTechnicien(dateMin.toString(),dateMax.toString(),technicienId);
     }
 }

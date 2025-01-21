@@ -36,14 +36,16 @@ public class TechnicienService {
     }
 
 
-    public List<Technicien> getAllTechniciensByDate(String minDate,String maxDate) {
+    public List<Technicien> getTechnicienByDate(String minDate,String maxDate, Integer technicienId) {
         LocalDate dateMin =  LocalDate.of(1901, 1, 1) ;
         if (minDate != null && !minDate.isEmpty()) {
            dateMin = LocalDate.parse(minDate);  
         } 
         LocalDate dateMax =  LocalDate.of(2100, 12, 31);
-        if(maxDate!=null && !maxDate.isEmpty()) LocalDate.parse(maxDate);
-        return technicienRepository.filterByDate(dateMin.toString(),dateMax.toString());
+        if(maxDate!=null && !maxDate.isEmpty()) {
+            dateMax = LocalDate.parse(maxDate);
+        }
+        return technicienRepository.filterByDate(dateMin.toString(),dateMax.toString(), technicienId);
     }
 
 }

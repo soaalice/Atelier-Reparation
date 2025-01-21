@@ -2,6 +2,7 @@ package com.web.atelier.Controllers;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,14 +36,16 @@ public class TechnicienController {
     private ReparationService reparationService;
 
     @GetMapping("/commissions")
-    public String showAllComposants(@RequestParam(value="dateMin",required = false)String dateMin,@RequestParam(value = "dateMax",required = false) String dateMax ,Model model) {
+    public String showAllComposants(@RequestParam(value="technicienId", required = false) Integer technicienId, @RequestParam(value="dateMin",required = false)String dateMin,@RequestParam(value = "dateMax",required = false) String dateMax ,Model model) {
         List<Technicien> allTechniciens = technicienService.getAllTechniciens();
-        if(dateMax != null || dateMin!=null){
-            allTechniciens = technicienService.getAllTechniciensByDate(dateMin, dateMax);
+        List<Technicien> techniciens = technicienService.getAllTechniciens();
+        if(dateMax != null || dateMin!=null || technicienId != null){
+            allTechniciens = technicienService.getTechnicienByDate(dateMin, dateMax, technicienId);
             for (Technicien technicien : allTechniciens) {
                 technicien.setAllReparations(reparationService.getReparationsTechnicien(dateMin, dateMax,technicien.getId()));
             }
         }
+        model.addAttribute("listAlltechniciens", techniciens);
         model.addAttribute("listTechniciens", allTechniciens);
         return "ListCommission";
     }
