@@ -9,6 +9,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Commissions</title>
+    <style>
+        .montant-cell {
+            text-align: right;
+        }
+        .total-row td {
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
@@ -18,7 +27,6 @@
             <th>Technicien</th>
             <th>Réparation</th>
             <th>Commissions</th>
-            <%--<th>Durée Totale</th> --%>
         </tr>
         <%
             List<Technicien> listTechniciens = (List<Technicien>) request.getAttribute("listTechniciens");
@@ -33,16 +41,21 @@
                         double sommeCommission = 0;
                         List<Reparation> allReparations = technicien.getAllReparations();
                         Double[] commissions = new Double[allReparations.size()];
-                        for(Reparation reparation : allReparations) {
-                            sommeReparation += reparation.getMontantTotal();
-                            sommeCommission += reparation.getMontantTotal()*0.05; 
-                            commissions[allReparations.indexOf(reparation)] = reparation.getMontantTotal()*0.05;
-                            %>
-                            <tr>
-                                <td>REP<%= reparation.getId()  %></td>
-                                <td><%=reparation.getMontantTotal()%></td>
-                            </tr>
-                            <%
+                        if(allReparations.size()==0){
+                            out.print("Aucune Reparation");
+                        }
+                        else{
+                            for(Reparation reparation : allReparations) {
+                                sommeReparation += reparation.getMontantTotal();
+                                sommeCommission += reparation.getMontantTotal()*0.05; 
+                                commissions[allReparations.indexOf(reparation)] = reparation.getMontantTotal()*0.05;
+                                %>
+                                <tr>
+                                    <td>REP<%= reparation.getId()  %></td>
+                                    <td class="montant-cell"><%=reparation.getMontantTotal()%></td>
+                                </tr>
+                                <%
+                            }
                         }
                     %>
                     </table>
@@ -50,18 +63,23 @@
                 <td>
                     <table>
                     <%
-                        for(Double commission : commissions){
-                            %>
-                                <tr>
-                                    <td><%= commission %></td>
-                                </tr>
-                            <%
-                        } 
+                        if(allReparations.size() == 0){
+                            out.print("Aucune commission");
+                        }
+                        else{
+                            for(Double commission : commissions){
+                                %>
+                                    <tr>
+                                        <td class="montant-cell"><%= commission %></td>
+                                    </tr>
+                                <%
+                            } 
+                        }
                     %>
                     </table>
                 </td>
             </tr>
-            <tr style="text-align:right">
+            <tr class="total-row">
                 <td>total</td>
                 <td><%= sommeReparation %></td>
                 <td><%= sommeCommission %></td>
@@ -69,23 +87,13 @@
         <% } %>
     </table>
 
-    <%-- <form action="/reparations" method="get">
-        
-        <label for="typeComposantId">Type de composant :</label>
-        <select id="typeComposantId" name="typeComposantId">
-            <option value="">Tous</option>
-            <%
-                List<TypeComposant> listTypeComposant = (List<TypeComposant>) request.getAttribute("listTypeComposants");
-                if (listTypeComposant != null) {
-                    for (TypeComposant typeComposant : listTypeComposant) {
-                %>
-                        <option value="<%= typeComposant.getId() %>"><%= typeComposant.getName() %></option>
-                <%
-                    }}
-                %>
-        </select>
-        
+    <form action="/commissions" method="get">
+        <label for="dateMin">Min Date:</label>
+        <input type="date" name="dateMin">
+
+        <label for="dateMax">Max Date:</label>
+        <input type="date" name="dateMax">
         <button type="submit">Filtrer</button>
-    </form> --%>
+    </form>
 </body>
 </html>

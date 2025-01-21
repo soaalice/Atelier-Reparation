@@ -1,6 +1,7 @@
 package com.web.atelier.Services;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,15 @@ public class TechnicienService {
         return technicienRepository.findById(id).orElse(null);
     }
 
+
+    public List<Technicien> getAllTechniciensByDate(String minDate,String maxDate) {
+        LocalDate dateMin =  LocalDate.of(1901, 1, 1) ;
+        if (minDate != null && !minDate.isEmpty()) {
+           dateMin = LocalDate.parse(minDate);  
+        } 
+        LocalDate dateMax =  LocalDate.of(2100, 12, 31);
+        if(maxDate!=null && !maxDate.isEmpty()) LocalDate.parse(maxDate);
+        return technicienRepository.filterByDate(dateMin.toString(),dateMax.toString());
+    }
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.atelier.Models.Client;
 import com.web.atelier.Models.Composant;
+import com.web.atelier.Models.Technicien;
 import com.web.atelier.Models.TypeComposant;
 import com.web.atelier.Services.ClientService;
 import com.web.atelier.Services.ComposantService;
@@ -30,8 +31,12 @@ public class TechnicienController {
     private TechnicienService technicienService;
 
     @GetMapping("/commissions")
-    public String showAllComposants(Model model) {
-        model.addAttribute("listTechniciens", technicienService.getAllTechniciens());
+    public String showAllComposants(@RequestParam(value="dateMin",required = false)String dateMin,@RequestParam(value = "dateMax",required = false) String dateMax ,Model model) {
+        List<Technicien> allTechniciens = technicienService.getAllTechniciens();
+        if(dateMax != null || dateMin!=null){
+            allTechniciens = technicienService.getAllTechniciensByDate(dateMin, dateMax);
+        }
+        model.addAttribute("listTechniciens", allTechniciens);
         return "ListCommission";
     }
 
