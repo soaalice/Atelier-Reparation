@@ -3,6 +3,7 @@
 <%@ page import="com.web.atelier.Models.Reparation" %>
 <%@ page import="com.web.atelier.Models.Ordinateur" %>
 <%@ page import="com.web.atelier.Models.Client" %>
+<%@ page import="com.web.atelier.Models.Technicien" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -43,12 +44,23 @@
             <% } %>
         </select>
 
+        <label for="Client">Client:</label>
         <select id="client" name="clientId">
             <%
                 List<Client> listClients = (List<Client>) request.getAttribute("listClients");
                 for (Client client : listClients) {
             %>
                 <option value="<%= client.getId() %>"><%= client.getFullName() %></option>
+            <% } %>
+        </select>
+
+        <label for="Technicien">Technicien:</label>
+        <select id="technicien" name="technicienId">
+            <%
+                List<Technicien> listTechniciens = (List<Technicien>) request.getAttribute("listTechniciens");
+                for (Technicien technicien : listTechniciens) {
+            %>
+                <option value="<%= technicien.getId() %>"><%= technicien.getName() %></option>
             <% } %>
         </select>
 

@@ -19,9 +19,10 @@
             <th>Id</th>
             <th>Ordinateur</th>
             <th>Client</th>
+            <th>Technicien</th>
             <th>Date de Réparation</th>
-            <%-- <th>Montant Total</th>
-            <th>Durée Totale</th> --%>
+            <th>Montant Total</th>
+            <%--<th>Durée Totale</th> --%>
         </tr>
         <%
             List<Reparation> listReparations = (List<Reparation>) request.getAttribute("listReparations");
@@ -31,9 +32,10 @@
                 <td><%= reparation.getId() %></td>
                 <td><%= reparation.getOrdinateur().getName() %></td>
                 <td><%= reparation.getClient().getFullName() %></td>
+                <td><%= reparation.getTechnicien().getName() %></td>
                 <td><%= reparation.getDateReparation() %></td>
-                <%-- <td><%= reparation.getMontantTotal() %></td>
-                <td><%= reparation.getDureeTotale() %></td> --%>
+                <td><%= reparation.getMontantTotal() %></td>
+                <%--<td><%= reparation.getDureeTotale() %></td> --%>
             </tr>
         <% } %>
     </table>

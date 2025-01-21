@@ -33,11 +33,15 @@ public class Reparation {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
+    @ManyToOne
+    @JoinColumn(name = "technicien_id", nullable = false)
+    private Technicien technicien;
+
     @Column(nullable = false)
     private LocalDate dateReparation;
 
-    // @Column(nullable = false)
-    // private BigDecimal montantTotal;
+    @Column(nullable = false)
+    private Double montantTotal;
 
     // @Column(nullable = false)
     // private BigDecimal dureeTotale;

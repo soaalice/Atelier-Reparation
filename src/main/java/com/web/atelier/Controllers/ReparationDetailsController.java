@@ -38,12 +38,14 @@ public class ReparationDetailsController {
     @PostMapping("/reparations-details")
     public String addReparation(Reparation reparation,
             @RequestParam("ordinateurId") Integer ordinateurId,
+            @RequestParam("technicienId") Integer technicienId,
             @RequestParam("dateReparation") LocalDate dateReparation,
             @RequestParam("clientId") Integer clientId,Model model) {
 
             Ordinateur ordinateur = ordinateurService.getOrdinateurById(ordinateurId);
             model.addAttribute("ordinateurId", ordinateurId);
             model.addAttribute("clientId", clientId);
+            model.addAttribute("technicienId", technicienId);
         model.addAttribute("dateReparation", dateReparation);
         model.addAttribute("listComposants", composantService.getComposantByOrdinateur(ordinateur));
         model.addAttribute("listTypeReparations", typeReparationService.getAllTypeReparations());

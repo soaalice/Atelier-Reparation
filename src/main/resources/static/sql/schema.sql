@@ -79,8 +79,9 @@ CREATE TABLE type_composant_modele (
 CREATE TABLE reparation (
     id SERIAL PRIMARY KEY,
     ordinateur_id INT NOT NULL REFERENCES ordinateur(id),
+    technicien_id INT NOT NULL REFERENCES technicien(id),
     date_reparation DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    -- montant_total DECIMAL(10,2) NOT NULL,
+    montant_total DECIMAL(10,2) NOT NULL,
     -- duree_totale DECIMAL NOT NULL
     client_id INT NOT NULL REFERENCES client(id)
 );
@@ -88,6 +89,11 @@ CREATE TABLE reparation (
 -- Table: type_reparation
 CREATE TABLE type_reparation (
     id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE technicien(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
 );
 
 -- Table: tarif

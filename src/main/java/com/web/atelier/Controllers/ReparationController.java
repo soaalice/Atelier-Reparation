@@ -11,10 +11,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.atelier.Models.Reparation;
 import com.web.atelier.Models.ReparationDetails;
+import com.web.atelier.Models.Tarif;
 import com.web.atelier.Models.Composant;
 import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Services.ReparationService;
 import com.web.atelier.Services.TarifService;
+import com.web.atelier.Services.TechnicienService;
 import com.web.atelier.Services.TypeComposantService;
 import com.web.atelier.Services.TypeReparationService;
 import com.web.atelier.Services.ClientService;
@@ -56,6 +58,9 @@ public class ReparationController {
     @Autowired 
     private TypeReparationService typeReparationService;
 
+    @Autowired
+    private TechnicienService technicienService;
+
 
     @GetMapping("/reparations")
     public String showAllReparations(@RequestParam(value="typeComposantId",required = false)Integer typeComposantId,Model model) {
@@ -77,6 +82,7 @@ public class ReparationController {
             @RequestParam("ordinateurId") Integer ordinateurId,
             @RequestParam("dateReparation") LocalDate dateReparation,
             @RequestParam("clientId") Integer clientId,
+                @RequestParam("technicienId") Integer technicienId,
             @RequestParam("composants") List<Integer> composants,
             @RequestParam Map<String, String> typeReparations,
             Model model,
@@ -87,11 +93,13 @@ public class ReparationController {
                 reparation.setDateReparation(dateReparation);
                 reparation.setOrdinateur(ordinateur);
                 reparation.setClient(clientService.getClientById(clientId));
-
+                reparation.setTechnicien(technicienService.getTechnicienById(technicienId));
                 if(composants.size()==0){
                     throw new Exception("Vous devez selectionne au minimum un composant a reparer.");
                 }
-                reparationService.addReparation(reparation);
+                double montantTotal = 0;
+                reparation.setMontantTotal(0.0);
+                reparation = reparationService.addReparation(reparation);
                 for (Integer long1 : composants) {
                     Composant tempComposant = composantService.getComposantById(long1);
                     Composant newComposant = composantService.getSuperiorOrMinorComposant(tempComposant,
@@ -101,15 +109,18 @@ public class ReparationController {
                         throw new Exception("Aucun composant n'est disponible pour ce type de réparation.");
                     }        
                     ReparationDetails temp = new ReparationDetails();
-                    temp.setTarif(tarifService.getTarifByComposantAndTypeReparation(tempComposant,
+                    Tarif tempTarif = tarifService.getTarifByComposantAndTypeReparation(tempComposant,
                     typeReparationService.getTypeReparationById(
-                        Integer.parseInt(typeReparations.get("reparation_" + long1)))));
+                        Integer.parseInt(typeReparations.get("reparation_" + long1))));
+                        montantTotal+= tempTarif.getPrix();
+                        temp.setTarif(tempTarif);
                         temp.setReparation(reparation);
                         temp.setNewComposant(newComposant);
                         
                         reparationDetailsService.addReparationDetails(temp);
                     }
-
+                reparation.setMontantTotal(montantTotal);
+                reparationService.addReparation(reparation);
                 redirectAttributes.addFlashAttribute("successMessage", "Réparation ajoutée avec succès !");
             } catch (Exception e) {
                 redirectAttributes.addFlashAttribute("errorMessage", "Erreur: " + e.getMessage());
@@ -120,7 +131,8 @@ public class ReparationController {
         @GetMapping("/reparations/form")
         public String showFormReparation(Model model) {
             model.addAttribute("listClients", clientService.getAllClients());
-        // model.addAttribute("listOrdinateurs", ordinateurService.getAllOrdinateurs());
+        model.addAttribute("listTechniciens", technicienService
+        .getAllTechniciens());
         model.addAttribute("listOrdinateurs", ordinateurService.getAllRepairableOrdinateurs());
         return "FormReparation";
     }
