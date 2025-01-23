@@ -29,6 +29,8 @@
             <th>Commissions</th>
         </tr>
         <%
+            Double[]sumReparation = (Double[]) request.getAttribute("sumReparation");
+            Double[]sumCommission = (Double[]) request.getAttribute("sumCommission");
             List<Technicien> listTechniciens = (List<Technicien>) request.getAttribute("listTechniciens");
             for (Technicien technicien : listTechniciens) {
         %>
@@ -37,21 +39,15 @@
                 <td>
                     <table>
                     <%
-                        double sommeReparation = 0;
-                        double sommeCommission = 0;
                         List<Reparation> allReparations = technicien.getAllReparations();
-                        Double[] commissions = new Double[allReparations.size()];
                         if(allReparations.size()==0){
                             out.print("Aucune Reparation");
                         }
                         else{
                             for(Reparation reparation : allReparations) {
-                                sommeReparation += reparation.getMontantTotal();
-                                sommeCommission += reparation.getMontantTotal()*0.05; 
-                                commissions[allReparations.indexOf(reparation)] = reparation.getMontantTotal()*0.05;
                                 %>
                                 <tr>
-                                    <td>REP<%= reparation.getId()  %></td>
+                                    <td>REP<%= reparation.getId()+" ("+reparation.getDateReparation()+")"  %></td>
                                     <td class="montant-cell"><%=reparation.getMontantTotal()%></td>
                                 </tr>
                                 <%
@@ -67,10 +63,10 @@
                             out.print("Aucune commission");
                         }
                         else{
-                            for(Double commission : commissions){
+                            for(Reparation reparation : allReparations){
                                 %>
                                     <tr>
-                                        <td class="montant-cell"><%= commission %></td>
+                                        <td class="montant-cell"><%= reparation.getCommission().getMontantTotal() %></td>
                                     </tr>
                                 <%
                             } 
@@ -81,13 +77,24 @@
             </tr>
             <tr class="total-row">
                 <td>total</td>
-                <td><%= sommeReparation %></td>
-                <td><%= sommeCommission %></td>
+                <td><%= sumReparation[listTechniciens.indexOf(technicien)] %></td>
+                <td><%= sumCommission[listTechniciens.indexOf(technicien)] %></td>
             </tr>
         <% } %>
     </table>
 
     <form action="/commissions" method="get">
+        <label for="technicienId">Technicien:</label>
+        <select id="technicien" name="technicienId">
+        <option value="">Tous</option>
+            <%
+                List<Technicien> listAllTechniciens = (List<Technicien>) request.getAttribute("allTechniciens");
+                for (Technicien technicien : listAllTechniciens) {
+            %>
+                <option value="<%= technicien.getId() %>"><%= technicien.getName() %></option>
+            <% } %>
+        </select>
+
         <label for="dateMin">Min Date:</label>
         <input type="date" name="dateMin">
 

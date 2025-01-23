@@ -14,6 +14,7 @@ import com.web.atelier.Models.Technicien;
 @Repository
 public interface TechnicienRepository extends JpaRepository<Technicien, Integer> {
 
-    @Query("SELECT t FROM Technicien t JOIN Reparation r ON t.id = r.technicien.id WHERE (:minDate IS NULL OR r.dateReparation >= CAST( :minDate AS DATE)) AND ( :maxDate IS NULL OR r.dateReparation <= CAST( :maxDate AS DATE))")
-    List<Technicien> filterByDate(@Param("minDate") String minDate, @Param("maxDate") String maxDate);
+    // @Query("SELECT t FROM Technicien t LEFT JOIN Reparation r ON t.id = r.technicien.id WHERE (:minDate IS NULL OR r.dateReparation >= CAST( :minDate AS DATE)) AND ( :maxDate IS NULL OR r.dateReparation <= CAST( :maxDate AS DATE) AND (:technicienId IS NULL OR r.technicien.id = :technicienId ))")
+    // List<Technicien> filterByDate(@Param("minDate") String minDate, @Param("maxDate") String maxDate,
+    //         @Param("technicienId") Integer technicienId);
 }

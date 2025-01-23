@@ -43,6 +43,9 @@ public class Reparation {
     @Column(nullable = false)
     private Double montantTotal;
 
+    @OneToOne
+    @JoinColumn(name="reparation_id")
+     Commission commission;
     // @Column(nullable = false)
     // private BigDecimal dureeTotale;
 }

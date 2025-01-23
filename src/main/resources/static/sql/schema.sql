@@ -114,6 +114,20 @@ CREATE TABLE reparation_details (
     new_composant_id INT NOT NULL REFERENCES composant(id)
 );
 
+--Table :commission
+CREATE TABLE commission(
+    id SERIAL PRIMARY KEY,
+    reparation_id INT NOT NULL REFERENCES reparation(id),
+    montant_total DECIMAL(10,2) NOT NULL
+);
+
+--Table:commission_details
+CREATE TABLE commission_details(
+    id SERIAL PRIMARY KEY,
+    reparation_details_id INT NOT NULL REFERENCES reparation_details(id),
+    montant DECIMAL(10,2) NOT NULL
+);
+
 -- Table: mvt_stock
 CREATE TABLE mvt_stock (
     id SERIAL PRIMARY KEY,

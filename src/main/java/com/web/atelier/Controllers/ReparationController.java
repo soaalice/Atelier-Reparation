@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.web.atelier.Models.Reparation;
 import com.web.atelier.Models.ReparationDetails;
 import com.web.atelier.Models.Tarif;
+import com.web.atelier.Models.Commission;
+import com.web.atelier.Models.CommissionDetails;
 import com.web.atelier.Models.Composant;
 import com.web.atelier.Models.Ordinateur;
 import com.web.atelier.Services.ReparationService;
@@ -20,6 +22,8 @@ import com.web.atelier.Services.TechnicienService;
 import com.web.atelier.Services.TypeComposantService;
 import com.web.atelier.Services.TypeReparationService;
 import com.web.atelier.Services.ClientService;
+import com.web.atelier.Services.CommissionDetailsService;
+import com.web.atelier.Services.CommissionService;
 import com.web.atelier.Services.ComposantService;
 import com.web.atelier.Services.OrdinateurService;
 import com.web.atelier.Services.ReparationDetailsService;
@@ -60,6 +64,12 @@ public class ReparationController {
 
     @Autowired
     private TechnicienService technicienService;
+
+    @Autowired
+    private CommissionService commissionService;
+
+    @Autowired
+    private CommissionDetailsService commissionDetailsService;
 
 
     @GetMapping("/reparations")
@@ -118,7 +128,19 @@ public class ReparationController {
                         temp.setNewComposant(newComposant);
                         
                         reparationDetailsService.addReparationDetails(temp);
-                    }
+                    CommissionDetails commissionDetails = new CommissionDetails();
+                    commissionDetails.setMontant(tempTarif.getPrix()*0.05);
+                    commissionDetails.setReparationDetails(temp);
+                    commissionDetailsService.addCommissionDetails(commissionDetails);
+                }
+                Commission commission = new Commission();
+                commission.setMontantTotal(montantTotal*0.05);
+                commission.setReparation(reparation);
+
+                reparation.setCommission(commission);
+
+                commissionService.addCommission(commission);
+
                 reparation.setMontantTotal(montantTotal);
                 reparationService.addReparation(reparation);
                 redirectAttributes.addFlashAttribute("successMessage", "Réparation ajoutée avec succès !");
