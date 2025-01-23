@@ -21,13 +21,19 @@
 </head>
 <body>
     <jsp:include page="inc/header.jsp" />
+
     <h1>Liste des Commissions</h1>
+
     <table border="1">
-        <tr>
-            <th>Technicien</th>
-            <th>Réparation</th>
-            <th>Commissions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Technicien</th>
+                <th>Réparation</th>
+                <th>Commissions</th>
+            </tr>
+        </thead>
+
+        <tbody>
         <%
             Double[]sumReparation = (Double[]) request.getAttribute("sumReparation");
             Double[]sumCommission = (Double[]) request.getAttribute("sumCommission");
@@ -37,13 +43,14 @@
             <tr>
                 <td><%= technicien.getName() %></td>
                 <td>
-                    <table>
                     <%
                         List<Reparation> allReparations = technicien.getAllReparations();
                         if(allReparations.size()==0){
-                            out.print("Aucune Reparation");
-                        }
-                        else{
+                            out.print("Aucune réparation");
+                        } else{
+                    %>
+                    <table>
+                        <%
                             for(Reparation reparation : allReparations) {
                                 %>
                                 <tr>
@@ -52,12 +59,11 @@
                                 </tr>
                                 <%
                             }
-                        }
-                    %>
+                        %>
                     </table>
+                    <% } %>
                 </td>
                 <td>
-                    <table>
                     <%
                         if(allReparations.size() == 0){
                             out.print("Aucune commission");
@@ -73,6 +79,7 @@
                         }
                     %>
                     </table>
+                    <% } %>
                 </td>
             </tr>
             <tr class="total-row">
@@ -81,6 +88,7 @@
                 <td><%= sumCommission[listTechniciens.indexOf(technicien)] %></td>
             </tr>
         <% } %>
+        </tbody>
     </table>
 
     <form action="/commissions" method="get">
@@ -100,7 +108,22 @@
 
         <label for="dateMax">Max Date:</label>
         <input type="date" name="dateMax">
+
+        <select id="technicienId" name="technicienId">
+            <option value="">Tous</option>
+            <%
+                List<Technicien> listAllTechniciens = (List<Technicien>) request.getAttribute("listAlltechniciens");
+                if (listAllTechniciens != null) {
+                    for (Technicien technicien : listAllTechniciens) {
+                %>
+                        <option value="<%= technicien.getId() %>"><%= technicien.getName() %></option>
+                <%
+                    }}
+                %>
+        </select>
+
         <button type="submit">Filtrer</button>
+
     </form>
 </body>
 </html>
