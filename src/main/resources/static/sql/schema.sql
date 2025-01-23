@@ -91,9 +91,16 @@ CREATE TABLE type_reparation (
     id SERIAL PRIMARY KEY
 );
 
-CREATE TABLE technicien(
+--table :sexe
+CREATE TABLE sexe(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE technicien(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    sexe_id INT NOT NULL REFERENCES sexe(id)
 );
 
 -- Table: tarif

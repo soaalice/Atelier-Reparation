@@ -64,6 +64,7 @@
                     <% } %>
                 </td>
                 <td>
+                    <table>
                     <%
                         if(allReparations.size() == 0){
                             out.print("Aucune commission");
@@ -71,6 +72,7 @@
                         else{
                             for(Reparation reparation : allReparations){
                                 %>
+
                                     <tr>
                                         <td class="montant-cell"><%= reparation.getCommission().getMontantTotal() %></td>
                                     </tr>
@@ -79,7 +81,7 @@
                         }
                     %>
                     </table>
-                    <% } %>
+                    
                 </td>
             </tr>
             <tr class="total-row">
@@ -87,7 +89,7 @@
                 <td><%= sumReparation[listTechniciens.indexOf(technicien)] %></td>
                 <td><%= sumCommission[listTechniciens.indexOf(technicien)] %></td>
             </tr>
-        <% } %>
+            <% } %>
         </tbody>
     </table>
 
@@ -108,19 +110,6 @@
 
         <label for="dateMax">Max Date:</label>
         <input type="date" name="dateMax">
-
-        <select id="technicienId" name="technicienId">
-            <option value="">Tous</option>
-            <%
-                List<Technicien> listAllTechniciens = (List<Technicien>) request.getAttribute("listAlltechniciens");
-                if (listAllTechniciens != null) {
-                    for (Technicien technicien : listAllTechniciens) {
-                %>
-                        <option value="<%= technicien.getId() %>"><%= technicien.getName() %></option>
-                <%
-                    }}
-                %>
-        </select>
 
         <button type="submit">Filtrer</button>
 
