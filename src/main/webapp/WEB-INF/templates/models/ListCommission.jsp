@@ -49,7 +49,7 @@
                             out.print("Aucune réparation");
                         } else{
                     %>
-                    <table>
+                        <table>
                         <%
                             for(Reparation reparation : allReparations) {
                                 %>
@@ -64,24 +64,23 @@
                     <% } %>
                 </td>
                 <td>
-                    <table>
                     <%
                         if(allReparations.size() == 0){
                             out.print("Aucune commission");
                         }
                         else{
+                    %>
+                        <table>
+                        <%
                             for(Reparation reparation : allReparations){
                                 %>
 
                                     <tr>
                                         <td class="montant-cell"><%= reparation.getCommission().getMontantTotal() %></td>
                                     </tr>
-                                <%
-                            } 
-                        }
-                    %>
-                    </table>
-                    
+                            <% } %>
+                        </table>
+                    <% } %>
                 </td>
             </tr>
             <tr class="total-row">

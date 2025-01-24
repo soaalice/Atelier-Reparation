@@ -290,11 +290,11 @@
                     <a href="/" class="navbar-link">Home</a>
                 </li>
 
-                <li class="navbar-item">
+                <%-- <li class="navbar-item">
                     <a href="/etat-stock" class="navbar-link">Etat Stock</a>
-                </li>
+                </li> --%>
 
-                <!-- Dropdown Insertion -->
+                <%-- <!-- Dropdown Insertion -->
                 <li class="navbar-item dropdown">
                     <a href="#" class="navbar-link">Insertion</a>
                     <div class="dropdown-content">
@@ -332,6 +332,62 @@
                         <a href="/techniciens" class="dropdown-item">Techniciens</a>
                         <a href="/commissions" class="dropdown-item">Commissions</a>
                         <a href="/commissions/etat" class="dropdown-item">Etat Commissions</a>
+                    </div>
+                </li> --%>
+
+                <%-- Dropdown Client --%>
+                <li class="navbar-item dropdown">
+                    <a href="#" class="navbar-link">Client</a>
+                    <div class="dropdown-content">
+                        <a href="/clients" class="dropdown-item">Liste des Clients</a>
+                        <a href="/clients/form" class="dropdown-item">Ajouter un Client</a>
+                        <a href="/recommendations" class="dropdown-item">Composants Recommandés</a>
+                    </div>
+                </li>
+
+                <%-- Dropdown Services --%>
+                <li class="navbar-item dropdown">
+                    <a href="#" class="navbar-link">Services</a>
+                    <div class="dropdown-content">
+                        <a href="/reparations/form" class="dropdown-item">Réparer un Appareil</a>
+                        <a href="/retours/form" class="dropdown-item">Retourner un Appareil</a>
+                        <a href="/recommendations/form" class="dropdown-item">Recommander un Composant</a>
+                        <a href="/mvt-stocks/form" class="dropdown-item">Mouvement de Stock</a>
+                    </div>
+                </li>
+
+                <%-- Dropdown Configurations --%>
+                <li class="navbar-item dropdown">
+                    <a href="#" class="navbar-link">Configurations</a>
+                    <div class="dropdown-content">
+                        <a href="/type-composants/form" class="dropdown-item">Type Composant</a>
+                        <a href="/type-reparations/form" class="dropdown-item">Type Réparation</a>
+                        <a href="/modeles/form" class="dropdown-item">Modèle</a>
+                        <a href="/composants/form" class="dropdown-item">Composant</a>
+                        <a href="/composant-modeles/form" class="dropdown-item">Composant Modèle</a>
+                        <a href="/ordinateurs/form" class="dropdown-item">Ordinateur</a>
+                        <a href="/tarifs/form" class="dropdown-item">Tarif</a>
+                        <a href="/techniciens/form" class="dropdown-item">Technicien</a>
+                    </div>
+                </li>
+
+                <%-- Dropdown Rapports --%>
+                <li class="navbar-item dropdown">
+                    <a href="#" class="navbar-link">Rapports & Suivis</a>
+                    <div class="dropdown-content">
+                        <a href="/reparations" class="dropdown-item">Réparation</a>
+                        <a href="/retours" class="dropdown-item">Retour</a>
+                        <a href="/commissions" class="dropdown-item">Commissions</a>
+                        <a href="/commissions/etat" class="dropdown-item">Etat des Commissions</a>
+                        <a href="/etat-stock" class="dropdown-item">Etat des Stocks</a>
+                    </div>
+                </li>
+
+                <%-- Dropdown A propos --%>
+                <li class="navbar-item dropdown">
+                    <a href="#" class="navbar-link">A propos</a>
+                    <div class="dropdown-content">
+                        <a href="/tarifs" class="dropdown-item">Nos Tarifs</a>
                     </div>
                 </li>
             </ul>
