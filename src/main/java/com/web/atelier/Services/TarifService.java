@@ -7,6 +7,7 @@ import com.web.atelier.Repositories.TarifRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,7 +28,11 @@ public class TarifService {
         return tarifRepository.findById(id).orElse(null);
     }
 
-    public Tarif getTarifByComposantAndTypeReparation(Composant composant, TypeReparation typeReparation) {
-        return tarifRepository.findyByComposantAndTypeReparation(composant,typeReparation);
+    public Tarif getTarifByComposantAndTypeReparation(Composant composant, TypeReparation typeReparation,LocalDate date) {
+        return tarifRepository.findOneLatestTarifByComposantAndType(composant,typeReparation,date);
+    }
+
+    public List<Tarif> getTarifByComposantAndDate(Long composantId,LocalDate date){
+        return tarifRepository.findTarifByComposantAndDate(composantId,date);
     }
 }

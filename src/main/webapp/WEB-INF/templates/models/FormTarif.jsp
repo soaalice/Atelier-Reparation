@@ -59,6 +59,9 @@
             <% } %>
         </select>
 
+        <label for="date">Date:</label>
+        <input type="date" name="date" required />
+
         <button type="submit">Enregistrer</button>
     </form>
 </body>

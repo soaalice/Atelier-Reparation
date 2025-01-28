@@ -1,5 +1,7 @@
 package com.web.atelier.Models;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +30,7 @@ public class Tarif {
     @ManyToOne
     @JoinColumn(name = "type_reparation_id", nullable = false)
     private TypeReparation typeReparation;
+
+    @Column (nullable = false)
+    private LocalDate dateTarif;
 }

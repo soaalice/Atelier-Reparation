@@ -21,6 +21,7 @@
             <th>Durée</th>
             <th>Composant</th>
             <th>Type de Réparation</th>
+            <th>Date Tarif</th>
         </tr>
         <%
             List<Tarif> listTarifs = (List<Tarif>) request.getAttribute("listTarifs");
@@ -33,8 +34,32 @@
                 <% Composant composant = tarif.getComposant(); %>
                 <td><%= composant.getName() +"-"+ composant.getValeur() + composant.getTypeComposant().getUnite().getName() %></td>
                 <td><%= tarif.getTypeReparation().getName() %></td>
+                <td><%= tarif.getDateTarif() %></td>
             </tr>
         <% } %>
     </table>
+
+    <form action="/tarifs" method="get">
+        
+        <label for="ComposantId"> Composant :</label>
+        <select id="ComposantId" name="composantId">
+            <option value="">Tous</option>
+            <%
+                List<Composant> listComposant = (List<Composant>) request.getAttribute("listComposants");
+                if (listComposant != null) {
+                    for (Composant Composant : listComposant) {
+                %>
+                        <option value="<%= Composant.getId() %>"><%= Composant.getName() %></option>
+                <%
+                    }}
+                %>
+        </select>
+
+        <label for="date"> Date :</label>
+        <input type="date" name="date"/>
+        
+        <button type="submit">Filtrer</button>
+    </form>
+
 </body>
 </html>

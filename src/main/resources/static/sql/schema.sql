@@ -109,7 +109,8 @@ CREATE TABLE tarif (
     prix DECIMAL(10,2) NOT NULL,
     duree DECIMAL NOT NULL,
     composant_id INT NOT NULL REFERENCES composant(id),
-    type_reparation_id INT NOT NULL REFERENCES type_reparation(id)
+    type_reparation_id INT NOT NULL REFERENCES type_reparation(id),
+    date_tarif DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Table: reparation_details

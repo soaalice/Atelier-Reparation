@@ -121,7 +121,7 @@ public class ReparationController {
                     ReparationDetails temp = new ReparationDetails();
                     Tarif tempTarif = tarifService.getTarifByComposantAndTypeReparation(tempComposant,
                     typeReparationService.getTypeReparationById(
-                        Integer.parseInt(typeReparations.get("reparation_" + long1))));
+                        Integer.parseInt(typeReparations.get("reparation_" + long1))),dateReparation);
                         montantTotal+= tempTarif.getPrix();
                         temp.setTarif(tempTarif);
                         temp.setReparation(reparation);

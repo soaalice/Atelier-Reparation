@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -30,27 +31,39 @@ public class TarifController {
     private TypeReparationService typeReparationService;
 
     @GetMapping("/tarifs")
-    public String showAllTarifs(Model model) {
+    public String showAllTarifs(@RequestParam(value = "composantId",required = false)Long composantId,
+        @RequestParam(value = "date", required = false) String date,Model model) {
         List<Tarif> listTarifs = tarifService.getAllTarifs();
-        model.addAttribute("listTarifs", listTarifs);
-        return "ListTarif";
+        List<Composant> listComposants = composantService.getAllComposants();
+        if(composantId != null ||(date!=null && !date.isEmpty())){
+            LocalDate localDate = null;
+            if(date != null && !date.isEmpty()){
+                localDate = LocalDate.parse(date);
+            }
+            listTarifs = tarifService.getTarifByComposantAndDate(composantId,localDate);
         }
+        model.addAttribute("listTarifs", listTarifs);
+        model.addAttribute("listComposants", listComposants);
+        return "ListTarif";
+    }
 
         @PostMapping("/tarifs")
         public String addTarif(@RequestParam("prix") Double prix,
             @RequestParam("duree") Double duree,
             @RequestParam("composantId") Integer composantId,
             @RequestParam("typeReparationId") Integer typeReparationId,
+                @RequestParam("date") String date,
             RedirectAttributes redirectAttributes) {
             try {
                 Composant composant = composantService.getComposantById(composantId);
                 TypeReparation typeReparation = typeReparationService.getTypeReparationById(typeReparationId);
-
+                LocalDate localDate = LocalDate.parse(date);
                 Tarif tarif = new Tarif();
                 tarif.setPrix(prix);
                 tarif.setDuree(duree);
                 tarif.setComposant(composant);
                 tarif.setTypeReparation(typeReparation);
+                tarif.setDateTarif(localDate);
 
                 tarifService.addTarif(tarif);
                 redirectAttributes.addFlashAttribute("successMessage", "Tarif ajouté avec succès !");
