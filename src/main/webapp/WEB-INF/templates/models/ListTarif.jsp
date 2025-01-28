@@ -55,6 +55,20 @@
                 %>
         </select>
 
+        <label for="typeReparationId"> Composant :</label>
+        <select id="typeReparationId" name="typeReparationId">
+            <option value="">Tous</option>
+            <%
+                List<TypeReparation> listTypeReparation = (List<TypeReparation>) request.getAttribute("listTypeReparations");
+                if (listTypeReparation != null) {
+                    for (TypeReparation TypeReparation : listTypeReparation) {
+                %>
+                        <option value="<%= TypeReparation.getId() %>"><%= TypeReparation.getName() %></option>
+                <%
+                    }}
+                %>
+        </select>
+
         <label for="date"> Date :</label>
         <input type="date" name="date"/>
         

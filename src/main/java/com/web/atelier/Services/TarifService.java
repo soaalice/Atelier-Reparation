@@ -32,7 +32,7 @@ public class TarifService {
         return tarifRepository.findOneLatestTarifByComposantAndType(composant,typeReparation,date);
     }
 
-    public List<Tarif> getTarifByComposantAndDate(Long composantId,LocalDate date){
+    public List<Tarif> getTarifByComposantAndDate(Long composantId,String date){
         return tarifRepository.findTarifByComposantAndDate(composantId,date);
     }
 }

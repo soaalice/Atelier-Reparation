@@ -32,13 +32,15 @@ public class TarifController {
 
     @GetMapping("/tarifs")
     public String showAllTarifs(@RequestParam(value = "composantId",required = false)Long composantId,
+            @RequestParam(value = "typeReparationId", required = false) Long typeReparationId,
         @RequestParam(value = "date", required = false) String date,Model model) {
         List<Tarif> listTarifs = tarifService.getAllTarifs();
         List<Composant> listComposants = composantService.getAllComposants();
         if(composantId != null ||(date!=null && !date.isEmpty())){
-            LocalDate localDate = null;
+            String localDate = null;
             if(date != null && !date.isEmpty()){
-                localDate = LocalDate.parse(date);
+                LocalDate temp = LocalDate.parse(date);
+                localDate = temp.toString();
             }
             listTarifs = tarifService.getTarifByComposantAndDate(composantId,localDate);
         }

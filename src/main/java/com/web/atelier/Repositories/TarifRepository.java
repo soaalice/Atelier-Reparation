@@ -28,9 +28,9 @@ public interface TarifRepository extends JpaRepository<Tarif, Integer> {
 
     @Query(value = "SELECT t FROM Tarif t " +
             "WHERE (:composantId IS NULL OR t.composant.id = :composantId) " +
-            "AND (:date IS NULL OR t.dateTarif = :date)")
+            "AND (:date IS NULL OR t.dateTarif = CAST(:date AS DATE))")
     List<Tarif> findTarifByComposantAndDate(
             @Param("composantId") Long composantId,
-            @Param("date") LocalDate date);
+            @Param("date") String date);
 
 }
