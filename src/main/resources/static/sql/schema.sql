@@ -150,3 +150,9 @@ CREATE TABLE retour (
     reparation_id INT NOT NULL REFERENCES reparation(id),
     date_retour DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE config_commission(
+    id SERIAL PRIMARY KEY, 
+    value_min NUMERIC(18,2) DEFAULT 0,
+    date_config DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
