@@ -119,9 +119,9 @@ public class ReparationController {
                         throw new Exception("Aucun composant n'est disponible pour ce type de réparation.");
                     }        
                     ReparationDetails temp = new ReparationDetails();
-                    Tarif tempTarif = tarifService.getTarifByComposantAndTypeReparation(tempComposant,
+                    Tarif tempTarif = tarifService.getTarifByComposantAndTypeReparation(long1.longValue(),
                     typeReparationService.getTypeReparationById(
-                        Integer.parseInt(typeReparations.get("reparation_" + long1))),dateReparation);
+                        Integer.parseInt(typeReparations.get("reparation_" + long1))).getId().longValue(),dateReparation);
                         montantTotal+= tempTarif.getPrix();
                         temp.setTarif(tempTarif);
                         temp.setReparation(reparation);

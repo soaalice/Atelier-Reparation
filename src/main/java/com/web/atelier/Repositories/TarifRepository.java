@@ -14,16 +14,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TarifRepository extends JpaRepository<Tarif, Integer> {
-    @Query(value = "SELECT t.* FROM Tarif t WHERE t.composant = :composant " +
-            "AND t.type_reparation = :typeReparation " +
+    @Query(value = "SELECT t.* FROM Tarif t WHERE t.composant_id = :composant " +
+            "AND t.type_reparation_id = :typeReparation " +
             "AND t.date_tarif = (" +
             "SELECT MAX(ta.date_tarif) FROM Tarif ta " +
-            "WHERE ta.composant = :composant " +
-            "AND ta.type_reparation = :typeReparation " +
-            "AND ta.date_tarif<= :date) LIMIT 1", nativeQuery = true)
+            "WHERE ta.composant_id = :composant " +
+            "AND ta.type_reparation_id = :typeReparation " +
+            "AND ta.date_tarif <= :date) LIMIT 1", nativeQuery = true)
     Tarif findOneLatestTarifByComposantAndType(
-            @Param("composant") Composant composant,
-            @Param("typeReparation") TypeReparation typeReparation,
+            @Param("composant") Long composant,
+            @Param("typeReparation") Long typeReparation,
             @Param("date") LocalDate date);
 
     @Query(value = "SELECT t FROM Tarif t " +

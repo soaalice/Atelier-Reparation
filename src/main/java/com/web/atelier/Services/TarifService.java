@@ -28,7 +28,7 @@ public class TarifService {
         return tarifRepository.findById(id).orElse(null);
     }
 
-    public Tarif getTarifByComposantAndTypeReparation(Composant composant, TypeReparation typeReparation,LocalDate date) {
+    public Tarif getTarifByComposantAndTypeReparation(Long composant, Long typeReparation,LocalDate date) {
         return tarifRepository.findOneLatestTarifByComposantAndType(composant,typeReparation,date);
     }
 
