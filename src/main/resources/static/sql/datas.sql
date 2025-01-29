@@ -3,3 +3,5 @@ INSERT INTO type_reparation (name) VALUES ('Remplacement'), ('Reparation'), ('Do
 INSERT INTO type_ordinateur (name) VALUES ('Gamer'), ('Bureau'), ('Portable'), ('Serveur'), ('All in One');
 
 INSERT INTO sexe(name) VALUES ('Homme'),('Femme');
+
+INSERT INTO config_commission (value_min,date_config) VALUES(200000,CURRENT_TIMESTAMP);
