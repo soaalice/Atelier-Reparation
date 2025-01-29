@@ -47,9 +47,9 @@
             <%
                 List<Composant> listComposant = (List<Composant>) request.getAttribute("listComposants");
                 if (listComposant != null) {
-                    for (Composant Composant : listComposant) {
+                    for (Composant composant : listComposant) {
                 %>
-                        <option value="<%= Composant.getId() %>"><%= Composant.getName() %></option>
+                        <option value="<%= composant.getId() %>"><%= composant.getName() +"-"+ composant.getValeur() + composant.getTypeComposant().getUnite().getName() %></option>
                 <%
                     }}
                 %>
