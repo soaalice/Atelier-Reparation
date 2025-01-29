@@ -55,7 +55,7 @@
                 %>
         </select>
 
-        <label for="typeReparationId"> Composant :</label>
+        <label for="typeReparationId"> Type Reparation :</label>
         <select id="typeReparationId" name="typeReparationId">
             <option value="">Tous</option>
             <%

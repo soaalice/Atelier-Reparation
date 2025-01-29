@@ -26,11 +26,13 @@ public interface TarifRepository extends JpaRepository<Tarif, Integer> {
             @Param("typeReparation") Long typeReparation,
             @Param("date") LocalDate date);
 
-    @Query(value = "SELECT t FROM Tarif t " +
-            "WHERE (:composantId IS NULL OR t.composant.id = :composantId) " +
-            "AND (:date IS NULL OR t.dateTarif = CAST(:date AS DATE))")
+    @Query(nativeQuery = true, value = "SELECT * FROM tarif t " +
+                    "WHERE (CASE WHEN :composantId IS NULL THEN TRUE ELSE t.composant_id = :composantId END) " +
+                    "AND (CASE WHEN :date IS NULL THEN TRUE ELSE t.date_tarif = CAST(:date AS DATE) END) " +
+                    "AND (CASE WHEN :typeReparationId IS NULL THEN TRUE ELSE t.type_reparation_id = :typeReparationId END)")
     List<Tarif> findTarifByComposantAndDate(
-            @Param("composantId") Long composantId,
-            @Param("date") String date);
+                    @Param("composantId") Long composantId,
+                    @Param("typeReparationId") Long typeReparationId,
+                    @Param("date") String date);
 
 }
