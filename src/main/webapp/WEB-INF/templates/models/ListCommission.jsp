@@ -73,10 +73,11 @@
                         <table>
                         <%
                             for(Reparation reparation : allReparations){
+                                double com = (reparation.getCommission()!=null) ? reparation.getCommission().getMontantTotal():0;
                                 %>
 
                                     <tr>
-                                        <td class="montant-cell"><%= reparation.getCommission().getMontantTotal() %></td>
+                                        <td class="montant-cell"><%= com %></td>
                                     </tr>
                             <% } %>
                         </table>

@@ -58,7 +58,9 @@ public class CommissionController {
             double tempSumCommission = 0;
             for (Reparation reparation : technicien.getAllReparations()) {
                 tempSumReparation += reparation.getMontantTotal();
-                tempSumCommission += reparation.getCommission().getMontantTotal();
+                if(reparation.getCommission()!=null){
+                    tempSumCommission += reparation.getCommission().getMontantTotal();
+                }
             }
             sumCommission[allTechniciens.indexOf(technicien)] = tempSumCommission;
             sumReparation[allTechniciens.indexOf(technicien)] = tempSumReparation;
@@ -98,13 +100,16 @@ public class CommissionController {
 
         for (Technicien technicien : boysTechniciens) {
             for (Reparation reparation : technicien.getAllReparations()) {
-                sumBoys += reparation.getCommission().getMontantTotal();
-            }
+                if (reparation.getCommission() != null) {
+                    sumBoys += reparation.getCommission().getMontantTotal();
+                }            }
         }
 
         for (Technicien technicien : girlsTechniciens) {
             for (Reparation reparation : technicien.getAllReparations()) {
-                sumGirls += reparation.getCommission().getMontantTotal();
+                if(reparation.getCommission()!=null){
+                    sumGirls += reparation.getCommission().getMontantTotal();
+                }
             }
         }
 
@@ -118,7 +123,9 @@ public class CommissionController {
             double tempSumCommission = 0;
             for (Reparation reparation : technicien.getAllReparations()) {
                 tempSumReparation += reparation.getMontantTotal();
-                tempSumCommission += reparation.getCommission().getMontantTotal();
+                if (reparation.getCommission() != null) {
+                    tempSumCommission += reparation.getCommission().getMontantTotal();
+                }
             }
             sumCommissionGirls[girlsTechniciens.indexOf(technicien)] = tempSumCommission;
             sumReparationGirls[girlsTechniciens.indexOf(technicien)] = tempSumReparation;
@@ -129,7 +136,9 @@ public class CommissionController {
             double tempSumCommission = 0;
             for (Reparation reparation : technicien.getAllReparations()) {
                 tempSumReparation += reparation.getMontantTotal();
-                tempSumCommission += reparation.getCommission().getMontantTotal();
+                if(reparation.getCommission()!=null){
+                    tempSumCommission += reparation.getCommission().getMontantTotal();
+                }
             }
             sumCommissionBoys[boysTechniciens.indexOf(technicien)] = tempSumCommission;
             sumReparationBoys[boysTechniciens.indexOf(technicien)] = tempSumReparation;

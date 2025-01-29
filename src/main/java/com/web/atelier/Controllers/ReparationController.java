@@ -25,6 +25,7 @@ import com.web.atelier.Services.ClientService;
 import com.web.atelier.Services.CommissionDetailsService;
 import com.web.atelier.Services.CommissionService;
 import com.web.atelier.Services.ComposantService;
+import com.web.atelier.Services.ConfigCommissionService;
 import com.web.atelier.Services.OrdinateurService;
 import com.web.atelier.Services.ReparationDetailsService;
 
@@ -70,6 +71,9 @@ public class ReparationController {
 
     @Autowired
     private CommissionDetailsService commissionDetailsService;
+
+    @Autowired
+    private ConfigCommissionService configCommissionService;
 
 
     @GetMapping("/reparations")
@@ -133,13 +137,15 @@ public class ReparationController {
                     commissionDetails.setReparationDetails(temp);
                     commissionDetailsService.addCommissionDetails(commissionDetails);
                 }
-                Commission commission = new Commission();
-                commission.setMontantTotal(montantTotal*0.05);
-                commission.setReparation(reparation);
+                if (montantTotal >= configCommissionService.getConfigCommissionById(1).getValueMin()) {
+                    Commission commission = new Commission() ;
+                    commission.setMontantTotal(montantTotal*0.05);
+                    commission.setReparation(reparation);
+    
+                    commissionService.addCommission(commission);
+                    reparation.setCommission(commission);
+                }
 
-                reparation.setCommission(commission);
-
-                commissionService.addCommission(commission);
 
                 reparation.setMontantTotal(montantTotal);
                 reparationService.addReparation(reparation);

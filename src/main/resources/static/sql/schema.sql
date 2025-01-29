@@ -157,3 +157,4 @@ CREATE TABLE config_commission(
     value_min NUMERIC(18,2) DEFAULT 0,
     date_config DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
