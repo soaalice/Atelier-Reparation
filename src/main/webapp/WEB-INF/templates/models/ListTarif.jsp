@@ -41,33 +41,19 @@
 
     <form action="/tarifs" method="get">
         
-        <label for="ComposantId"> Composant :</label>
+        <%-- <label for="ComposantId"> Composant :</label>
         <select id="ComposantId" name="composantId">
             <option value="">Tous</option>
             <%
                 List<Composant> listComposant = (List<Composant>) request.getAttribute("listComposants");
                 if (listComposant != null) {
-                    for (Composant Composant : listComposant) {
+                    for (Composant composant : listComposant) {
                 %>
-                        <option value="<%= Composant.getId() %>"><%= Composant.getName() %></option>
+                        <option value="<%= composant.getId() %>"><%= composant.getName() +"-"+ composant.getValeur() + composant.getTypeComposant().getUnite().getName() %></option>
                 <%
                     }}
                 %>
-        </select>
-
-        <label for="typeReparationId"> Composant :</label>
-        <select id="typeReparationId" name="typeReparationId">
-            <option value="">Tous</option>
-            <%
-                List<TypeReparation> listTypeReparation = (List<TypeReparation>) request.getAttribute("listTypeReparations");
-                if (listTypeReparation != null) {
-                    for (TypeReparation TypeReparation : listTypeReparation) {
-                %>
-                        <option value="<%= TypeReparation.getId() %>"><%= TypeReparation.getName() %></option>
-                <%
-                    }}
-                %>
-        </select>
+        </select> --%>
 
         <label for="date"> Date :</label>
         <input type="date" name="date"/>
